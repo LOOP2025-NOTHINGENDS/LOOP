@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YG Style Site</title>
+  <style>
+    @font-face {
+      font-family: 'SUIT';
+      src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'MADE Outer Sans';
+      src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
+      font-weight: 500;
+    }
+
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: 'SUIT', sans-serif;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 20px;
+      background-color: white;
+      height: 48px;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: black;
+    }
+
+    nav li:hover {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="./loop%20asset%20symbol.png" alt="Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li>ABOUT</li>
+        <li>ARTIST</li>
+        <li>GOODS</li>
+        <li>DESIGN</li>
+        <li>MV</li>
+        <li>NEWS</li>
+        <li>INVESTORS</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div style="height: 48px;"></div>
+
+  <main>
+  <section>
+    <img src="./LOOP_WEBSITE1.jpeg" style="width: 100%; display: block; margin: 0; padding: 0; border: 0;" />
+  </section>
+  <section>
+    <img src="./LOOP_WEBSITE2.jpeg" style="width: 100%; display: block; margin: 0; padding: 0; border: 0;" />
+  </section>
+  <section>
+    <img src="./LOOP_WEBSITE3.jpeg" style="width: 100%; display: block; margin: 0; padding: 0; border: 0;" />
+  </section>
+</main>
+</body>
+</html>
