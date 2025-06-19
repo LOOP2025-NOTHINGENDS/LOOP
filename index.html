@@ -32,9 +32,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 6px 20px;
+      padding: 6px 5vw;
       background-color: white;
       height: 48px;
+      box-sizing: border-box;
     }
 
     .logo img {
@@ -50,7 +51,8 @@
     nav ul {
       list-style: none;
       display: flex;
-      gap: 30px;
+      flex-wrap: wrap;
+      gap: 5vw;
       margin: 0;
       padding: 0;
     }
@@ -67,6 +69,38 @@
     nav li:hover {
       opacity: 0.7;
       transform: scale(1.1);
+    }
+
+    section img {
+      width: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    /* 반응형 - 모바일 대응 */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      nav li {
+        font-size: 12px;
+      }
+
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 5vw;
+        gap: 10px;
+      }
+
+      .logo img {
+        height: 24px;
+      }
     }
   </style>
 </head>
@@ -88,18 +122,19 @@
     </nav>
   </header>
 
+  <!-- 헤더 고정 공간 확보 -->
   <div style="height: 48px;"></div>
 
   <main>
-  <section>
-    <img src="./LOOP_WEBSITE1.jpeg" style="width: 100%; display: block; margin: 0; padding: 0; border: 0;" />
-  </section>
-  <section>
-    <img src="./LOOP_WEBSITE2.jpeg" style="width: 100%; display: block; margin: 0; padding: 0; border: 0;" />
-  </section>
-  <section>
-    <img src="./LOOP_WEBSITE3.jpeg" style="width: 100%; display: block; margin: 0; padding: 0; border: 0;" />
-  </section>
-</main>
+    <section>
+      <img src="./LOOP_WEBSITE1.jpeg" alt="Section 1" />
+    </section>
+    <section>
+      <img src="./LOOP_WEBSITE2.jpeg" alt="Section 2" />
+    </section>
+    <section>
+      <img src="./LOOP_WEBSITE3.jpeg" alt="Section 3" />
+    </section>
+  </main>
 </body>
 </html>
