@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LOOP</title>
+  <title>ABOUT - LOOP</title>
   <style>
     @font-face {
       font-family: 'SUIT';
@@ -18,8 +18,8 @@
 
     body {
       margin: 0;
-      background-color: black;
-      color: white;
+      background-color: white;
+      color: black;
       font-family: 'SUIT', sans-serif;
     }
 
@@ -36,6 +36,7 @@
       background-color: white;
       height: 48px;
       box-sizing: border-box;
+      border-bottom: 1px solid #ddd;
     }
 
     .logo img {
@@ -76,17 +77,49 @@
       transform: scale(1.1);
     }
 
-    nav li a {
-      color: inherit;
-      text-decoration: none;
+    /* INTRODUCTION 애니메이션 */
+    .title {
+      text-align: center;
+      font-size: 48px;
+      font-weight: bold;
+      margin: 80px 0 16px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlide 1s ease-out forwards;
     }
 
-    section img {
-      width: 100%;
-      display: block;
+    @keyframes fadeSlide {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .top-image-section {
       margin: 0;
       padding: 0;
-      border: 0;
+    }
+
+    .full-width-image {
+      width: 100vw;
+      height: auto;
+      display: block;
+    }
+
+    .zoom-section {
+      position: relative;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+
+    .zoom-image {
+      width: 100%;
+      transition: transform 1.5s ease;
+      transform: scale(1);
+    }
+
+    .zoom-section:hover .zoom-image {
+      transform: scale(1.08);
     }
 
     @media (max-width: 768px) {
@@ -110,10 +143,17 @@
       .logo img {
         height: 24px;
       }
+
+      .title {
+        font-size: 32px;
+        margin-top: 100px;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- 메뉴바 -->
   <header>
     <div class="logo">
       <a href="./index.html">
@@ -122,30 +162,32 @@
     </div>
     <nav>
       <ul>
-        <li><a href="./about.html">ABOUT</a></li>
-        <li><a href="#">ARTIST</a></li>
-        <li><a href="#">GOODS</a></li>
-        <li><a href="#">DESIGN</a></li>
-        <li><a href="#">MV</a></li>
-        <li><a href="#">NEWS</a></li>
-        <li><a href="#">INVESTORS</a></li>
+        <li>ABOUT</li>
+        <li>ARTIST</li>
+        <li>GOODS</li>
+        <li>DESIGN</li>
+        <li>MV</li>
+        <li>NEWS</li>
+        <li>INVESTORS</li>
       </ul>
     </nav>
   </header>
 
-  <!-- 헤더 고정 공간 확보 -->
+  <!-- 메뉴바 높이 확보 -->
   <div style="height: 48px;"></div>
 
-  <main>
-    <section>
-      <img src="./LOOP_WEBSITE1.jpeg" alt="Section 1" />
-    </section>
-    <section>
-      <img src="./LOOP_WEBSITE2.jpeg" alt="Section 2" />
-    </section>
-    <section>
-      <img src="./LOOP_WEBSITE3.jpeg" alt="Section 3" />
-    </section>
-  </main>
+  <!-- INTRODUCTION 텍스트 -->
+  <div class="title">INTRODUCTION</div>
+
+  <!-- 상단 이미지 -->
+  <section class="top-image-section">
+    <img src="./intro_top-100.jpg" alt="소개 이미지" class="full-width-image" />
+  </section>
+
+  <!-- 하단 확대 이미지 -->
+  <section class="zoom-section">
+    <img src="./LOOPABOUTBB.png" alt="LOOP Billboard" class="zoom-image" />
+  </section>
+
 </body>
 </html>
