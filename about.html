@@ -76,6 +76,12 @@
       opacity: 0.7;
       transform: scale(1.1);
     }
+    
+    /* 링크 스타일을 위한 CSS 추가 */
+    nav a {
+        text-decoration: none;
+        color: inherit;
+    }
 
     /* INTRODUCTION 애니메이션 */
     .title {
@@ -153,7 +159,6 @@
 </head>
 <body>
 
-  <!-- 메뉴바 -->
   <header>
     <div class="logo">
       <a href="./index.html">
@@ -163,7 +168,7 @@
     <nav>
       <ul>
         <li>ABOUT</li>
-        <li>ARTIST</li>
+        <li><a href="artist.html">ARTIST</a></li>
         <li>GOODS</li>
         <li>DESIGN</li>
         <li>MV</li>
@@ -173,23 +178,18 @@
     </nav>
   </header>
 
-  <!-- 메뉴바 높이 확보 -->
   <div style="height: 48px;"></div>
 
-  <!-- INTRODUCTION 텍스트 -->
   <div class="title">INTRODUCTION</div>
 
-  <!-- 상단 이미지 -->
   <section class="top-image-section">
     <img src="./intro_top-100.jpg" alt="소개 이미지" class="full-width-image" />
   </section>
 
-  <!-- 하단 확대 이미지 -->
   <section class="zoom-section">
     <img src="./LOOPABOUTBB.png" alt="LOOP Billboard" class="zoom-image" />
   </section>
 
-  <!-- 추가 이미지 섹션 (1~5) -->
   <section class="zoom-section">
     <img src="./LOOPWEBSITEabout1.jpg" alt="LOOP ABOUT 1" class="zoom-image" />
   </section>
