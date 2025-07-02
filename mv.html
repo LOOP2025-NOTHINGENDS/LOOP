@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MV - LOOP</title>
+  <style>
+    /* 기본 폰트 설정 */
+    @font-face {
+      font-family: 'SUIT';
+      src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'MADE Outer Sans';
+      src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
+      font-weight: 500;
+    }
+
+    /* 기본 바디 및 헤더 스타일 */
+    body {
+      margin: 0;
+      background-color: white;
+      color: black;
+      font-family: 'SUIT', sans-serif;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 5vw;
+      background-color: white;
+      height: 48px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    .logo a {
+      display: inline-block;
+      height: 30px;
+    }
+
+    /* 네비게이션 스타일 */
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5vw;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: black;
+    }
+    
+    nav li:hover {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* --- MV 페이지 전용 스타일 --- */
+
+    /* 영상 섹션 */
+    .video-wrapper {
+      width: 100%;
+      height: 100vh; /* 뷰포트 높이를 100% 사용하여 화면을 채움 */
+      overflow: hidden;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 비디오가 컨테이너를 가득 채우도록 설정 (잘릴 수 있음) */
+    }
+
+    /* 촬영팀 소개 섹션 */
+    .credits-section {
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 0 40px;
+      text-align: center;
+    }
+
+    .credits-section h2 {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-size: 32px;
+      margin-bottom: 60px;
+    }
+
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
+      gap: 50px 40px; /* 세로, 가로 간격 */
+      text-align: left;
+    }
+
+    .credit-member {
+      display: flex;
+      align-items: center;
+      gap: 20px; /* 이미지와 텍스트 사이 간격 */
+    }
+
+    .profile-image img, .profile-placeholder {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+    }
+
+    .profile-placeholder {
+      background-color: #f0f0f0; /* 회색 배경의 사각형 */
+    }
+
+    .member-info h3 {
+      font-family: 'MADE Outer Sans', sans-serif;
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .member-info p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* 모바일 반응형 스타일 */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 5vw;
+        gap: 10px;
+      }
+
+      .video-wrapper {
+        height: 50vh; /* 모바일에서는 영상 높이 줄이기 */
+      }
+      
+      .credits-grid {
+        grid-template-columns: 1fr; /* 1열로 변경 */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="./index.html">
+        <img src="./loop asset symbol.png" alt="Logo" />
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="artist.html">ARTIST</a></li>
+        <li><a href="goods.html">GOODS</a></li>
+        <li><a href="design.html">DESIGN</a></li>
+        <li>MV</li> <li>NEWS</li>
+        <li>INVESTORS</li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="video-wrapper">
+    <video src="loopmv.mp4" autoplay loop muted playsinline></video>
+  </section>
+
+  <section class="credits-section">
+    <h2>FILM CREW</h2>
+    <div class="credits-grid">
+      <div class="credit-member">
+        <div class="profile-image"><img src="jimin.png" alt="Jimin Yuk"></div>
+        <div class="member-info">
+          <h3>Jimin Yuk</h3>
+          <p>Director, Actor</p>
+        </div>
+      </div>
+      <div class="credit-member">
+        <div class="profile-image"><img src="jubin.png" alt="Jubin Seo"></div>
+        <div class="member-info">
+          <h3>Jubin Seo</h3>
+          <p>Director, Cinematographer</p>
+        </div>
+      </div>
+      <div class="credit-member">
+        <div class="profile-placeholder"></div>
+        <div class="member-info">
+          <h3>Hajeong Ji</h3>
+          <p>Assistant Director</p>
+        </div>
+      </div>
+      <div class="credit-member">
+        <div class="profile-placeholder"></div>
+        <div class="member-info">
+          <h3>Jihoon Won</h3>
+          <p>Lighting</p>
+        </div>
+      </div>
+      <div class="credit-member">
+        <div class="profile-placeholder"></div>
+        <div class="member-info">
+          <h3>Joochan Noh</h3>
+          <p>Producer PD</p>
+        </div>
+      </div>
+      <div class="credit-member">
+        <div class="profile-placeholder"></div>
+        <div class="member-info">
+          <h3>Soobin Lee</h3>
+          <p>Art</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
