@@ -113,6 +113,21 @@
       margin: 0;
       color: #111;
     }
+    
+    /* ✨ 새로 추가된 앨범 크레딧 스타일 */
+    .album-credits {
+        margin-top: 24px;
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
+    }
+
+    .credit-item {
+        font-family: 'MADE Outer Sans', sans-serif;
+        font-size: 14px;
+        color: #333;
+        font-weight: 500;
+    }
 
     .tracklist-section {
         padding: 0 5vw 80px;
@@ -229,6 +244,15 @@
       .main-headline {
         font-size: 48px;
       }
+
+      .album-credits {
+          margin-top: 16px;
+          gap: 16px;
+      }
+
+      .credit-item {
+          font-size: 13px;
+      }
       
       .track-header {
           gap: 16px;
@@ -274,6 +298,10 @@
     <section class="page-header">
       <p class="page-subtitle">TRACKLIST</p>
       <h1 class="main-headline">THE STORY OF US</h1>
+      <div class="album-credits">
+        <span class="credit-item">ARTIST: JIMIN</span>
+        <span class="credit-item">PRODUCER: J.TOPIA</span>
+      </div>
     </section>
 
     <section class="tracklist-section">
