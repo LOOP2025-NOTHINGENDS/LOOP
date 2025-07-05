@@ -119,6 +119,7 @@
       border-radius: 16px; /* 이미지 모서리를 둥글게 */
       overflow: hidden; /* 이미지가 컨테이너 밖으로 나가지 않도록 */
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); /* 은은한 그림자 효과 */
+      margin-bottom: 60px; /* 아래 섹션과의 간격 추가 */
     }
 
     .artist-image-container img {
@@ -130,6 +131,43 @@
     
     .artist-image-container:hover img {
       transform: scale(1.03); /* 마우스 호버 시 이미지 확대 효과 */
+    }
+
+    /* --- 새로운 PRODUCER 섹션 스타일 --- */
+    .producer-section {
+      text-align: center;
+      padding: 0 5vw 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease-out forwards;
+    }
+
+    .producer-title {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 24px;
+    }
+
+    .producer-image-container {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .producer-image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+
+    .producer-image-container:hover img {
+      transform: scale(1.03);
     }
 
 
@@ -158,7 +196,7 @@
       
       /* 메뉴바가 2줄이 되므로, 콘텐츠 시작 위치를 더 아래로 조정 */
        .main-content-area {
-        padding-top: 100px; 
+        padding-top: 100px;
       }
       
       .artist-section {
@@ -168,6 +206,11 @@
       .main-headline {
         font-size: 48px; /* 모바일에서 헤드라인 폰트 크기 조정 */
         margin-bottom: 32px;
+      }
+
+      .producer-title {
+        font-size: 18px;
+        margin-bottom: 16px;
       }
     }
   </style>
@@ -206,6 +249,13 @@
         <img src="artist-main.png" alt="JIMIN">
       </div>
       
+    </section>
+    
+    <section class="producer-section">
+      <h2 class="producer-title">PRODUCER</h2>
+      <div class="producer-image-container">
+        <img src="pruducer.png" alt="PRODUCER">
+      </div>
     </section>
     
     </main>
