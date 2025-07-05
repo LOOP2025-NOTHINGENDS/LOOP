@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRACK - LOOP</title>
+  <style>
+    /* --- 기본 스타일 --- */
+    @font-face {
+      font-family: 'SUIT';
+      src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'MADE Outer Sans';
+      src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
+      font-weight: 500;
+    }
+
+    body {
+      margin: 0;
+      background-color: #F8F8F8;
+      color: black;
+      font-family: 'SUIT', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 5vw;
+      background-color: #F8F8F8;
+      height: 48px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    .logo a {
+      display: inline-block;
+      height: 30px;
+    }
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5vw;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: black;
+    }
+    
+    nav a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    nav li:hover {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+
+    /* --- ✨ TRACK 페이지를 위한 스타일 --- */
+    
+    .main-content-area {
+        padding-top: 48px; /* 고정 헤더 높이만큼 여백 */
+    }
+
+    .page-header {
+      padding: 80px 5vw 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .page-subtitle {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    .main-headline {
+      font-family: 'SUIT', sans-serif;
+      font-size: 84px;
+      font-weight: bold;
+      line-height: 1.1;
+      margin: 0;
+      color: #111;
+    }
+
+    .tracklist-section {
+        padding: 0 5vw 80px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .track-item {
+        padding: 40px 0;
+        border-bottom: 1px solid #e0e0e0;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 0.8s ease-out forwards;
+        /* 순차적 애니메이션을 위한 지연 설정 */
+        animation-delay: calc(0.15s * var(--i));
+    }
+    
+    .tracklist-section .track-item:first-child {
+        border-top: 1px solid #e0e0e0;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .track-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: 16px;
+    }
+
+    .track-number {
+        font-family: 'MADE Outer Sans', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: #888;
+        padding-top: 8px;
+    }
+
+    .track-details {
+        flex: 1;
+    }
+
+    .track-title {
+        font-family: 'SUIT', sans-serif;
+        font-size: 28px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .track-title .feat {
+        font-size: 18px;
+        font-weight: normal;
+        color: #555;
+    }
+    
+    .track-title .tag {
+        font-family: 'MADE Outer Sans', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #111;
+        padding: 4px 10px;
+        border-radius: 12px;
+        margin-left: 8px;
+    }
+
+    .track-description {
+        color: #333;
+        margin: 0;
+        white-space: pre-wrap; /* 줄바꿈을 유지하도록 설정 */
+    }
+
+
+    /* --- 반응형 스타일 --- */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      nav li {
+        font-size: 12px;
+      }
+
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 5vw;
+        gap: 10px;
+      }
+
+      .logo img {
+        height: 24px;
+      }
+      
+      .main-content-area {
+        padding-top: 100px; 
+      }
+      
+      .page-header {
+        padding: 40px 5vw 30px;
+      }
+
+      .main-headline {
+        font-size: 48px;
+      }
+      
+      .track-header {
+          gap: 16px;
+      }
+      
+      .track-title {
+          font-size: 22px;
+      }
+      
+      .track-title .feat {
+          font-size: 16px;
+      }
+      
+      .track-description {
+          font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="./index.html">
+        <img src="./loop%20asset%20symbol.png" alt="Logo" />
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="./about.html">ABOUT</a></li>
+        <li><a href="./artist.html">ARTIST</a></li> 
+        <li><a href="goods.html">GOODS</a></li>
+        <li><a href="design.html">DESIGN</a></li>
+        <li><a href="mv.html">MV</a></li>
+        <li style="font-weight: bold;">TRACK</li>
+        <li>INVESTORS</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content-area">
+  
+    <section class="page-header">
+      <p class="page-subtitle">TRACKLIST</p>
+      <h1 class="main-headline">THE STORY OF US</h1>
+    </section>
+
+    <section class="tracklist-section">
+      
+      <div class="track-item" style="--i: 1;">
+        <div class="track-header">
+          <span class="track-number">01</span>
+          <div class="track-details">
+            <h3 class="track-title">SELFISH</h3>
+            <p class="track-description">행복하다, 어떤것도 두렵지 않았고 주위에는 그때 당시에 좋은 사람이 널려 있다고 생각했다. 내가 하는 말, 행동이 다 맞다고 생각했다. 나의 가장 가까운 사람들을 위해서라면 뭐든지 해주고 싶었다. 내 주변 사람들은 언제나 내 곁에 있을것만 같았다. 내가 지금 공부를 하지 않아도 해야할일을 하지 않아도, 내 몸을 관리하지 않아도 모든게 괜찮을거 같았다.내가 아무리 이렇게 살아도 내 주위 사람은 지켜줄거 같았다. 꿈이 컷다, 내가 바라는걸 뭐든지 해낼 수 있다는 자신감이 있었지만 어느순간 헷갈리기 시작했다. 이렇게 내 모든걸 주위 사람에게 줘도 되는지 이렇게 이기적이어도 되는지, 해야할 일을 하지 않으면서 놀고 먹고 할 수 있는지 이런 생각을 하다보니 잘 살고 있는 사람들을 보게 됐다. 열심히 살고 있는 사람들이 싫어졌다 그들이 잘 하고 정상적이게 살고 있음에도 나는 그런 사람들이 싫고 왜 저렇게까지 살아야되나 싶었다. 그냥 자기 합리화를 했던거 같다. 그 사람들이 부러웠을수있다. 나는 내가 가진거 모든걸 주위 사람에게 부었고 뭔가 잘못되가고 있다는 걸 느끼면서도 이미 늦은걸 알았고 나의 이런 모습과 행동은 멈출 수 없었다.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="track-item" style="--i: 2;">
+        <div class="track-header">
+          <span class="track-number">02</span>
+          <div class="track-details">
+            <h3 class="track-title">HOPE <span class="feat">(feat. 박창현)</span></h3>
+            <p class="track-description">무너지기 시작했다. 나의 헷갈림이 확신이 되었고 돌아가고 원상복구 하기에는 너무 멀리 왔다. 사람들이 흔히 말하는 안좋은것들이 나에게는 더 이상 안좋은게 아니었다. 사람들이 손가락질 할 일들이 나에게는 당연시 되고 있다. 내가 가장 믿었던 사람들 마저 하나 둘 등을 돌리기 시작했다. 지나가는 사람들 마저 나를 무시하는거 같다. 내 자신이 너무 초라해지고 불쌍하다. 내가 뭘 그렇게 잘못했는데 날 이렇게 보는걸까? 라는 생각을 했다. 내가 가장 의지해야할 신을 무시했고 외면 했다. 물론 이미 예전부터 외면 하고 있었을지 모른다. 점점 내 주변 사람들의 단점이 보이기 시작했다. 나는 나도 싫어지고 있었고 주변 사람들이 나에게 등을 돌리는것만 같을때 내가 먼저 상대방을 끊어냈다. 상대방이 나를 끊어낸다는게 얼마나 비참하고 슬픈지 알았다. 어떻게든 사람들에게 인정을 받고 싶었지만 난 잘하는게 없다. 하나도 없다. 내 모든걸 준 사람도 날 무시하는것만 같았다. 이제 더는 아무것도 하기 싫었다.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="track-item" style="--i: 3;">
+        <div class="track-header">
+          <span class="track-number">03</span>
+          <div class="track-details">
+            <h3 class="track-title">RAIN <span class="feat">(SKIT)</span></h3>
+          </div>
+        </div>
+      </div>
+      
+      <div class="track-item" style="--i: 4;">
+        <div class="track-header">
+          <span class="track-number">04</span>
+          <div class="track-details">
+            <h3 class="track-title">REIN</h3>
+            <p class="track-description">정말 아무것도 하기 싫었다. 학업도 인간관계도 다 끊어냈다. 나도 끊어내고 싶지 않았는데 나 자신을 잃어버린것만 같았다. 너무 힘들었다. 하지만 누구에게도 내 이런 힘듬을 보여주고 싶지 않았다. 특히 내가 가장 가까웠다고 생각헀던 사람들에게는 더더욱. 근데 티가 났던건지 주위 사람은 그냥 날 이상하게 여겼다. 난 잘 보이고 싶었지만 그게 마음처럼 안되나보다. 죽고 싶었다. 길을 걷다 큰 트럭이 지나가면 뛰어들까도 생각했다, 옥상에 올라가는 일들이 많아졌다. 주위에서 좋은 얘기를 듣지 못했다 당연한 일이다 내가 잘한 일, 잘하는 것이 없기 떄문이다. 그냥 너무 속상했다. 혼자 울기도 많이 했다. 그저 나를 이용해 먹으려고 하는 사람들을 떨추지 못했다 그마저 내가 끊어버리면 이 세상에 정말 나 혼자일거 같았다. 정말 죽으려고 했다 아무도 못 믿겠고 사람이 싫었다. 그러던 중 정말 죽으려고 다짐했을때 너무 무서워졌다. 나 자신에게 한번 더 기회를 주고 싶었다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="track-item" style="--i: 5;">
+        <div class="track-header">
+          <span class="track-number">05</span>
+          <div class="track-details">
+            <h3 class="track-title">RESET <span class="feat">(feat.)</span></h3>
+            <p class="track-description">나를 한명이라도 믿는 사람이 있지 않을까라는 생각을 하게 됐다. 나 자신에게 노력하고 싶었다. 내가 잘하는게 없으면 노력하면 되겠지라고 생각했다. 나보다 더 힘들게 사는 사람들도 있을텐데 내가 왜 이렇게까지 힘들어야할까 그냥 내가 너무 약해서 인건 아닐까 20살의 내가 시작을 잘못한거지 앞으로의 나는 예전의 모습을 버릴 수 있지 않을까? 나 자신을 위한 질문을 많이 했다. 쉽지는 않았다 오히려 내가 나를 믿지 않고 죽고 싶었을때보다 더 힘들었을지도 모른다. 더러워지고 녹슨걸 다시 새걸로 바꿔야되는거라 생각하면 되지 않을까라는 생각이다. 이미 녹슬어서 포기해버린건 오히려 쉽다 하지만 녹슬고 부러진걸 원상 복구 시키려면 더 많은 노력이 필요하다. 내 상황이 딱 이랬다. 너무 지치고 힘들었어서 다시 돌아오는데에는 시간과 정말 많은 노력이 필요했다. 미친듯이 노력했다 예전의 나를 버리려고. 그러다보니 주위에 사람이 하나 둘 다시 모이기 시작했고 나 자신도 사람을 밀어내지 않았다. 나는 내 자신을 한단계지만 성장했다고 생각했다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="track-item" style="--i: 6;">
+        <div class="track-header">
+          <span class="track-number">06</span>
+          <div class="track-details">
+            <h3 class="track-title">SMILIE <span class="feat">(feat. J.topia)</span><span class="tag">TITLE</span></h3>
+            <p class="track-description">멈추고 싶지 않았다. 더 올라가고 싶었고 목표르 만들기 시작했다 아무런 목표 없이 흘러가던대로 살던 내가 목표를 하나씩 정하기 시작했다. 하나 둘 목표를 포스팃에 적었다 한번도 공부를 하면서도 포스팃을 책상에 붙혀 본적 없던 내가 내 목표르 포스팃에 붗혔고 하나 둘 이루어지기 시작했다. 하나 둘 날 무시했던 사람들이 인정해주기 시작했다. 누군가의 인정을 받고 스스로도 나를 칭찬하기 시작했다. 한번도 경험해보지 못한 경험도 하게 되었다. 물론 새로운 사람들을 만나면서 우여곡절도 있었다. 다 포기해버리고 싶을때와는 다르게 모든 사람을 만나기 시작했으니깐 사람을 가리지 못했다. 싸우기도 싸웠고 아직 사람을 대할때 서툰 행동들도 보였다. 가끔은 게을러질때도 있었다. 하지만 목표를 정하기 시작했고 내가 나 자신을 보듬어주고 챙겨줄 수 있는 사람이 되었다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="track-item" style="--i: 7;">
+        <div class="track-header">
+          <span class="track-number">07</span>
+          <div class="track-details">
+            <h3 class="track-title">TOO MUCH COFFEE <span class="feat">(feat. llake:)</span></h3>
+            <p class="track-description">이렇게 성장하기까지의 시간을 돌아봤을때 내 주변에 있던 사람들을 생각하면서 후회하기 보다는 그 사람들에게서 내가 어떤걸 배우고 깨달았는지 회상한다. 많은 우여곡절이 있었지만 언제나 끝이 있고 끝에는 행복, 혹은 또 다른 평화가 찾아 올거다. 물론, 평화가 마음의 평화일수도 있고 그저 여유일수도 있지만 어쩃든 잘 버텨온 나를 칭찬해주고 싶다. 너무 잘 이겨냈고 잘하고 있음에 감사하고 앞으로 더 열심히 살아야겠다는 다짐을 하고 싶은 생각을 들게 만드는 시간인거 같다. 또 누군가에게 상처를 줬거나 힘들게 했다면 그 또한 인정하고 싶어진다. 내가 누군가에게 좋든 안 좋은 영향을 끼쳤다면 사과하고 싶다. 이 또한, 내 자신이 성장 했다고 믿는다. 아직 많이 부족하다고 생각한다. 언젠간 내가 다시 나 자신을 버리면서 자신감을 잃어버리고 구속에서 벽만 보고 있을지는 몰라도 더 노력하고 싶고 더 잘하고 싶다. </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    
+  </main>
+
+</body>
+</html>
