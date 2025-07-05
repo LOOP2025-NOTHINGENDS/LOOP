@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INVESTORS - LOOP</title>
+  <style>
+    /* --- 기본 스타일 --- */
+    @font-face {
+      font-family: 'SUIT';
+      src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'MADE Outer Sans';
+      src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
+      font-weight: 500;
+    }
+
+    body {
+      margin: 0;
+      background-color: #F8F8F8;
+      color: black;
+      font-family: 'SUIT', sans-serif;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 5vw;
+      background-color: #F8F8F8;
+      height: 48px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    .logo a {
+      display: inline-block;
+      height: 30px;
+    }
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5vw;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: black;
+    }
+    
+    nav a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    nav li:hover {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+
+    /* --- ✨ INVESTORS 페이지를 위한 스타일 --- */
+    
+    .main-content-area {
+        padding-top: 48px; /* 고정 헤더 높이만큼 여백 */
+    }
+    
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .page-header {
+      padding: 80px 5vw 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease-out forwards;
+    }
+    
+    .page-subtitle {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    .main-headline {
+      font-family: 'SUIT', sans-serif;
+      font-size: 84px;
+      font-weight: bold;
+      line-height: 1.1;
+      margin: 0;
+      color: #111;
+    }
+    
+    .investor-list-section {
+        padding: 0 5vw 80px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .investor-category {
+        font-family: 'MADE Outer Sans', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 24px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 1s 0.2s ease-out forwards;
+    }
+    
+    .investor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
+    }
+    
+    .investor-card {
+        background-color: #fff;
+        padding: 32px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+        font-family: 'SUIT', sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        color: #111;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 1s ease-out forwards;
+        animation-delay: calc(0.2s + 0.1s * var(--i));
+    }
+
+
+    /* --- 반응형 스타일 --- */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      nav li {
+        font-size: 12px;
+      }
+
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 5vw;
+        gap: 10px;
+      }
+
+      .logo img {
+        height: 24px;
+      }
+      
+      .main-content-area {
+        padding-top: 100px; 
+      }
+      
+      .page-header {
+        padding: 40px 5vw 30px;
+      }
+
+      .main-headline {
+        font-size: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="./index.html">
+        <img src="./loop%20asset%20symbol.png" alt="Logo" />
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="./about.html">ABOUT</a></li>
+        <li><a href="./artist.html">ARTIST</a></li> 
+        <li><a href="./goods.html">GOODS</a></li>
+        <li><a href="./design.html">DESIGN</a></li>
+        <li><a href="./mv.html">MV</a></li>
+        <li><a href="./track.html">TRACK</a></li>
+        <li style="font-weight: bold;">INVESTORS</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content-area">
+  
+    <section class="page-header">
+      <p class="page-subtitle">SHAREHOLDER</p>
+      <h1 class="main-headline">INVESTORS</h1>
+    </section>
+
+    <section class="investor-list-section">
+      <h2 class="investor-category">MAJOR SHAREHOLDERS</h2>
+      <div class="investor-grid">
+        <div class="investor-card" style="--i: 1;">
+          YUK DONGJUN
+        </div>
+        <div class="investor-card" style="--i: 2;">
+          PARK HYANGMI
+        </div>
+      </div>
+    </section>
+    
+  </main>
+
+</body>
+</html>
