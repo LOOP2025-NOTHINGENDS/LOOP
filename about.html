@@ -82,7 +82,6 @@
         color: inherit;
     }
 
-    /* 페이지 제목 애니메이션 */
     .title {
       text-align: center;
       font-size: 48px;
@@ -94,7 +93,6 @@
       animation-delay: 0.2s;
     }
 
-    /* 콘텐츠 요소 애니메이션 */
     @keyframes fadeSlideUp {
       to {
         opacity: 1;
@@ -102,7 +100,6 @@
       }
     }
 
-    /* 메인 콘텐츠 스타일 */
     .content-container {
       max-width: 800px;
       margin: 40px auto 80px;
@@ -130,59 +127,40 @@
 
     .section-text {
       font-size: 17px;
-      line-height: 1.9; /* 줄 간격을 살짝 넓혀 가독성 향상 */
+      line-height: 1.9;
       color: #333;
       margin-bottom: 1em;
-      text-align: left; /* 긴 글은 왼쪽 정렬이 읽기 편합니다 */
+      text-align: left;
     }
     
-    /* 텍스트 단락 애니메이션 지연 시간 설정 */
     .section-text:nth-of-type(1) {
       animation-delay: 0.8s;
     }
     .section-text:nth-of-type(2) {
       animation-delay: 1.1s;
     }
-    .section-text:nth-of-type(3) {
-      animation-delay: 1.4s;
-    }
 
 
-    /* 반응형 디자인 */
     @media (max-width: 768px) {
       nav ul {
         gap: 12px;
         justify-content: center;
         flex-wrap: wrap;
       }
-
-      nav li {
-        font-size: 12px;
-      }
-
+      nav li { font-size: 12px; }
       header {
         flex-direction: column;
         height: auto;
         padding: 10px 5vw;
         gap: 10px;
       }
-
-      .logo img {
-        height: 24px;
-      }
-
+      .logo img { height: 24px; }
       .title {
         font-size: 32px;
         margin-top: 100px;
       }
-
-      .tagline {
-        font-size: 18px;
-      }
-
-      .section-text {
-        font-size: 15px;
-      }
+      .tagline { font-size: 18px; }
+      .section-text { font-size: 15px; }
     }
   </style>
 </head>
@@ -196,7 +174,8 @@
     </div>
     <nav>
       <ul>
-        <li>ABOUT</li>
+        <li style="font-weight: bold;">ABOUT</li>
+        <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
         <li><a href="artist.html">ARTIST</a></li>
         <li><a href="goods.html">GOODS</a></li>
         <li><a href="design.html">DESIGN</a></li>
