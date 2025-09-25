@@ -143,15 +143,48 @@
     .credits-section h2 {
       font-family: 'MADE Outer Sans', sans-serif;
       font-size: 32px;
+      margin-bottom: 60px;
+    }
+
+    /* ✨ 1. 기존 사진 그리드 스타일 (복원) */
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 50px 40px;
+      text-align: left;
+    }
+
+    .credit-member {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-image img, .profile-placeholder {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+    }
+
+    .profile-placeholder {
+      background-color: #f0f0f0;
+    }
+
+    .member-info h3 {
+      font-family: 'MADE Outer Sans', sans-serif;
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .member-info p {
       margin: 0;
+      font-size: 14px;
+      color: #666;
     }
     
-    /* ✨ 새로 추가된 스타일 */
-    .section-subtitle {
-        font-family: 'SUIT', sans-serif;
-        font-size: 18px;
-        color: #555;
-        margin: 8px 0 60px 0;
+    /* ✨ 2. 새로운 스태프 목록 스타일 (추가) */
+    .staff-title {
+        margin-top: 120px; /* 위쪽 목록과의 간격 */
     }
 
     .staff-grid {
@@ -176,7 +209,6 @@
         color: #333;
     }
 
-
     /* 모바일 반응형 스타일 */
     @media (max-width: 768px) {
       header {
@@ -193,8 +225,8 @@
         padding-top: 100px;
       }
       
-      .staff-grid {
-        grid-template-columns: 1fr; /* 모바일에서는 1열로 표시 */
+      .credits-grid, .staff-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -230,49 +262,95 @@
   </section>
 
   <section class="credits-section">
+    
     <h2>HEADERS</h2>
-    <p class="section-subtitle">STAFF</p>
-    <div class="staff-grid">
-      <div class="staff-category">
-        <h3>Production Team</h3>
-        <p>
-          Song Hayoon<br>
-          Seong Dongjun<br>
-          Park Jeonghyun
-        </p>
+    <div class="credits-grid">
+      <div class="credit-member">
+        <div class="profile-image"><img src="jimin.png" alt="Jimin Yuk"></div>
+        <div class="member-info">
+          <h3>Jimin Yuk</h3>
+          <p>Director, Actor</p>
+        </div>
       </div>
-      <div class="staff-category">
-        <h3>Art Team</h3>
-        <p>
-          Kim Gawon<br>
-          Kim Jeram
-        </p>
+      <div class="credit-member">
+        <div class="profile-image"><img src="jubin.png" alt="Jubin Seo"></div>
+        <div class="member-info">
+          <h3>Jubin Seo</h3>
+          <p>Director, Cinematographer</p>
+        </div>
       </div>
-      <div class="staff-category">
-        <h3>Camera Team</h3>
-        <p>
-          Hong Jeongmin
-        </p>
+      <div class="credit-member">
+        <div class="profile-placeholder"></div>
+        <div class="member-info">
+          <h3>Hajeong Ji</h3>
+          <p>Assistant Director</p>
+        </div>
       </div>
-      <div class="staff-category">
-        <h3>Lighting Team</h3>
-        <p>
-          Ahn Damhee
-        </p>
+      <div class="credit-member">
+        <div class="profile-placeholder"></div>
+        <div class="member-info">
+          <h3>Jihoon Won</h3>
+          <p>Lighting</p>
+        </div>
       </div>
-      <div class="staff-category">
-        <h3>Assistant Director</h3>
-        <p>
-          Lee Roeun
-        </p>
+      <div class="credit-member">
+        <div class="profile-placeholder"></div>
+        <div class="member-info">
+          <h3>Joochan Noh</h3>
+          <p>Producer PD</p>
+        </div>
       </div>
-      <div class="staff-category">
-        <h3>Performance Team</h3>
-        <p>
-          Jeong Taejoo
-        </p>
+      <div class="credit-member">
+        <div class="profile-placeholder"></div>
+        <div class="member-info">
+          <h3>Soobin Lee</h3>
+          <p>Art</p>
+        </div>
       </div>
     </div>
+
+    <h2 class="staff-title">STAFF</h2>
+    <div class="staff-grid">
+        <div class="staff-category">
+          <h3>Production Team</h3>
+          <p>
+            Song Hayoon<br>
+            Seong Dongjun<br>
+            Park Jeonghyun
+          </p>
+        </div>
+        <div class="staff-category">
+          <h3>Art Team</h3>
+          <p>
+            Kim Gawon<br>
+            Kim Jeram
+          </p>
+        </div>
+        <div class="staff-category">
+          <h3>Camera Team</h3>
+          <p>
+            Hong Jeongmin
+          </p>
+        </div>
+        <div class="staff-category">
+          <h3>Lighting Team</h3>
+          <p>
+            Ahn Damhee
+          </p>
+        </div>
+        <div class="staff-category">
+          <h3>Assistant Director</h3>
+          <p>
+            Lee Roeun
+          </p>
+        </div>
+        <div class="staff-category">
+          <h3>Performance Team</h3>
+          <p>
+            Jeong Taejoo
+          </p>
+        </div>
+      </div>
   </section>
 
 </body>
