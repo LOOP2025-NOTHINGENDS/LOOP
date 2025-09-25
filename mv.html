@@ -211,7 +211,7 @@
         color: #333;
     }
 
-    /* 모바일 반응형 스타일 */
+    /* --- 반응형 스타일 --- */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -219,16 +219,49 @@
         padding: 10px 5vw;
         gap: 10px;
       }
+      
+      nav ul {
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
 
-      .dropdown-menu { display: none !important; }
+      nav li {
+        font-size: 12px;
+        /* 모바일에서는 호버 영역 확장이 불필요하므로 초기화 */
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
 
+      .logo img {
+        height: 24px;
+      }
+      
+      /* ✨ --- 수정된 부분 시작 --- ✨ */
+      
+      /* 기존: 드롭다운 메뉴를 숨김 처리 */
+      /* .dropdown-menu { display: none !important; } */
+
+      /* 변경: 드롭다운 메뉴를 일반 목록처럼 보이도록 스타일 초기화 */
+      .dropdown-menu {
+        display: contents; /* 자식 요소(li)를 부모(ul)의 직접적인 자식처럼 취급 */
+      }
+      
+      .dropdown-menu li a {
+          padding-left: 10px; /* ABOUT 하위 항목임을 나타내기 위해 살짝 들여쓰기 */
+          opacity: 0.8; /* 하위 항목 시각적 구분 */
+          font-size: 11px; /* 폰트 크기 살짝 줄이기 */
+      }
+      
+      /* ✨ --- 수정된 부분 끝 --- ✨ */
+      
+      /* 각 페이지별 레이아웃 스타일 (페이지마다 다를 수 있음) */
+      .main-content, .main-content-area {
+        padding-top: 100px;
+      }
       .video-wrapper {
         height: 50vh;
         padding-top: 100px;
-      }
-      
-      .credits-grid, .staff-grid {
-        grid-template-columns: 1fr;
       }
     }
   </style>
