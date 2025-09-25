@@ -116,11 +116,9 @@
 
     .main-content {
         padding-top: 48px;
-        /* ✨ HTML 태그 사이의 눈에 보이지 않는 공백을 제거합니다. */
         font-size: 0;
     }
     
-    /* ✨ section 태그의 모든 여백을 확실히 제거합니다. */
     .main-content section {
       margin: 0;
       padding: 0;
@@ -134,6 +132,14 @@
       padding: 0;
       border: 0;
     }
+    
+    /* ✨ 3번째 이미지를 2번째 위로 겹치게 하는 스타일 */
+    .overlapping-section {
+      /* vh는 화면 높이 기준 단위, 화면 높이의 20%만큼 위로 올립니다. */
+      margin-top: -20vh; 
+      position: relative; /* 다른 요소들 위에 올 수 있도록 설정 */
+    }
+
 
     @media (max-width: 768px) {
       nav ul {
@@ -161,6 +167,11 @@
 
       .main-content {
         padding-top: 100px;
+      }
+      
+      /* 모바일에서는 겹치는 정도를 살짝 줄입니다. */
+      .overlapping-section {
+        margin-top: -15vh;
       }
     }
   </style>
@@ -197,7 +208,7 @@
     <section>
       <img src="./LOOP_WEBSITE2.jpeg" alt="Section 2" />
     </section>
-    <section>
+    <section class="overlapping-section">
       <img src="./LOOP_WEBSITE3.jpeg" alt="Section 3" />
     </section>
   </main>
