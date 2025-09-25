@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ARTIST - LOOP</title>
   <style>
-    /* --- 기존 스타일 (수정 없음) --- */
+    /* --- 기본 스타일 --- */
     @font-face {
       font-family: 'SUIT';
       src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
@@ -19,7 +19,7 @@
 
     body {
       margin: 0;
-      background-color: #F8F8F8; /* 스크린샷의 배경색과 유사하게 약간의 회색으로 변경 */
+      background-color: #F8F8F8;
       color: black;
       font-family: 'SUIT', sans-serif;
     }
@@ -34,20 +34,14 @@
       align-items: center;
       justify-content: space-between;
       padding: 6px 5vw;
-      background-color: #F8F8F8; /* 배경색과 통일 */
+      background-color: #F8F8F8;
       height: 48px;
       box-sizing: border-box;
       border-bottom: 1px solid #ddd;
     }
 
-    .logo img {
-      height: 30px;
-    }
-
-    .logo a {
-      display: inline-block;
-      height: 30px;
-    }
+    .logo img { height: 30px; }
+    .logo a { display: inline-block; height: 30px; }
 
     nav {
       flex: 1;
@@ -69,32 +63,69 @@
       font-weight: 500;
       font-size: 14px;
       cursor: pointer;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.3s ease; /* transform 제외 */
       color: black;
+      position: relative;
+      /* --- ✨ 1. 호버 영역 확장을 위한 수정 --- */
+      padding-bottom: 15px;
+      margin-bottom: -15px;
     }
 
     nav li:hover {
       opacity: 0.7;
-      transform: scale(1.1);
+      /* transform: scale(1.1); ✨ 드롭다운 사용 시 방해가 될 수 있어 제거 */
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* --- 드롭다운 메뉴 CSS --- */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+      /* --- ✨ 2. 위치 조정을 위한 수정 --- */
+      margin-top: 0;
     }
 
-    /* --- ✨ ARTIST 페이지를 위한 새로운 스타일 --- */
-    
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+      /* ✨ li에 적용했던 패딩/마진 값을 초기화 */
+      padding-bottom: 8px;
+      margin-bottom: 0;
+    }
+
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+    }
+
+    /* --- ARTIST 페이지 스타일 --- */
     .artist-section {
-      padding: 80px 5vw 40px; /* 위, 좌우, 아래 여백 */
+      padding: 80px 5vw 40px;
       max-width: 1400px;
-      margin: 0 auto; /* 중앙 정렬 */
+      margin: 0 auto;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 1s ease-out forwards;
     }
     
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
     .page-subtitle {
       font-family: 'MADE Outer Sans', sans-serif;
@@ -116,10 +147,10 @@
 
     .artist-image-container {
       width: 100%;
-      border-radius: 16px; /* 이미지 모서리를 둥글게 */
-      overflow: hidden; /* 이미지가 컨테이너 밖으로 나가지 않도록 */
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); /* 은은한 그림자 효과 */
-      margin-bottom: 60px; /* 아래 섹션과의 간격 추가 */
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      margin-bottom: 60px;
     }
 
     .artist-image-container img {
@@ -129,13 +160,10 @@
       transition: transform 0.8s ease;
     }
     
-    .artist-image-container:hover img {
-      transform: scale(1.03); /* 마우스 호버 시 이미지 확대 효과 */
-    }
+    .artist-image-container:hover img { transform: scale(1.03); }
 
-    /* --- 새로운 PRODUCER 섹션 스타일 (왼쪽 정렬로 수정) --- */
     .producer-section {
-      text-align: left; /* 중앙 정렬에서 왼쪽 정렬로 변경 */
+      text-align: left;
       padding: 0 5vw 40px;
       max-width: 1400px;
       margin: 0 auto;
@@ -166,12 +194,9 @@
       transition: transform 0.8s ease;
     }
 
-    .producer-image-container:hover img {
-      transform: scale(1.03);
-    }
+    .producer-image-container:hover img { transform: scale(1.03); }
 
-
-    /* --- 기존 반응형 스타일 + 새 스타일 추가 --- */
+    /* --- 반응형 스타일 --- */
     @media (max-width: 768px) {
       nav ul {
         gap: 12px;
@@ -179,9 +204,7 @@
         flex-wrap: wrap;
       }
 
-      nav li {
-        font-size: 12px;
-      }
+      nav li { font-size: 12px; }
 
       header {
         flex-direction: column;
@@ -190,28 +213,14 @@
         gap: 10px;
       }
 
-      .logo img {
-        height: 24px;
-      }
+      .logo img { height: 24px; }
       
-      /* 메뉴바가 2줄이 되므로, 콘텐츠 시작 위치를 더 아래로 조정 */
-       .main-content-area {
-        padding-top: 100px;
-      }
-      
-      .artist-section {
-        padding-top: 40px;
-      }
+      .main-content-area { padding-top: 100px; }
+      .artist-section { padding-top: 40px; }
+      .main-headline { font-size: 48px; margin-bottom: 32px; }
+      .producer-title { font-size: 18px; margin-bottom: 16px; }
 
-      .main-headline {
-        font-size: 48px; /* 모바일에서 헤드라인 폰트 크기 조정 */
-        margin-bottom: 32px;
-      }
-
-      .producer-title {
-        font-size: 18px;
-        margin-bottom: 16px;
-      }
+      .dropdown-menu { display: none !important; }
     }
   </style>
 </head>
@@ -225,40 +234,14 @@
     </div>
     <nav>
       <ul>
-        <li><a href="./about.html" style="text-decoration: none; color: inherit;">ABOUT</a></li>
+        <li>
+          <a href="about.html">ABOUT</a>
+          <ul class="dropdown-menu">
+            <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+          </ul>
+        </li>
         <li style="font-weight: bold;">ARTIST</li> 
         <li><a href="goods.html">GOODS</a></li>
         <li><a href="design.html">DESIGN</a></li>
         <li><a href="mv.html">MV</a></li>
-        <li><a href="track.html">TRACK</a></li>
-        <li><a href="investor.html">INVESTORS</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class="main-content-area" style="padding-top: 48px;">
-  
-    <section class="artist-section">
-      
-      <div class="text-wrapper">
-        <p class="page-subtitle">ARTIST</p>
-        <h1 class="main-headline">JIMIN<br>NOTHING ENDS.</h1>
-      </div>
-      
-      <div class="artist-image-container">
-        <img src="artist.png" alt="JIMIN">
-      </div>
-      
-    </section>
-    
-    <section class="producer-section">
-      <h2 class="producer-title">PRODUCER</h2>
-      <div class="producer-image-container">
-        <img src="producer.png" alt="PRODUCER">
-      </div>
-    </section>
-    
-    </main>
-
-</body>
-</html>
+        <li><a href="track.html">TRACK
