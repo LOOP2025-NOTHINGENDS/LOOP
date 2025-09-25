@@ -71,47 +71,81 @@
       font-weight: 500;
       font-size: 14px;
       cursor: pointer;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.3s ease;
       color: black;
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: -15px;
     }
     
     nav li:hover {
       opacity: 0.7;
-      transform: scale(1.1);
     }
-
-    /* 네비게이션 링크 스타일 */
+    
     nav a {
         text-decoration: none;
         color: inherit;
     }
-    
-    /* --- Design 페이지 전용 스타일 --- */
 
-    /* 페이지 전체 콘텐츠를 감싸는 래퍼 */
-    .design-container {
-        max-width: 1200px; /* 콘텐츠 최대 너비 설정 */
-        margin: 60px auto; /* 상하 여백 및 좌우 자동 여백으로 중앙 정렬 */
-        padding: 0 40px; /* 좌우 패딩 */
+    /* --- ✨ 드롭다운 메뉴 CSS 추가 --- */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+      margin-top: 0;
     }
 
-    /* 각 디자인 아이템 섹션 */
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+      padding-bottom: 8px;
+      margin-bottom: 0;
+    }
+
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+    }
+    
+    /* --- ✨ 본문 시작 위치 CSS 추가 --- */
+    .main-content {
+      padding-top: 48px;
+    }
+    
+    /* --- Design 페이지 전용 스타일 --- */
+    .design-container {
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 40px;
+    }
+
     .design-item {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 5vw; /* 텍스트와 이미지 사이의 간격 */
+        gap: 5vw;
         margin-bottom: 100px;
         min-height: 400px;
     }
 
-    /* 이미지-텍스트 순서를 바꾸기 위한 클래스 */
     .design-item.reverse {
         flex-direction: row-reverse;
     }
 
     .design-text, .design-image {
-        flex: 1; /* 텍스트와 이미지가 1:1 비율을 차지하도록 설정 */
+        flex: 1;
     }
 
     .design-image {
@@ -123,7 +157,7 @@
     .design-image img {
         max-width: 100%;
         height: auto;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 이미지에 은은한 그림자 효과 */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         border-radius: 8px;
     }
 
@@ -150,11 +184,18 @@
         padding: 10px 5vw;
         gap: 10px;
       }
+
+      .dropdown-menu { display: none !important; }
+
+      .main-content {
+        padding-top: 100px;
+      }
+      
       .design-container {
-        margin-top: 120px; /* 모바일에서 높아진 헤더만큼 더 내리기 */
+        margin-top: 40px;
       }
       .design-item, .design-item.reverse {
-        flex-direction: column; /* 세로로 쌓이도록 변경 */
+        flex-direction: column;
         gap: 20px;
         margin-bottom: 60px;
       }
@@ -178,10 +219,15 @@
     </div>
     <nav>
       <ul>
-        <li><a href="about.html">ABOUT</a></li>
+        <li>
+          <a href="about.html">ABOUT</a>
+          <ul class="dropdown-menu">
+            <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+          </ul>
+        </li>
         <li><a href="artist.html">ARTIST</a></li>
         <li><a href="goods.html">GOODS</a></li>
-        <li><a href="design.html">DESIGN</a></li> 
+        <li style="font-weight: bold;">DESIGN</li> 
         <li><a href="mv.html">MV</a></li>
         <li><a href="track.html">TRACK</a></li>
         <li><a href="investor.html">INVESTORS</a></li>
@@ -189,50 +235,49 @@
     </nav>
   </header>
 
-  <div style="height: 48px;"></div>
-
-  <main class="design-container">
-    
-    <section class="design-item">
-      <div class="design-image">
-        <img src="looplogo.png" alt="LOOP 로고">
-      </div>
-      <div class="design-text">
-        <h2>LOGO</h2>
-        <p>LOOP의 로고는 '반복'이라는 키워드에 집중하여 디자인되었습니다. LOOP의 'OO'를 룰렛이 돌아가는 듯한 느낌으로 시각화했습니다.</p>
-      </div>
-    </section>
-
-    <section class="design-item reverse">
+  <main class="main-content">
+    <div class="design-container">
+      
+      <section class="design-item">
         <div class="design-image">
-            <img src="loopsymbol.png" alt="LOOP 심볼">
+          <img src="looplogo.png" alt="LOOP 로고">
         </div>
         <div class="design-text">
-            <h2>SYMBOL</h2>
-            <p>LOOP의 심볼은 뉴턴의 크레들에서 영감을 받아, 5개의 구슬이 부딪히며 반복되는 움직임과 속도를 시각화했습니다.</p>
+          <h2>LOGO</h2>
+          <p>LOOP의 로고는 '반복'이라는 키워드에 집중하여 디자인되었습니다. LOOP의 'OO'를 룰렛이 돌아가는 듯한 느낌으로 시각화했습니다.</p>
         </div>
-    </section>
-    
-    <section class="design-item">
-        <div class="design-image">
-            <img src="loopposter.png" alt="LOOP 포스터">
-        </div>
-        <div class="design-text">
-            <h2>POSTER</h2>
-            <p>LOOP의 포스터는 깨진 심볼 사이로 피어나는 꽃을 통해 앨범의 주제인 '무너짐과 회복'을 상징합니다. 시대의 흐름에 맞게 AI로 이미지를 생성하고 후작업을 통해 앨범의 의미를 담았습니다.</p>
-        </div>
-    </section>
+      </section>
 
-    <section class="design-item reverse">
-        <div class="design-image">
-            <img src="loopposter2.png" alt="LOOP 두 번째 포스터">
-        </div>
-        <div class="design-text">
-            <h2>POSTER VER.2</h2>
-            <p>두 번째 포스터는 그룹의 또 다른 세계관을 보여주는 상징적인 이미지들을 조합하여 완성되었습니다. 각 요소는 멤버들과 그들의 서사를 나타냅니다.</p>
-        </div>
-    </section>
+      <section class="design-item reverse">
+          <div class="design-image">
+              <img src="loopsymbol.png" alt="LOOP 심볼">
+          </div>
+          <div class="design-text">
+              <h2>SYMBOL</h2>
+              <p>LOOP의 심볼은 뉴턴의 크레들에서 영감을 받아, 5개의 구슬이 부딪히며 반복되는 움직임과 속도를 시각화했습니다.</p>
+          </div>
+      </section>
+      
+      <section class="design-item">
+          <div class="design-image">
+              <img src="loopposter.png" alt="LOOP 포스터">
+          </div>
+          <div class="design-text">
+              <h2>POSTER</h2>
+              <p>LOOP의 포스터는 깨진 심볼 사이로 피어나는 꽃을 통해 앨범의 주제인 '무너짐과 회복'을 상징합니다. 시대의 흐름에 맞게 AI로 이미지를 생성하고 후작업을 통해 앨범의 의미를 담았습니다.</p>
+          </div>
+      </section>
 
+      <section class="design-item reverse">
+          <div class="design-image">
+              <img src="loopposter2.png" alt="LOOP 두 번째 포스터">
+          </div>
+          <div class="design-text">
+              <h2>POSTER VER.2</h2>
+              <p>두 번째 포스터는 그룹의 또 다른 세계관을 보여주는 상징적인 이미지들을 조합하여 완성되었습니다. 각 요소는 멤버들과 그들의 서사를 나타냅니다.</p>
+          </div>
+      </section>
+    </div>
   </main>
 
 </body>
