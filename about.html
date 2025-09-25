@@ -39,14 +39,8 @@
       border-bottom: 1px solid #ddd;
     }
 
-    .logo img {
-      height: 30px;
-    }
-
-    .logo a {
-      display: inline-block;
-      height: 30px;
-    }
+    .logo img { height: 30px; }
+    .logo a { display: inline-block; height: 30px; }
 
     nav {
       flex: 1;
@@ -70,6 +64,7 @@
       cursor: pointer;
       transition: opacity 0.3s ease, transform 0.3s ease;
       color: black;
+      position: relative; /* ✨ 드롭다운 기준점을 위해 추가 */
     }
 
     nav li:hover {
@@ -81,6 +76,39 @@
         text-decoration: none;
         color: inherit;
     }
+    
+    /* --- ✨ 드롭다운을 위한 CSS 추가 --- */
+    .dropdown-menu {
+      display: none; /* 평소에는 숨김 */
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      margin-top: 10px; /* 'ABOUT' 과의 간격 */
+      list-style: none;
+      min-width: 160px; /* 드롭다운 최소 너비 */
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+    }
+
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap; /* 글자 줄바꿈 방지 */
+    }
+
+    /* 부모 li에 마우스를 올렸을 때 드롭다운 메뉴를 표시 */
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+      margin-top: 5px;
+    }
+    /* --- 드롭다운 CSS 끝 --- */
 
     .title {
       text-align: center;
@@ -93,12 +121,7 @@
       animation-delay: 0.2s;
     }
 
-    @keyframes fadeSlideUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fadeSlideUp { to { opacity: 1; transform: translateY(0); } }
 
     .content-container {
       max-width: 800px;
@@ -133,20 +156,11 @@
       text-align: left;
     }
     
-    .section-text:nth-of-type(1) {
-      animation-delay: 0.8s;
-    }
-    .section-text:nth-of-type(2) {
-      animation-delay: 1.1s;
-    }
-
+    .section-text:nth-of-type(1) { animation-delay: 0.8s; }
+    .section-text:nth-of-type(2) { animation-delay: 1.1s; }
 
     @media (max-width: 768px) {
-      nav ul {
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+      nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
       nav li { font-size: 12px; }
       header {
         flex-direction: column;
@@ -155,12 +169,10 @@
         gap: 10px;
       }
       .logo img { height: 24px; }
-      .title {
-        font-size: 32px;
-        margin-top: 100px;
-      }
+      .title { font-size: 32px; margin-top: 100px; }
       .tagline { font-size: 18px; }
       .section-text { font-size: 15px; }
+      .dropdown-menu { display: none !important; /* 모바일에서는 드롭다운 숨김 처리 */ }
     }
   </style>
 </head>
@@ -174,8 +186,12 @@
     </div>
     <nav>
       <ul>
-        <li style="font-weight: bold;">ABOUT</li>
-        <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+        <li>
+          <a href="about.html" style="font-weight: bold;">ABOUT</a>
+          <ul class="dropdown-menu">
+            <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+          </ul>
+        </li>
         <li><a href="artist.html">ARTIST</a></li>
         <li><a href="goods.html">GOODS</a></li>
         <li><a href="design.html">DESIGN</a></li>
@@ -187,13 +203,9 @@
   </header>
 
   <div style="height: 48px;"></div>
-
   <div class="title">INTRODUCTION</div>
-
   <main class="content-container">
-
     <p class="tagline">NOTHING ENDS, IT'S JUST LOOPING</p>
-
     <section class="about-section">
       <p class="section-text">
         LOOP는 아티스트 지민의 붕괴와 회복을 담아낸 여정입니다. 깊은 무너짐 속에서 시작된 이야기는, 혼란과 고통을 지나며 서서히 빛을 찾아갑니다. 그리고 마침내 회복의 순간에 이르러, 무너짐조차 새로운 시작이 될 수 있음을 말합니다.
@@ -202,7 +214,6 @@
         이 앨범은 단순히 끝나지 않는 반복이 아닌, 무너짐과 다시 일어섬이 끊임없이 이어지는 삶의 순환을 상징합니다. LOOP는 우리 모두가 겪는 내면의 굴곡 속에서 다시 나아갈 용기와 희망을 건네고자 합니다.
       </p>
     </section>
-
   </main>
 
 </body>

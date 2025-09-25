@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BRAND IDENTITY - LOOP</title>
   <style>
-    /* --- 기본 스타일 (다른 페이지와 동일) --- */
     @font-face {
       font-family: 'SUIT';
       src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
@@ -65,12 +64,44 @@
       cursor: pointer;
       transition: opacity 0.3s ease, transform 0.3s ease;
       color: black;
+      position: relative; /* ✨ 드롭다운 기준점을 위해 추가 */
     }
 
     nav li:hover { opacity: 0.7; transform: scale(1.1); }
     nav a { text-decoration: none; color: inherit; }
 
-    /* --- ✨ 브랜드 아이덴티티 페이지 스타일 --- */
+    /* --- ✨ 드롭다운을 위한 CSS 추가 --- */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      margin-top: 10px;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+    }
+
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+      margin-top: 5px;
+    }
+    /* --- 드롭다운 CSS 끝 --- */
+
     .title {
       text-align: center;
       font-size: 48px;
@@ -81,12 +112,7 @@
       animation: fadeUp 1s ease-out forwards;
     }
     
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
     .content-container {
       max-width: 1200px;
@@ -115,28 +141,20 @@
       padding-bottom: 12px;
     }
 
-    /* 로고 섹션 */
     .logo-display {
       background-color: #f9f9f9;
       border-radius: 12px;
       padding: 60px;
       text-align: center;
     }
-    .logo-display img {
-      max-width: 150px;
-    }
+    .logo-display img { max-width: 150px; }
 
-    /* 컬러 팔레트 섹션 */
     .color-palette {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 20px;
     }
-    .color-swatch {
-      border-radius: 8px;
-      padding: 20px;
-      text-align: left;
-    }
+    .color-swatch { border-radius: 8px; padding: 20px; text-align: left; }
     .color-swatch .color-box {
       width: 100%;
       height: 120px;
@@ -144,39 +162,16 @@
       margin-bottom: 12px;
       border: 1px solid rgba(0,0,0,0.05);
     }
-    .color-swatch .color-name {
-      font-weight: bold;
-      font-size: 16px;
-      margin: 0 0 4px;
-    }
-    .color-swatch .color-code {
-      font-size: 14px;
-      color: #555;
-    }
+    .color-swatch .color-name { font-weight: bold; font-size: 16px; margin: 0 0 4px; }
+    .color-swatch .color-code { font-size: 14px; color: #555; }
 
-    /* 타이포그래피 섹션 */
-    .typography-showcase {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-    }
-    .font-display .font-name {
-      font-size: 28px;
-      font-weight: bold;
-      margin: 0 0 16px;
-    }
-    .font-display .font-sample-heading {
-      font-size: 40px;
-      margin: 0 0 12px;
-    }
-    .font-display .font-sample-body {
-      font-size: 16px;
-      line-height: 1.7;
-    }
+    .typography-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .font-display .font-name { font-size: 28px; font-weight: bold; margin: 0 0 16px; }
+    .font-display .font-sample-heading { font-size: 40px; margin: 0 0 12px; }
+    .font-display .font-sample-body { font-size: 16px; line-height: 1.7; }
     .font-made { font-family: 'MADE Outer Sans', sans-serif; }
     .font-suit { font-family: 'SUIT', sans-serif; }
 
-    /* 반응형 */
     @media (max-width: 768px) {
       nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
       nav li { font-size: 12px; }
@@ -185,6 +180,7 @@
       .title { font-size: 32px; margin-top: 120px; }
       .content-container { gap: 60px; }
       .typography-showcase { grid-template-columns: 1fr; }
+      .dropdown-menu { display: none !important; /* 모바일에서는 드롭다운 숨김 처리 */ }
     }
   </style>
 </head>
@@ -198,8 +194,12 @@
     </div>
     <nav>
       <ul>
-        <li><a href="about.html">ABOUT</a></li>
-        <li style="font-weight: bold;">BRAND IDENTITY</li>
+        <li>
+          <a href="about.html" style="font-weight: bold;">ABOUT</a>
+          <ul class="dropdown-menu">
+            <li><a href="BRAND IDENTITY.html" style="font-weight: bold;">BRAND IDENTITY</a></li>
+          </ul>
+        </li>
         <li><a href="artist.html">ARTIST</a></li>
         <li><a href="goods.html">GOODS</a></li>
         <li><a href="design.html">DESIGN</a></li>
@@ -211,18 +211,14 @@
   </header>
 
   <div style="height: 48px;"></div>
-
   <div class="title">BRAND IDENTITY</div>
-
   <main class="content-container">
-
     <section class="identity-section logo-section">
       <h2 class="section-title">LOGO</h2>
       <div class="logo-display">
         <img src="./loop%20asset%20symbol.png" alt="LOOP Main Logo">
       </div>
     </section>
-
     <section class="identity-section color-section">
       <h2 class="section-title">COLOR PALETTE</h2>
       <div class="color-palette">
@@ -248,7 +244,6 @@
         </div>
       </div>
     </section>
-
     <section class="identity-section typography-section">
       <h2 class="section-title">TYPOGRAPHY</h2>
       <div class="typography-showcase">
@@ -264,7 +259,6 @@
         </div>
       </div>
     </section>
-
   </main>
 
 </body>
