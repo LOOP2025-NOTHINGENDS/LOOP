@@ -71,13 +71,15 @@
       font-weight: 500;
       font-size: 14px;
       cursor: pointer;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.3s ease;
       color: black;
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: -15px;
     }
     
     nav li:hover {
       opacity: 0.7;
-      transform: scale(1.1);
     }
 
     nav a {
@@ -85,22 +87,54 @@
       color: inherit;
     }
     
-    /* --- MV 페이지 전용 스타일 --- */
+    /* --- ✨ 드롭다운 메뉴 CSS 추가 --- */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+      margin-top: 0;
+    }
 
-    /* 영상 섹션 */
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+      padding-bottom: 8px;
+      margin-bottom: 0;
+    }
+
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+    }
+
+    /* --- MV 페이지 전용 스타일 --- */
     .video-wrapper {
       width: 100%;
-      height: 100vh; /* 뷰포트 높이를 100% 사용하여 화면을 채움 */
+      height: 100vh;
       overflow: hidden;
+      /* 헤더가 고정이므로, 영상이 헤더 아래에서 시작하도록 패딩 추가 */
+      padding-top: 48px; 
+      box-sizing: border-box; /* 패딩이 높이값에 포함되도록 설정 */
     }
 
     .video-wrapper video {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* 비디오가 컨테이너를 가득 채우도록 설정 (잘릴 수 있음) */
+      object-fit: cover;
     }
 
-    /* 촬영팀 소개 섹션 */
     .credits-section {
       max-width: 1000px;
       margin: 80px auto;
@@ -116,15 +150,15 @@
 
     .credits-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
-      gap: 50px 40px; /* 세로, 가로 간격 */
+      grid-template-columns: repeat(2, 1fr);
+      gap: 50px 40px;
       text-align: left;
     }
 
     .credit-member {
       display: flex;
       align-items: center;
-      gap: 20px; /* 이미지와 텍스트 사이 간격 */
+      gap: 20px;
     }
 
     .profile-image img, .profile-placeholder {
@@ -134,7 +168,7 @@
     }
 
     .profile-placeholder {
-      background-color: #f0f0f0; /* 회색 배경의 사각형 */
+      background-color: #f0f0f0;
     }
 
     .member-info h3 {
@@ -158,12 +192,16 @@
         gap: 10px;
       }
 
+      .dropdown-menu { display: none !important; }
+
       .video-wrapper {
-        height: 50vh; /* 모바일에서는 영상 높이 줄이기 */
+        height: 50vh;
+        /* 모바일 헤더 높이에 맞게 패딩 조정 */
+        padding-top: 100px;
       }
       
       .credits-grid {
-        grid-template-columns: 1fr; /* 1열로 변경 */
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -178,11 +216,16 @@
     </div>
     <nav>
       <ul>
-        <li><a href="about.html">ABOUT</a></li>
+        <li>
+          <a href="about.html">ABOUT</a>
+          <ul class="dropdown-menu">
+            <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+          </ul>
+        </li>
         <li><a href="artist.html">ARTIST</a></li>
         <li><a href="goods.html">GOODS</a></li>
         <li><a href="design.html">DESIGN</a></li>
-        <li>MV</li> 
+        <li style="font-weight: bold;">MV</li> 
         <li><a href="track.html">TRACK</a></li>
         <li><a href="investor.html">INVESTORS</a></li>
       </ul>
