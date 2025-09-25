@@ -71,47 +71,81 @@
       font-weight: 500;
       font-size: 14px;
       cursor: pointer;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.3s ease;
       color: black;
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: -15px;
     }
     
     nav li:hover {
       opacity: 0.7;
-      transform: scale(1.1);
     }
-
-    /* 네비게이션 링크 스타일 */
+    
     nav a {
         text-decoration: none;
         color: inherit;
     }
     
-    /* --- Goods 페이지 전용 스타일 --- */
-
-    /* 페이지 전체 콘텐츠를 감싸는 래퍼 */
-    .goods-container {
-        max-width: 1200px; /* 콘텐츠 최대 너비 설정 */
-        margin: 40px auto; /* 상하 여백 및 좌우 자동 여백으로 중앙 정렬 */
-        padding: 0 40px; /* 좌우 패딩 */
+    /* --- ✨ 드롭다운 메뉴 CSS 추가 --- */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+      margin-top: 0;
     }
 
-    /* 각 상품 섹션 */
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+      padding-bottom: 8px;
+      margin-bottom: 0;
+    }
+
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+    }
+    
+    /* --- ✨ 본문 시작 위치 CSS 추가 --- */
+    .main-content {
+        padding-top: 48px;
+    }
+
+    /* --- Goods 페이지 전용 스타일 --- */
+    .goods-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 40px;
+    }
+
     .product-section {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 5vw; /* 텍스트와 이미지 사이의 간격 */
+        gap: 5vw;
         margin-bottom: 100px;
         min-height: 450px;
     }
 
-    /* 이미지-텍스트 순서를 바꾸기 위한 클래스 */
     .product-section.reverse {
         flex-direction: row-reverse;
     }
 
     .product-text, .product-image {
-        flex: 1; /* 텍스트와 이미지가 1:1 비율을 차지하도록 설정 */
+        flex: 1;
     }
 
     .product-image {
@@ -121,7 +155,7 @@
     .product-image img {
         max-width: 85%;
         height: auto;
-        border-radius: 8px; /* 이미지에 부드러운 모서리 추가 */
+        border-radius: 8px;
     }
 
     .product-text h2 {
@@ -134,10 +168,9 @@
         font-size: 16px;
         color: #666;
         line-height: 1.7;
-        max-width: 400px; /* 텍스트 너비 제한 */
+        max-width: 400px;
     }
 
-    /* "VIEW MORE" 버튼 */
     .view-button {
         display: inline-block;
         margin-top: 24px;
@@ -165,11 +198,18 @@
         padding: 10px 5vw;
         gap: 10px;
       }
+      
+      .dropdown-menu { display: none !important; }
+      
+      .main-content {
+          padding-top: 100px;
+      }
+
       .goods-container {
-        margin-top: 120px; /* 모바일에서 높아진 헤더만큼 더 내리기 */
+        margin-top: 40px; /* 기존 120px에서 줄임 */
       }
       .product-section, .product-section.reverse {
-        flex-direction: column; /* 세로로 쌓이도록 변경 */
+        flex-direction: column;
         gap: 20px;
         margin-bottom: 60px;
       }
@@ -193,9 +233,14 @@
     </div>
     <nav>
       <ul>
-        <li><a href="about.html">ABOUT</a></li>
+        <li>
+          <a href="about.html">ABOUT</a>
+          <ul class="dropdown-menu">
+            <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+          </ul>
+        </li>
         <li><a href="artist.html">ARTIST</a></li>
-        <li>GOODS</li> 
+        <li style="font-weight: bold;">GOODS</li> 
         <li><a href="design.html">DESIGN</a></li>
         <li><a href="mv.html">MV</a></li>
         <li><a href="track.html">TRACK</a></li>
@@ -204,65 +249,64 @@
     </nav>
   </header>
 
-  <div style="height: 48px;"></div>
+  <main class="main-content">
+    <div class="goods-container">
+      
+      <section class="product-section">
+        <div class="product-text"><h2>LOOP ALBUM</h2><p>The first official album from LOOP. A collection of tracks that define our unique sound and vision.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopalbum.png" alt="LOOP Album"></div>
+      </section>
+      
+      <section class="product-section reverse">
+        <div class="product-text"><h2>MINIATURE BUS</h2><p>A detailed die-cast model of the bus featured in our debut music video. A must-have for collectors.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopbus.png" alt="LOOP Miniature Bus"></div>
+      </section>
 
-  <main class="goods-container">
-    
-    <section class="product-section">
-      <div class="product-text"><h2>LOOP ALBUM</h2><p>The first official album from LOOP. A collection of tracks that define our unique sound and vision.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopalbum.png" alt="LOOP Album"></div>
-    </section>
-    
-    <section class="product-section reverse">
-      <div class="product-text"><h2>MINIATURE BUS</h2><p>A detailed die-cast model of the bus featured in our debut music video. A must-have for collectors.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopbus.png" alt="LOOP Miniature Bus"></div>
-    </section>
+      <section class="product-section">
+        <div class="product-text"><h2>PHOTO CARD SET</h2><p>A complete set of high-quality photo cards featuring exclusive shots of all members.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopcard.png" alt="LOOP Photo Card Set"></div>
+      </section>
 
-    <section class="product-section">
-      <div class="product-text"><h2>PHOTO CARD SET</h2><p>A complete set of high-quality photo cards featuring exclusive shots of all members.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopcard.png" alt="LOOP Photo Card Set"></div>
-    </section>
+      <section class="product-section reverse">
+        <div class="product-text"><h2>PHONE CASE</h2><p>Protect your phone in style with our signature case, available for various models.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopcase.png" alt="LOOP Phone Case"></div>
+      </section>
 
-    <section class="product-section reverse">
-      <div class="product-text"><h2>PHONE CASE</h2><p>Protect your phone in style with our signature case, available for various models.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopcase.png" alt="LOOP Phone Case"></div>
-    </section>
+      <section class="product-section">
+        <div class="product-text"><h2>SIGNATURE LIP</h2><p>Official collaboration lip tint. Get the iconic look with a color that suits everyone.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="looplip.png" alt="LOOP Signature Lip Tint"></div>
+      </section>
 
-    <section class="product-section">
-      <div class="product-text"><h2>SIGNATURE LIP</h2><p>Official collaboration lip tint. Get the iconic look with a color that suits everyone.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="looplip.png" alt="LOOP Signature Lip Tint"></div>
-    </section>
+      <section class="product-section reverse">
+        <div class="product-text"><h2>SPECIAL LP</h2><p>A special edition vinyl press of the debut album. Experience the music in its purest analog form.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="looplp.png" alt="LOOP Special Edition LP"></div>
+      </section>
 
-    <section class="product-section reverse">
-      <div class="product-text"><h2>SPECIAL LP</h2><p>A special edition vinyl press of the debut album. Experience the music in its purest analog form.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="looplp.png" alt="LOOP Special Edition LP"></div>
-    </section>
+      <section class="product-section">
+        <div class="product-text"><h2>MAGAZINE VOL. 1</h2><p>Go behind the scenes with exclusive interviews and photos in the first issue of the official LOOP magazine.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopmagazine1.png" alt="LOOP Magazine Vol. 1"></div>
+      </section>
 
-    <section class="product-section">
-      <div class="product-text"><h2>MAGAZINE VOL. 1</h2><p>Go behind the scenes with exclusive interviews and photos in the first issue of the official LOOP magazine.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopmagazine1.png" alt="LOOP Magazine Vol. 1"></div>
-    </section>
+      <section class="product-section reverse">
+        <div class="product-text"><h2>MAGAZINE VOL. 2</h2><p>The story continues. Dive deeper into the world of LOOP with the second volume of our official magazine.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopmagazine2.png" alt="LOOP Magazine Vol. 2"></div>
+      </section>
 
-    <section class="product-section reverse">
-      <div class="product-text"><h2>MAGAZINE VOL. 2</h2><p>The story continues. Dive deeper into the world of LOOP with the second volume of our official magazine.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopmagazine2.png" alt="LOOP Magazine Vol. 2"></div>
-    </section>
+      <section class="product-section">
+        <div class="product-text"><h2>S.BIN EDITION</h2><p>A special edition photobook curated by member S.Bin, showcasing her unique artistic perspective.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopsbin.png" alt="LOOP S.Bin Special Edition"></div>
+      </section>
 
-    <section class="product-section">
-      <div class="product-text"><h2>S.BIN EDITION</h2><p>A special edition photobook curated by member S.Bin, showcasing her unique artistic perspective.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopsbin.png" alt="LOOP S.Bin Special Edition"></div>
-    </section>
+      <section class="product-section reverse">
+        <div class="product-text"><h2>WALLET & CARD</h2><p>Sleek and minimalist. Carry a piece of LOOP with you everywhere with our branded wallet and card set.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopwallet.png" alt="LOOP Wallet and Card"></div>
+      </section>
 
-    <section class="product-section reverse">
-      <div class="product-text"><h2>WALLET & CARD</h2><p>Sleek and minimalist. Carry a piece of LOOP with you everywhere with our branded wallet and card set.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopwallet.png" alt="LOOP Wallet and Card"></div>
-    </section>
-
-    <section class="product-section">
-      <div class="product-text"><h2>TIMEPIECE</h2><p>A timeless, modern watch featuring a subtle LOOP logo. A sophisticated accessory for any fan.</p><a href="#" class="view-button">VIEW MORE</a></div>
-      <div class="product-image"><img src="loopwatch.png" alt="LOOP Watch"></div>
-    </section>
-
+      <section class="product-section">
+        <div class="product-text"><h2>TIMEPIECE</h2><p>A timeless, modern watch featuring a subtle LOOP logo. A sophisticated accessory for any fan.</p><a href="#" class="view-button">VIEW MORE</a></div>
+        <div class="product-image"><img src="loopwatch.png" alt="LOOP Watch"></div>
+      </section>
+    </div>
   </main>
 
 </body>
