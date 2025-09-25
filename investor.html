@@ -69,8 +69,11 @@
       font-weight: 500;
       font-size: 14px;
       cursor: pointer;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.3s ease;
       color: black;
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: -15px;
     }
     
     nav a {
@@ -80,13 +83,44 @@
 
     nav li:hover {
       opacity: 0.7;
-      transform: scale(1.1);
+    }
+    
+    /* --- ✨ 드롭다운 메뉴 CSS 추가 --- */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+      margin-top: 0;
+    }
+
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+      padding-bottom: 8px;
+      margin-bottom: 0;
+    }
+
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
     }
 
     /* --- ✨ INVESTORS 페이지를 위한 스타일 --- */
     
     .main-content-area {
-        padding-top: 48px; /* 고정 헤더 높이만큼 여백 */
+        padding-top: 48px;
     }
     
     @keyframes fadeUp {
@@ -188,6 +222,8 @@
       .main-content-area {
         padding-top: 100px; 
       }
+
+      .dropdown-menu { display: none !important; }
       
       .page-header {
         padding: 40px 5vw 30px;
@@ -209,12 +245,17 @@
     </div>
     <nav>
       <ul>
-        <li><a href="./about.html">ABOUT</a></li>
-        <li><a href="./artist.html">ARTIST</a></li> 
-        <li><a href="./goods.html">GOODS</a></li>
-        <li><a href="./design.html">DESIGN</a></li>
-        <li><a href="./mv.html">MV</a></li>
-        <li><a href="./track.html">TRACK</a></li>
+        <li>
+          <a href="about.html">ABOUT</a>
+          <ul class="dropdown-menu">
+            <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+          </ul>
+        </li>
+        <li><a href="artist.html">ARTIST</a></li> 
+        <li><a href="goods.html">GOODS</a></li>
+        <li><a href="design.html">DESIGN</a></li>
+        <li><a href="mv.html">MV</a></li>
+        <li><a href="track.html">TRACK</a></li>
         <li style="font-weight: bold;">INVESTORS</li>
       </ul>
     </nav>
