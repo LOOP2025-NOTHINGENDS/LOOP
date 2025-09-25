@@ -66,14 +66,12 @@
       transition: opacity 0.3s ease; /* transform 제외 */
       color: black;
       position: relative;
-      /* --- ✨ 1. 호버 영역 확장을 위한 수정 --- */
       padding-bottom: 15px;
       margin-bottom: -15px;
     }
 
     nav li:hover {
       opacity: 0.7;
-      /* transform: scale(1.1); ✨ 드롭다운 사용 시 방해가 될 수 있어 제거 */
     }
     
     nav a {
@@ -97,7 +95,6 @@
       opacity: 0;
       transition: opacity 0.3s ease, margin-top 0.3s ease;
       z-index: 1100;
-      /* --- ✨ 2. 위치 조정을 위한 수정 --- */
       margin-top: 0;
     }
 
@@ -105,7 +102,6 @@
       padding: 8px 16px;
       font-size: 13px;
       white-space: nowrap;
-      /* ✨ li에 적용했던 패딩/마진 값을 초기화 */
       padding-bottom: 8px;
       margin-bottom: 0;
     }
@@ -244,4 +240,30 @@
         <li><a href="goods.html">GOODS</a></li>
         <li><a href="design.html">DESIGN</a></li>
         <li><a href="mv.html">MV</a></li>
-        <li><a href="track.html">TRACK
+        <li><a href="track.html">TRACK</a></li>
+        <li><a href="investor.html">INVESTORS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content-area" style="padding-top: 48px;">
+    <section class="artist-section">
+      <div class="text-wrapper">
+        <p class="page-subtitle">ARTIST</p>
+        <h1 class="main-headline">JIMIN<br>NOTHING ENDS.</h1>
+      </div>
+      <div class="artist-image-container">
+        <img src="artist.png" alt="JIMIN">
+      </div>
+    </section>
+    
+    <section class="producer-section">
+      <h2 class="producer-title">PRODUCER</h2>
+      <div class="producer-image-container">
+        <img src="producer.png" alt="PRODUCER">
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

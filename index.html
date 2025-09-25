@@ -83,7 +83,6 @@
       text-decoration: none;
     }
     
-    /* --- ✨ 드롭다운 메뉴 CSS --- */
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -114,11 +113,16 @@
       display: block;
       opacity: 1;
     }
-    /* --- 드롭다운 CSS 끝 --- */
 
-    /* --- ✨ 본문 시작 위치 CSS --- */
     .main-content {
         padding-top: 48px;
+    }
+    
+    /* ✨ 이미지 사이 여백 제거를 위한 스타일 추가 */
+    section {
+      margin: 0;
+      /* 이미지가 section안에서 공백을 만들지 않도록 추가 */
+      line-height: 0; 
     }
 
     section img {
