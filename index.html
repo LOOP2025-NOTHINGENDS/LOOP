@@ -116,12 +116,14 @@
 
     .main-content {
         padding-top: 48px;
+        /* ✨ HTML 태그 사이의 눈에 보이지 않는 공백을 제거합니다. */
+        font-size: 0;
     }
     
-    /* ✨ 이미지 사이 여백 제거를 위한 스타일 추가 */
-    section {
+    /* ✨ section 태그의 모든 여백을 확실히 제거합니다. */
+    .main-content section {
       margin: 0;
-      /* 이미지가 section안에서 공백을 만들지 않도록 추가 */
+      padding: 0;
       line-height: 0; 
     }
 
