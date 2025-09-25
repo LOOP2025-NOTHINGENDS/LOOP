@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRAND IDENTITY - LOOP</title>
+  <style>
+    /* --- 기본 스타일 (다른 페이지와 동일) --- */
+    @font-face {
+      font-family: 'SUIT';
+      src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'MADE Outer Sans';
+      src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
+      font-weight: 500;
+    }
+
+    body {
+      margin: 0;
+      background-color: white;
+      color: black;
+      font-family: 'SUIT', sans-serif;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 5vw;
+      background-color: white;
+      height: 48px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo img { height: 30px; }
+    .logo a { display: inline-block; height: 30px; }
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5vw;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: black;
+    }
+
+    nav li:hover { opacity: 0.7; transform: scale(1.1); }
+    nav a { text-decoration: none; color: inherit; }
+
+    /* --- ✨ 브랜드 아이덴티티 페이지 스타일 --- */
+    .title {
+      text-align: center;
+      font-size: 48px;
+      font-weight: bold;
+      margin: 80px 0 40px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s ease-out forwards;
+    }
+    
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+
+    .identity-section {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease-out forwards;
+    }
+    .identity-section:nth-of-type(1) { animation-delay: 0.2s; }
+    .identity-section:nth-of-type(2) { animation-delay: 0.4s; }
+    .identity-section:nth-of-type(3) { animation-delay: 0.6s; }
+
+    .section-title {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 12px;
+    }
+
+    /* 로고 섹션 */
+    .logo-display {
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 60px;
+      text-align: center;
+    }
+    .logo-display img {
+      max-width: 150px;
+    }
+
+    /* 컬러 팔레트 섹션 */
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+    .color-swatch {
+      border-radius: 8px;
+      padding: 20px;
+      text-align: left;
+    }
+    .color-swatch .color-box {
+      width: 100%;
+      height: 120px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .color-swatch .color-name {
+      font-weight: bold;
+      font-size: 16px;
+      margin: 0 0 4px;
+    }
+    .color-swatch .color-code {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* 타이포그래피 섹션 */
+    .typography-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .font-display .font-name {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 0 0 16px;
+    }
+    .font-display .font-sample-heading {
+      font-size: 40px;
+      margin: 0 0 12px;
+    }
+    .font-display .font-sample-body {
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .font-made { font-family: 'MADE Outer Sans', sans-serif; }
+    .font-suit { font-family: 'SUIT', sans-serif; }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+      nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
+      nav li { font-size: 12px; }
+      header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; }
+      .logo img { height: 24px; }
+      .title { font-size: 32px; margin-top: 120px; }
+      .content-container { gap: 60px; }
+      .typography-showcase { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="./index.html">
+        <img src="./loop%20asset%20symbol.png" alt="Logo" />
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="about.html">ABOUT</a></li>
+        <li style="font-weight: bold;">BRAND IDENTITY</li>
+        <li><a href="artist.html">ARTIST</a></li>
+        <li><a href="goods.html">GOODS</a></li>
+        <li><a href="design.html">DESIGN</a></li>
+        <li><a href="mv.html">MV</a></li>
+        <li><a href="track.html">TRACK</a></li>
+        <li><a href="investor.html">INVESTORS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div style="height: 48px;"></div>
+
+  <div class="title">BRAND IDENTITY</div>
+
+  <main class="content-container">
+
+    <section class="identity-section logo-section">
+      <h2 class="section-title">LOGO</h2>
+      <div class="logo-display">
+        <img src="./loop%20asset%20symbol.png" alt="LOOP Main Logo">
+      </div>
+    </section>
+
+    <section class="identity-section color-section">
+      <h2 class="section-title">COLOR PALETTE</h2>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: #000000;"></div>
+          <p class="color-name">Primary Black</p>
+          <p class="color-code">#000000</p>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: #FFFFFF;"></div>
+          <p class="color-name">Primary White</p>
+          <p class="color-code">#FFFFFF</p>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: #A0A0A0;"></div>
+          <p class="color-name">Neutral Gray</p>
+          <p class="color-code">#A0A0A0</p>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: #4A90E2;"></div>
+          <p class="color-name">Accent Blue</p>
+          <p class="color-code">#4A90E2</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="identity-section typography-section">
+      <h2 class="section-title">TYPOGRAPHY</h2>
+      <div class="typography-showcase">
+        <div class="font-display">
+          <p class="font-name font-made">MADE Outer Sans</p>
+          <p class="font-sample-heading font-made">HEADINGS</p>
+          <p class="font-sample-body font-made">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789</p>
+        </div>
+        <div class="font-display">
+          <p class="font-name font-suit">SUIT</p>
+          <p class="font-sample-heading font-suit">Body Text</p>
+          <p class="font-sample-body font-suit">본문 텍스트는 SUIT 폰트를 사용하여<br>가독성을 높이고 정돈된 인상을 줍니다.<br>The quick brown fox jumps over the lazy dog.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
