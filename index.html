@@ -38,30 +38,10 @@
       box-sizing: border-box;
     }
 
-    .logo img {
-      height: 30px;
-    }
-
-    .logo a {
-      display: inline-block;
-      height: 30px;
-    }
-
-    nav {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5vw;
-      margin: 0;
-      padding: 0;
-    }
-
+    .logo img { height: 30px; }
+    .logo a { display: inline-block; height: 30px; }
+    nav { flex: 1; display: flex; justify-content: center; }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 5vw; margin: 0; padding: 0; }
     nav li {
       font-family: 'MADE Outer Sans', sans-serif;
       font-weight: 500;
@@ -73,16 +53,8 @@
       padding-bottom: 15px;
       margin-bottom: -15px;
     }
-
-    nav li:hover {
-      opacity: 0.7;
-    }
-
-    nav a {
-      color: inherit;
-      text-decoration: none;
-    }
-    
+    nav li:hover { opacity: 0.7; }
+    nav a { color: inherit; text-decoration: none; }
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -100,7 +72,6 @@
       z-index: 1100;
       margin-top: 0;
     }
-
     .dropdown-menu li {
       padding: 8px 16px;
       font-size: 13px;
@@ -108,23 +79,17 @@
       padding-bottom: 8px;
       margin-bottom: 0;
     }
-
-    li:hover > .dropdown-menu {
-      display: block;
-      opacity: 1;
-    }
+    li:hover > .dropdown-menu { display: block; opacity: 1; }
 
     .main-content {
         padding-top: 48px;
         font-size: 0;
     }
-    
     .main-content section {
       margin: 0;
       padding: 0;
       line-height: 0; 
     }
-
     section img {
       width: 100%;
       display: block;
@@ -132,47 +97,56 @@
       padding: 0;
       border: 0;
     }
-    
-    /* ✨ 3번째 이미지를 2번째 위로 겹치게 하는 스타일 */
     .overlapping-section {
-      /* vh는 화면 높이 기준 단위, 화면 높이의 20%만큼 위로 올립니다. */
       margin-top: -20vh; 
-      position: relative; /* 다른 요소들 위에 올 수 있도록 설정 */
+      position: relative;
+    }
+    
+    /* --- ✨ 카운트다운 스타일 시작 --- */
+    .hero-section {
+        position: relative; /* 자식 요소인 카운트다운을 위치시킬 기준 */
     }
 
+    .countdown-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        width: 100%;
+    }
+
+    .countdown-title {
+        font-family: 'SUIT', sans-serif;
+        font-size: 2vw; /* 화면 너비에 따라 크기 조절 */
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-bottom: 24px;
+    }
+
+    #countdown-timer {
+        font-family: 'MADE Outer Sans', sans-serif;
+        font-size: 7vw; /* 화면 너비에 따라 크기 조절 */
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        line-height: 1.2;
+    }
+    /* --- ✨ 카운트다운 스타일 끝 --- */
 
     @media (max-width: 768px) {
-      nav ul {
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      nav li {
-        font-size: 12px;
-      }
-
-      header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 5vw;
-        gap: 10px;
-      }
-
-      .logo img {
-        height: 24px;
-      }
-
+      nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
+      nav li { font-size: 12px; }
+      header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; }
+      .logo img { height: 24px; }
       .dropdown-menu { display: none !important; }
+      .main-content { padding-top: 100px; }
+      .overlapping-section { margin-top: -15vh; }
 
-      .main-content {
-        padding-top: 100px;
-      }
-      
-      /* 모바일에서는 겹치는 정도를 살짝 줄입니다. */
-      .overlapping-section {
-        margin-top: -15vh;
-      }
+      /* 모바일용 카운트다운 스타일 */
+      .countdown-title { font-size: 4vw; margin-bottom: 16px; }
+      #countdown-timer { font-size: 12vw; }
     }
   </style>
 </head>
@@ -202,9 +176,15 @@
   </header>
 
   <main class="main-content">
-    <section>
-      <img src="comingsoon.jpg" alt="Section 1" />
+    
+    <section class="hero-section">
+      <img src="comingsoon.jpg" alt="Coming Soon" />
+      <div class="countdown-container">
+        <h2 class="countdown-title">UNTIL THE DROP</h2>
+        <div id="countdown-timer"></div>
+      </div>
     </section>
+    
     <section>
       <img src="./LOOP_WEBSITE2.jpeg" alt="Section 2" />
     </section>
@@ -212,5 +192,41 @@
       <img src="./LOOP_WEBSITE3.jpeg" alt="Section 3" />
     </section>
   </main>
+
+  <script>
+    // 목표 날짜 설정: 2025년 11월 3일 00:00:00
+    const countDownDate = new Date("Nov 3, 2025 00:00:00").getTime();
+
+    // 1초마다 업데이트
+    const x = setInterval(function() {
+      // 현재 시간 가져오기
+      const now = new Date().getTime();
+      
+      // 목표 날짜와 현재 시간의 차이 계산
+      const distance = countDownDate - now;
+      
+      // 시간, 분, 초 계산
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      // HTML 요소에 결과 표시
+      // 각 숫자가 10보다 작을 경우 앞에 '0'을 붙여 두 자리로 만듭니다. (예: 7 -> 07)
+      document.getElementById("countdown-timer").innerHTML = 
+        days + "d " + 
+        (hours < 10 ? "0" + hours : hours) + "h " + 
+        (minutes < 10 ? "0" + minutes : minutes) + "m " + 
+        (seconds < 10 ? "0" + seconds : seconds) + "s ";
+      
+      // 카운트다운이 끝나면 "COMING SOON" 텍스트 표시
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown-timer").innerHTML = "COMING SOON!";
+        document.querySelector(".countdown-title").style.display = 'none'; // 타이틀 숨기기
+      }
+    }, 1000);
+  </script>
+
 </body>
 </html>
