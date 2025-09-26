@@ -24,11 +24,8 @@
       background-color: #ffffff;
       color: #111;
       font-family: 'SUIT', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* --- ✨ 정상 작동하는 헤더 스타일 (수정 완료) --- */
     header {
       position: fixed;
       top: 0;
@@ -82,26 +79,35 @@
     .dropdown-menu li { padding: 8px 16px; font-size: 13px; white-space: nowrap; }
     li:hover > .dropdown-menu { display: block; opacity: 1; margin-top: 0; }
 
-    /* --- ✨ 새로운 디자인 페이지 스타일 --- */
-    .main-content { padding-top: 48px; }
-    .page-container { max-width: 1200px; margin: 0 auto; padding: 0 4vw; }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-
+    /* --- ✨ 페이지 전체 콘텐츠 래퍼 --- */
+    .page-wrapper {
+        padding-top: 48px; /* 고정 헤더 높이만큼 여백 */
+    }
+    
+    /* --- ✨ 페이지 헤더 (메뉴바 아래로 이동) --- */
     .page-header {
       text-align: center;
-      padding: 100px 0 80px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 0.8s ease-out forwards;
+      padding: 60px 4vw;
+      background-color: #f8f8f8;
+      border-bottom: 1px solid #eee;
     }
-    .page-header h1 { font-size: 56px; font-weight: 900; margin: 0 0 8px 0; }
-    .page-header p { font-size: 18px; color: #555; max-width: 600px; margin: 0 auto; }
+    .page-header h1 { font-size: 40px; font-weight: 900; margin: 0 0 8px 0; }
+    .page-header p { font-size: 16px; color: #555; max-width: 600px; margin: 0 auto; }
     
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 4vw;
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .asset-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 32px;
-        padding-bottom: 100px;
     }
     
     .asset-card {
@@ -115,64 +121,30 @@
         transform: translateY(20px);
         animation: fadeIn 0.8s ease-out forwards;
     }
-    
-    .asset-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.07);
-    }
-
-    .asset-card.full-width {
-        grid-column: 1 / -1; /* 1번 열에서 마지막 열까지 확장 */
-    }
-
-    .asset-card img {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 24px;
-    }
-    
+    .asset-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+    .asset-card.full-width { grid-column: 1 / -1; }
+    .asset-card img { max-width: 100%; height: auto; margin-bottom: 24px; }
     .asset-card .logo-image { max-height: 80px; }
     .asset-card .symbol-image { max-height: 200px; }
-
-    .asset-card h3 {
-        font-family: 'MADE Outer Sans', sans-serif;
-        font-size: 20px;
-        margin: 0 0 8px 0;
-    }
-
-    .asset-card p {
-        font-size: 16px;
-        color: #555;
-        line-height: 1.7;
-        margin: 0;
-    }
+    .asset-card h3 { font-family: 'MADE Outer Sans', sans-serif; font-size: 20px; margin: 0 0 8px 0; }
+    .asset-card p { font-size: 16px; color: #555; line-height: 1.7; margin: 0; }
     
-    .poster-image-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        margin-top: 24px;
-    }
+    .poster-image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+    .poster-image-grid img { width: 100%; border-radius: 8px; }
 
-    .poster-image-grid img {
-        width: 100%;
-        border-radius: 8px;
-    }
-
-
+    /* 반응형 스타일 */
     @media (max-width: 768px) {
       header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; background-color: rgba(255, 255, 255, 0.95); }
-      .main-content { padding-top: 86px; }
+      .page-wrapper { padding-top: 86px; } /* 모바일 헤더 높이만큼 여백 */
       .logo img { height: 24px; }
       nav ul { gap: 12px; }
       nav li { font-size: 12px; }
       .dropdown-menu { display: none !important; }
 
-      .page-container { padding: 40px 4vw; }
-      .page-header { padding: 60px 0 40px; }
-      .page-header h1 { font-size: 40px; }
-      .page-header p { font-size: 16px; }
+      .page-header { padding: 40px 4vw; }
+      .page-header h1 { font-size: 32px; }
       
+      .page-container { padding: 60px 4vw; }
       .asset-grid { grid-template-columns: 1fr; }
       .poster-image-grid { grid-template-columns: 1fr; }
     }
@@ -230,39 +202,41 @@
     </nav>
   </header>
 
-  <main class="main-content">
-    <div class="page-container">
-      
-      <header class="page-header">
-        <h1>Design Assets</h1>
-        <p>Explore the visual identity of LOOP, from the core logo and symbol to the official album artwork.</p>
-      </header>
-      
-      <div class="asset-grid">
-        <div class="asset-card" style="--i: 1;">
-            <img src="looplogo.png" alt="LOOP 로고" class="logo-image">
-            <h3>LOGO</h3>
-            <p>LOOP의 로고는 '반복'이라는 키워드에 집중하여 디자인되었습니다. LOOP의 'OO'를 룰렛이 돌아가는 듯한 느낌으로 시각화했습니다.</p>
-        </div>
-        
-        <div class="asset-card" style="--i: 2;">
-            <img src="loopsymbol.png" alt="LOOP 심볼" class="symbol-image">
-            <h3>SYMBOL</h3>
-            <p>LOOP의 심볼은 뉴턴의 크레들에서 영감을 받아, 5개의 구슬이 부딪히며 반복되는 움직임과 속도를 시각화했습니다.</p>
-        </div>
-
-        <div class="asset-card full-width" style="--i: 3;">
-            <h3>POSTERS</h3>
-            <p>LOOP의 포스터는 앨범의 핵심 주제인 '무너짐과 회복'을 상징합니다. AI로 생성된 초현실적인 이미지와 상징적인 요소들을 조합하여 그룹의 깊이 있는 세계관을 시각적으로 표현했습니다.</p>
-            <div class="poster-image-grid">
-                <img src="loopposter.png" alt="LOOP 포스터">
-                <img src="loopposter2.png" alt="LOOP 두 번째 포스터">
-            </div>
+  <div class="page-wrapper">
+    
+    <header class="page-header">
+      <h1>Design Assets</h1>
+      <p>Explore the visual identity of LOOP, from the core logo and symbol to the official album artwork.</p>
+    </header>
+    
+    <main>
+      <div class="page-container">
+        <div class="asset-grid">
+          <div class="asset-card" style="--i: 1;">
+              <img src="looplogo.png" alt="LOOP 로고" class="logo-image">
+              <h3>LOGO</h3>
+              <p>LOOP의 로고는 '반복'이라는 키워드에 집중하여 디자인되었습니다. LOOP의 'OO'를 룰렛이 돌아가는 듯한 느낌으로 시각화했습니다.</p>
+          </div>
+          
+          <div class="asset-card" style="--i: 2;">
+              <img src="loopsymbol.png" alt="LOOP 심볼" class="symbol-image">
+              <h3>SYMBOL</h3>
+              <p>LOOP의 심볼은 뉴턴의 크레들에서 영감을 받아, 5개의 구슬이 부딪히며 반복되는 움직임과 속도를 시각화했습니다.</p>
+          </div>
+  
+          <div class="asset-card full-width" style="--i: 3;">
+              <h3>POSTERS</h3>
+              <p>LOOP의 포스터는 앨범의 핵심 주제인 '무너짐과 회복'을 상징합니다. AI로 생성된 초현실적인 이미지와 상징적인 요소들을 조합하여 그룹의 깊이 있는 세계관을 시각적으로 표현했습니다.</p>
+              <div class="poster-image-grid">
+                  <img src="loopposter.png" alt="LOOP 포스터">
+                  <img src="loopposter2.png" alt="LOOP 두 번째 포스터">
+              </div>
+          </div>
         </div>
       </div>
-      
-    </div>
-  </main>
+    </main>
+
+  </div>
 
   <footer class="site-footer">
     <div class="footer-container">
