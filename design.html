@@ -21,9 +21,11 @@
     /* 기본 바디 및 헤더 스타일 */
     body {
       margin: 0;
-      background-color: white;
-      color: black;
+      background-color: #ffffff;
+      color: #111;
       font-family: 'SUIT', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     header {
@@ -41,9 +43,8 @@
       -webkit-backdrop-filter: blur(10px);
       height: 48px;
       box-sizing: border-box;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #e0e0e0;
     }
-
     .logo img { height: 30px; }
     .logo a { display: inline-block; height: 30px; }
     nav { flex: 1; display: flex; justify-content: center; }
@@ -60,7 +61,6 @@
     nav a { text-decoration: none; color: inherit; }
     nav li:hover { color: #000; }
     nav li.nav-active > a { font-weight: 900; color: #000; }
-    
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -78,32 +78,13 @@
       z-index: 1100;
       margin-top: 10px;
     }
+    .dropdown-menu li { padding: 8px 16px; font-size: 13px; white-space: nowrap; }
+    li:hover > .dropdown-menu { display: block; opacity: 1; margin-top: 0; }
 
-    .dropdown-menu li {
-      padding: 8px 16px;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    li:hover > .dropdown-menu {
-      display: block;
-      opacity: 1;
-      margin-top: 0;
-    }
-    
-    .main-content {
-      padding-top: 48px;
-    }
-    
-    .page-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 4vw;
-    }
-
-    @keyframes fadeIn {
-        to { opacity: 1; transform: translateY(0); }
-    }
+    /* 페이지 레이아웃 */
+    .main-content { padding-top: 48px; }
+    .page-container { max-width: 1200px; margin: 0 auto; padding: 0 4vw; }
+    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
     .page-header {
       text-align: center;
@@ -112,19 +93,8 @@
       transform: translateY(20px);
       animation: fadeIn 0.8s ease-out forwards;
     }
-
-    .page-header h1 {
-      font-size: 56px;
-      font-weight: 900;
-      margin: 0 0 8px 0;
-    }
-
-    .page-header p {
-      font-size: 18px;
-      color: #555;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    .page-header h1 { font-size: 56px; font-weight: 900; margin: 0 0 8px 0; }
+    .page-header p { font-size: 18px; color: #555; max-width: 600px; margin: 0 auto; }
     
     .design-section {
         padding: 80px 0;
@@ -134,44 +104,14 @@
         animation: fadeIn 1s ease-out forwards;
     }
     .design-section:first-child { border-top: none; }
+    .design-section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center; }
+    .design-section-grid.reverse { grid-template-columns: 1fr 1fr; }
+    .design-title { font-family: 'MADE Outer Sans', sans-serif; font-size: 24px; margin-bottom: 12px; }
+    .design-description { font-size: 17px; line-height: 1.8; color: #444; max-width: 450px; }
+    .design-image img { width: 100%; height: auto; display: block; border-radius: 12px; }
+    .poster-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 
-    .design-section-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 5vw;
-        align-items: center;
-    }
-    
-    .design-section-grid.reverse {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .design-title {
-        font-family: 'MADE Outer Sans', sans-serif;
-        font-size: 24px;
-        margin-bottom: 12px;
-    }
-
-    .design-description {
-        font-size: 17px;
-        line-height: 1.8;
-        color: #444;
-        max-width: 450px;
-    }
-
-    .design-image img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 12px;
-    }
-    
-    .poster-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-    }
-
+    /* 반응형 스타일 */
     @media (max-width: 768px) {
       header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; background-color: rgba(255, 255, 255, 0.95); }
       .main-content { padding-top: 86px; }
@@ -191,9 +131,7 @@
           gap: 32px;
           text-align: center;
       }
-      .design-section-grid.reverse .design-text {
-          order: -1;
-      }
+      .design-section-grid.reverse .design-text { order: -1; }
       .design-description { margin: 0 auto; }
       .poster-grid { grid-template-columns: 1fr; }
     }
