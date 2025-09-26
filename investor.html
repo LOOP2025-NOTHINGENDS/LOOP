@@ -1,168 +1,372 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header Test</title>
-    <style>
-        /* --- 기본 폰트 및 스타일 --- */
-        @font-face {
-            font-family: 'SUIT';
-            src: url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css') format('woff2-variations');
-            font-weight: 100 900;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INVESTORS - LOOP</title>
+  <style>
+    /* --- 기본 스타일 --- */
+    @font-face {
+      font-family: 'SUIT';
+      src: url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css') format('woff2-variations');
+      font-weight: 100 900;
+    }
 
-        @font-face {
-            font-family: 'MADE Outer Sans';
-            src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
-            font-weight: 500;
-        }
+    @font-face {
+      font-family: 'MADE Outer Sans';
+      src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
+      font-weight: 500;
+    }
 
-        body {
-            margin: 0;
-            font-family: 'SUIT', sans-serif;
-            /* 페이지 내용 확인을 위한 여백 */
-            padding-top: 60px; 
-            height: 200vh; /* 스크롤 테스트용 */
-        }
-        
-        /* --- 헤더 전체 스타일 --- */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 4vw;
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            height: 48px;
-            box-sizing: border-box;
-            border-bottom: 1px solid #e0e0e0;
-        }
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      color: #111;
+      font-family: 'SUIT', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-        .logo img { 
-            height: 30px; 
-        }
+    /* --- 헤더 --- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 4vw;
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 48px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #e0e0e0;
+    }
 
-        .logo a { 
-            display: inline-block; 
-            height: 30px; 
-        }
+    .logo img { height: 30px; }
+    .logo a { display: inline-block; height: 30px; }
+    nav { flex: 1; display: flex; justify-content: center; }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4vw; margin: 0; padding: 0; }
+    nav li {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      color: #333;
+      position: relative; /* 드롭다운 기준점 */
+    }
+    nav a { text-decoration: none; color: inherit; }
+    nav li:hover { color: #000; }
+    nav li.nav-active > a { font-weight: 900; color: #000; }
+    
+    /* --- 드롭다운 메뉴 CSS --- */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+      margin-top: 10px;
+    }
 
-        /* --- 네비게이션 메뉴 스타일 --- */
-        nav { 
-            flex: 1; 
-            display: flex; 
-            justify-content: center; 
-        }
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
 
-        nav ul { 
-            list-style: none; 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 4vw; 
-            margin: 0; 
-            padding: 0; 
-        }
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+      margin-top: 0;
+    }
 
-        nav li {
-            font-family: 'MADE Outer Sans', sans-serif;
-            font-weight: 500;
-            font-size: 14px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-            color: #333;
-            position: relative; /* 드롭다운 기준점 */
-        }
 
-        nav a { 
-            text-decoration: none; 
-            color: inherit; 
-        }
+    /* --- INVESTORS 페이지 스타일 --- */
+    .main-content-area {
+        padding-top: 48px;
+    }
+    
+    .page-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 4vw;
+    }
 
-        nav li:hover { 
-            color: #000; 
-        }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        /* 현재 페이지 활성화 스타일 */
-        nav li.nav-active > a { 
-            font-weight: 900; 
-            color: #000; 
-        }
-        
-        /* --- 드롭다운 메뉴 스타일 --- */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            padding: 8px 0;
-            list-style: none;
-            min-width: 160px;
-            opacity: 0;
-            transition: opacity 0.3s ease, margin-top 0.3s ease;
-            z-index: 1100;
-            margin-top: 10px;
-        }
+    .page-header {
+      text-align: center;
+      padding: 120px 0 100px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .page-subtitle {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
 
-        .dropdown-menu li {
-            padding: 8px 16px;
-            font-size: 13px;
-            white-space: nowrap;
-        }
+    .main-headline {
+      font-size: 6vw;
+      font-weight: 900;
+      line-height: 1.1;
+      margin: 0;
+      color: #000;
+      letter-spacing: -2px;
+    }
+    
+    .investors-section {
+        padding-bottom: 120px;
+    }
+    
+    .investor-category-title {
+        font-family: 'MADE Outer Sans', sans-serif;
+        font-size: 22px;
+        font-weight: 500;
+        color: #111;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+        border-bottom: 2px solid #111;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.8s 0.2s ease-out forwards;
+    }
+    
+    .investor-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-        /* li에 마우스를 올렸을 때 드롭다운 표시 */
-        li:hover > .dropdown-menu {
-            display: block;
-            opacity: 1;
-            margin-top: 0;
-        }
-    </style>
+    .investor-item {
+        padding: 32px 16px;
+        border-bottom: 1px solid #e0e0e0;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.8s ease-out forwards;
+        animation-delay: calc(0.3s + 0.1s * var(--i));
+    }
+    
+    .investor-item a {
+        display: block;
+        text-decoration: none;
+        font-size: 32px;
+        font-weight: 700;
+        color: #222;
+        position: relative;
+        transition: color 0.4s ease;
+    }
+
+    .investor-item a:hover {
+        color: #000;
+    }
+    
+    .investor-item a::after {
+        content: '';
+        position: absolute;
+        bottom: -33px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #000;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    
+    .investor-item:hover a::after {
+        transform: scaleX(1);
+    }
+    
+    .contact-cta-section {
+        background-color: #f4f4f4;
+        padding: 100px 4vw;
+        text-align: center;
+    }
+    
+    .contact-cta-title {
+        font-size: 36px;
+        font-weight: 800;
+        color: #111;
+        margin: 0 0 16px 0;
+    }
+    
+    .contact-cta-description {
+        font-size: 18px;
+        color: #555;
+        max-width: 600px;
+        margin: 0 auto 32px;
+        line-height: 1.8;
+    }
+    
+    .cta-button {
+        display: inline-block;
+        font-family: 'MADE Outer Sans', sans-serif;
+        background-color: #111;
+        color: #fff;
+        padding: 16px 32px;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .cta-button:hover {
+        background-color: #333;
+        transform: translateY(-3px);
+    }
+
+    /* --- 반응형 스타일 --- */
+    @media (max-width: 992px) {
+        .main-headline { font-size: 8vw; }
+        .investor-item a { font-size: 28px; }
+    }
+    
+    @media (max-width: 768px) {
+      header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; background-color: rgba(255, 255, 255, 0.95); }
+      .main-content-area { padding-top: 86px; }
+      .logo img { height: 24px; }
+      nav ul { gap: 12px; }
+      nav li { font-size: 12px; }
+      .dropdown-menu { display: none !important; }
+
+      .page-header { padding: 80px 0 60px; }
+      .main-headline { font-size: 12vw; letter-spacing: -1px; }
+      .investor-item a { font-size: 24px; }
+      .contact-cta-title { font-size: 28px; }
+      .contact-cta-description { font-size: 16px; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-          <a href="./index.html">
-            <img src="./loop%20asset%20symbol.png" alt="Logo" />
+  <header>
+    <div class="logo">
+      <a href="./index.html">
+        <img src="./loop%20asset%20symbol.png" alt="Logo" />
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li>
+            <a href="about.html">ABOUT</a>
+            <ul class="dropdown-menu">
+                <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+            </ul>
+        </li>
+        <li><a href="artist.html">ARTIST</a></li> 
+        <li><a href="goods.html">GOODS</a></li>
+        <li><a href="design.html">DESIGN</a></li>
+        <li><a href="mv.html">MV</a></li>
+        <li><a href="track.html">TRACK</a></li>
+        <li class="nav-active">
+          <a href="investor.html">INVESTORS</a>
+          <ul class="dropdown-menu">
+            <li><a href="#contact-section">CONTACT IR</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content-area">
+    <div class="page-container">
+      <section class="page-header">
+        <p class="page-subtitle">SHAREHOLDER INFORMATION</p>
+        <h1 class="main-headline">Our Investors</h1>
+      </section>
+
+      <section class="investors-section">
+        <h2 class="investor-category-title">Major Shareholders</h2>
+        <ul class="investor-list">
+          <li class="investor-item" style="--i: 1;">
+            <a href="#">YUK DONGJUN</a>
+          </li>
+          <li class="investor-item" style="--i: 2;">
+            <a href="#">PARK HYANGMI</a>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    
+    <section class="contact-cta-section" id="contact-section">
+      <h3 class="contact-cta-title">Have a Question?</h3>
+      <p class="contact-cta-description">
+        For investor inquiries, please feel free to contact us via our official Instagram account. We are happy to provide you with more information.
+      </p>
+      <a href="https://www.instagram.com/dbrwlals.kr/" class="cta-button" target="_blank" rel="noopener noreferrer">
+        Contact on Instagram
+      </a>
+    </section>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-main">
+        
+        <div class="footer-column footer-about">
+          <a href="index.html" class="footer-logo">
+            <img src="./loop%20asset%20symbol.png" alt="LOOP Logo">
+          </a>
+          <p class="footer-description">
+            음악과 이야기의 경계를 허무는 새로운 여정. LOOP와 함께하세요.
+          </p>
+        </div>
+  
+        <div class="footer-column footer-links">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="artist.html">ARTIST</a></li>
+            <li><a href="track.html">TRACK</a></li>
+            <li><a href="goods.html">GOODS</a></li>
+            <li><a href="investor.html">INVESTORS</a></li>
+          </ul>
+        </div>
+  
+        <div class="footer-column footer-contact">
+          <h4>Contact Us</h4>
+          <p><a href="mailto:danielyook66@gmail.com">danielyook66@gmail.com</a></p>
+          <p><a href="tel:010-3271-2433">010-3271-2433</a></p>
+        </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.instagram.com/dbrwlals.kr/" target="_blank" rel="noopener noreferrer" title="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
           </a>
         </div>
-        <nav>
-          <ul>
-            <li>
-                <a href="about.html">ABOUT</a>
-                <ul class="dropdown-menu">
-                    <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
-                </ul>
-            </li>
-            <li><a href="artist.html">ARTIST</a></li> 
-            <li><a href="goods.html">GOODS</a></li>
-            <li><a href="design.html">DESIGN</a></li>
-            <li><a href="mv.html">MV</a></li>
-            <li><a href="track.html">TRACK</a></li>
-            <li class="nav-active">
-              <a href="investor.html">INVESTORS</a>
-              <ul class="dropdown-menu">
-                <li><a href="#contact-section">CONTACT IR</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-    </header>
-
-    <div style="padding: 20px;">
-        <h1>페이지 콘텐츠</h1>
-        <p>이 헤더는 스크롤해도 상단에 고정됩니다.</p>
+        <p class="footer-copyright">
+          &copy; 2025 LOOP Entertainment. All Rights Reserved.
+        </p>
+      </div>
     </div>
-
+  </footer>
 </body>
 </html>
