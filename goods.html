@@ -61,9 +61,38 @@
     nav a { text-decoration: none; color: inherit; }
     nav li:hover { color: #000; }
     nav li.nav-active > a { font-weight: 900; color: #000; }
-    .dropdown-menu { display: none; }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+      margin-top: 10px;
+    }
 
-    /* --- ✨ 페이지 레이아웃 --- */
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+      margin-top: 0;
+    }
+    
+    /* 페이지 레이아웃 */
     .main-content {
       padding-top: 48px;
     }
@@ -78,7 +107,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- ✨ 페이지 헤더 --- */
     .page-header {
       text-align: center;
       margin-bottom: 60px;
@@ -100,7 +128,6 @@
       margin: 0 auto;
     }
 
-    /* --- ✨ 상품 그리드 스타일 --- */
     .goods-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -153,7 +180,6 @@
       margin: 0;
     }
     
-    /* --- 반응형 스타일 --- */
     @media (max-width: 768px) {
       header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; background-color: rgba(255, 255, 255, 0.95); }
       .main-content { padding-top: 86px; }
@@ -172,7 +198,7 @@
         .goods-grid { grid-template-columns: 1fr; }
     }
 
-    /* ======================= FOOTER STYLES ======================= */
+    /* FOOTER STYLES */
     .site-footer {
       background-color: #1a1a1a;
       color: #a0a0a0;
