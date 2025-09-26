@@ -61,31 +61,24 @@
     nav a { text-decoration: none; color: inherit; }
     nav li:hover { color: #000; }
     nav li.nav-active > a { font-weight: 900; color: #000; }
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      padding: 8px 0;
-      list-style: none;
-      min-width: 160px;
-      opacity: 0;
-      transition: opacity 0.3s ease, margin-top 0.3s ease;
-      z-index: 1100;
-      margin-top: 10px;
+    .dropdown-menu { display: none; }
+
+    /* --- ✨ 페이지 레이아웃 --- */
+    .main-content {
+      padding-top: 48px;
     }
-    .dropdown-menu li { padding: 8px 16px; font-size: 13px; white-space: nowrap; }
-    li:hover > .dropdown-menu { display: block; opacity: 1; margin-top: 0; }
+    
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4vw;
+    }
 
-    /* 페이지 레이아웃 */
-    .main-content { padding-top: 48px; }
-    .page-container { max-width: 1200px; margin: 0 auto; padding: 0 4vw; }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
+    /* --- ✨ 페이지 헤더 --- */
     .page-header {
       text-align: center;
       padding: 100px 0 80px;
@@ -93,9 +86,21 @@
       transform: translateY(20px);
       animation: fadeIn 0.8s ease-out forwards;
     }
-    .page-header h1 { font-size: 56px; font-weight: 900; margin: 0 0 8px 0; }
-    .page-header p { font-size: 18px; color: #555; max-width: 600px; margin: 0 auto; }
+
+    .page-header h1 {
+      font-size: 56px;
+      font-weight: 900;
+      margin: 0 0 8px 0;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto;
+    }
     
+    /* --- ✨ 디자인 아이템 섹션 --- */
     .design-section {
         padding: 80px 0;
         border-top: 1px solid #eee;
@@ -104,14 +109,46 @@
         animation: fadeIn 1s ease-out forwards;
     }
     .design-section:first-child { border-top: none; }
-    .design-section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center; }
-    .design-section-grid.reverse { grid-template-columns: 1fr 1fr; }
-    .design-title { font-family: 'MADE Outer Sans', sans-serif; font-size: 24px; margin-bottom: 12px; }
-    .design-description { font-size: 17px; line-height: 1.8; color: #444; max-width: 450px; }
-    .design-image img { width: 100%; height: auto; display: block; border-radius: 12px; }
-    .poster-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 
-    /* 반응형 스타일 */
+    .design-section-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5vw;
+        align-items: center;
+    }
+    
+    .design-section-grid.reverse {
+        grid-template-columns: 1fr 1fr; /* To override mobile */
+    }
+
+    .design-title {
+        font-family: 'MADE Outer Sans', sans-serif;
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .design-description {
+        font-size: 17px;
+        line-height: 1.8;
+        color: #444;
+        max-width: 450px;
+    }
+
+    .design-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;
+    }
+    
+    /* --- ✨ 포스터 그리드 --- */
+    .poster-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    /* --- 반응형 스타일 --- */
     @media (max-width: 768px) {
       header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; background-color: rgba(255, 255, 255, 0.95); }
       .main-content { padding-top: 86px; }
@@ -131,12 +168,14 @@
           gap: 32px;
           text-align: center;
       }
-      .design-section-grid.reverse .design-text { order: -1; }
+      .design-section-grid.reverse .design-text {
+          order: -1; /* reverse일 때 텍스트를 위로 */
+      }
       .design-description { margin: 0 auto; }
       .poster-grid { grid-template-columns: 1fr; }
     }
 
-    /* FOOTER STYLES */
+    /* ======================= FOOTER STYLES ======================= */
     .site-footer {
       background-color: #1a1a1a;
       color: #a0a0a0;
@@ -185,12 +224,7 @@
         <li class="nav-active"><a href="design.html">DESIGN</a></li> 
         <li><a href="mv.html">MV</a></li>
         <li><a href="track.html">TRACK</a></li>
-        <li>
-          <a href="investor.html">INVESTORS</a>
-          <ul class="dropdown-menu">
-            <li><a href="investor.html#contact-section">CONTACT IR</a></li>
-          </ul>
-        </li>
+        <li><a href="investor.html">INVESTORS</a></li>
       </ul>
     </nav>
   </header>
