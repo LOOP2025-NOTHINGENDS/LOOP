@@ -1,28 +1,168 @@
-<header>
-  <div class="logo">
-    <a href="./index.html">
-      <img src="./loop%20asset%20symbol.png" alt="Logo" />
-    </a>
-  </div>
-  <nav>
-    <ul>
-      <li>
-          <a href="about.html">ABOUT</a>
-          <ul class="dropdown-menu">
-              <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Test</title>
+    <style>
+        /* --- 기본 폰트 및 스타일 --- */
+        @font-face {
+            font-family: 'SUIT';
+            src: url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css') format('woff2-variations');
+            font-weight: 100 900;
+        }
+
+        @font-face {
+            font-family: 'MADE Outer Sans';
+            src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
+            font-weight: 500;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'SUIT', sans-serif;
+            /* 페이지 내용 확인을 위한 여백 */
+            padding-top: 60px; 
+            height: 200vh; /* 스크롤 테스트용 */
+        }
+        
+        /* --- 헤더 전체 스타일 --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 4vw;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            height: 48px;
+            box-sizing: border-box;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logo img { 
+            height: 30px; 
+        }
+
+        .logo a { 
+            display: inline-block; 
+            height: 30px; 
+        }
+
+        /* --- 네비게이션 메뉴 스타일 --- */
+        nav { 
+            flex: 1; 
+            display: flex; 
+            justify-content: center; 
+        }
+
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 4vw; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        nav li {
+            font-family: 'MADE Outer Sans', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            color: #333;
+            position: relative; /* 드롭다운 기준점 */
+        }
+
+        nav a { 
+            text-decoration: none; 
+            color: inherit; 
+        }
+
+        nav li:hover { 
+            color: #000; 
+        }
+
+        /* 현재 페이지 활성화 스타일 */
+        nav li.nav-active > a { 
+            font-weight: 900; 
+            color: #000; 
+        }
+        
+        /* --- 드롭다운 메뉴 스타일 --- */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 8px 0;
+            list-style: none;
+            min-width: 160px;
+            opacity: 0;
+            transition: opacity 0.3s ease, margin-top 0.3s ease;
+            z-index: 1100;
+            margin-top: 10px;
+        }
+
+        .dropdown-menu li {
+            padding: 8px 16px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        /* li에 마우스를 올렸을 때 드롭다운 표시 */
+        li:hover > .dropdown-menu {
+            display: block;
+            opacity: 1;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+          <a href="./index.html">
+            <img src="./loop%20asset%20symbol.png" alt="Logo" />
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li>
+                <a href="about.html">ABOUT</a>
+                <ul class="dropdown-menu">
+                    <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+                </ul>
+            </li>
+            <li><a href="artist.html">ARTIST</a></li> 
+            <li><a href="goods.html">GOODS</a></li>
+            <li><a href="design.html">DESIGN</a></li>
+            <li><a href="mv.html">MV</a></li>
+            <li><a href="track.html">TRACK</a></li>
+            <li class="nav-active">
+              <a href="investor.html">INVESTORS</a>
+              <ul class="dropdown-menu">
+                <li><a href="#contact-section">CONTACT IR</a></li>
+              </ul>
+            </li>
           </ul>
-      </li>
-      <li><a href="artist.html">ARTIST</a></li> 
-      <li><a href="goods.html">GOODS</a></li>
-      <li><a href="design.html">DESIGN</a></li>
-      <li><a href="mv.html">MV</a></li>
-      <li><a href="track.html">TRACK</a></li>
-      <li class="nav-active">
-        <a href="investor.html">INVESTORS</a>
-        <ul class="dropdown-menu">
-          <li><a href="#contact-section">CONTACT IR</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-</header>
+        </nav>
+    </header>
+
+    <div style="padding: 20px;">
+        <h1>페이지 콘텐츠</h1>
+        <p>이 헤더는 스크롤해도 상단에 고정됩니다.</p>
+    </div>
+
+</body>
+</html>
