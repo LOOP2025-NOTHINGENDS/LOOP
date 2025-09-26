@@ -102,16 +102,16 @@
       position: relative;
     }
     
-    /* --- ✨ 카운트다운 스타일 시작 --- */
+    /* --- ✨ 카운트다운 섹션 및 컨테이너 스타일 수정 --- */
     .hero-section {
-        position: relative; /* 자식 요소인 카운트다운을 위치시킬 기준 */
+        background-color: black;
+        height: calc(100vh - 48px); /* 헤더 높이를 제외한 전체 화면 높이 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .countdown-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         color: white;
         text-align: center;
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
@@ -120,7 +120,7 @@
 
     .countdown-title {
         font-family: 'SUIT', sans-serif;
-        font-size: 2vw; /* 화면 너비에 따라 크기 조절 */
+        font-size: 2vw;
         font-weight: 600;
         letter-spacing: 2px;
         margin-bottom: 24px;
@@ -128,13 +128,12 @@
 
     #countdown-timer {
         font-family: 'MADE Outer Sans', sans-serif;
-        font-size: 7vw; /* 화면 너비에 따라 크기 조절 */
+        font-size: 7vw;
         font-weight: 500;
         letter-spacing: 0.1em;
         line-height: 1.2;
     }
-    /* --- ✨ 카운트다운 스타일 끝 --- */
-
+    
     @media (max-width: 768px) {
       nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
       nav li { font-size: 12px; }
@@ -144,7 +143,9 @@
       .main-content { padding-top: 100px; }
       .overlapping-section { margin-top: -15vh; }
 
-      /* 모바일용 카운트다운 스타일 */
+      .hero-section {
+          height: calc(100vh - 100px); /* 모바일 헤더 높이에 맞게 조정 */
+      }
       .countdown-title { font-size: 4vw; margin-bottom: 16px; }
       #countdown-timer { font-size: 12vw; }
     }
@@ -178,7 +179,6 @@
   <main class="main-content">
     
     <section class="hero-section">
-      <img src="comingsoon.jpg" alt="Coming Soon" />
       <div class="countdown-container">
         <h2 class="countdown-title">UNTIL THE DROP</h2>
         <div id="countdown-timer"></div>
@@ -194,36 +194,27 @@
   </main>
 
   <script>
-    // 목표 날짜 설정: 2025년 11월 3일 00:00:00
     const countDownDate = new Date("Nov 3, 2025 00:00:00").getTime();
 
-    // 1초마다 업데이트
     const x = setInterval(function() {
-      // 현재 시간 가져오기
       const now = new Date().getTime();
-      
-      // 목표 날짜와 현재 시간의 차이 계산
       const distance = countDownDate - now;
       
-      // 시간, 분, 초 계산
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       
-      // HTML 요소에 결과 표시
-      // 각 숫자가 10보다 작을 경우 앞에 '0'을 붙여 두 자리로 만듭니다. (예: 7 -> 07)
       document.getElementById("countdown-timer").innerHTML = 
         days + "d " + 
         (hours < 10 ? "0" + hours : hours) + "h " + 
         (minutes < 10 ? "0" + minutes : minutes) + "m " + 
         (seconds < 10 ? "0" + seconds : seconds) + "s ";
       
-      // 카운트다운이 끝나면 "COMING SOON" 텍스트 표시
       if (distance < 0) {
         clearInterval(x);
         document.getElementById("countdown-timer").innerHTML = "COMING SOON!";
-        document.querySelector(".countdown-title").style.display = 'none'; // 타이틀 숨기기
+        document.querySelector(".countdown-title").style.display = 'none';
       }
     }, 1000);
   </script>
