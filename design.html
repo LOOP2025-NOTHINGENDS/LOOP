@@ -258,9 +258,9 @@
             
             <div class="slider-container">
                 <div class="slider-track">
-                    <div class="slide"><img src="loopposter1.jpg" alt="LOOP 포스터 1"></div>
-                    <div class="slide"><img src="loopposter2.jpg" alt="LOOP 포스터 2"></div>
-                    <div class="slide"><img src="loopposter3.jpg" alt="LOOP 포스터 3"></div>
+                    <div class="slide"><img src="loopposter1.png" alt="LOOP 포스터 1"></div>
+                    <div class="slide"><img src="loopposter2.png" alt="LOOP 포스터 2"></div>
+                    <div class="slide"><img src="loopposter3.png" alt="LOOP 포스터 3"></div>
                 </div>
                 <button class="slider-btn prev">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -323,15 +323,10 @@
     const prevButton = document.querySelector('.slider-btn.prev');
     const dotsNav = document.querySelector('.slider-dots');
 
-    const slideWidth = slides[0].getBoundingClientRect().width;
+    // 슬라이드 너비는 유동적으로 계산되므로, 초기화 시 한 번만 계산합니다.
+    let slideWidth = track.clientWidth; // track의 현재 너비
 
-    // 1. 슬라이드 옆으로 배열
-    const setSlidePosition = (slide, index) => {
-      slide.style.left = slideWidth * index + 'px';
-    };
-    // slides.forEach(setSlidePosition); // This is for absolute positioning, not needed for flexbox
-
-    // 2. 하단 점(dot) 생성
+    // 1. 하단 점(dot) 생성
     slides.forEach((slide, index) => {
       const dot = document.createElement('button');
       dot.classList.add('dot');
@@ -344,17 +339,29 @@
     const dots = Array.from(dotsNav.children);
     let currentIndex = 0;
 
+    // 슬라이드 위치 업데이트 함수 (트랙의 transform 속성만 변경)
+    const updateSlidePosition = () => {
+      track.style.transform = 'translateX(-' + currentIndex * 100 + '%)';
+    };
+
     // 3. 슬라이드 이동 함수
     const moveToSlide = (targetIndex) => {
-      track.style.transform = 'translateX(-' + 100 * targetIndex + '%)';
-      
+      // 인덱스 유효성 검사
+      if (targetIndex < 0 || targetIndex >= slides.length) {
+          console.error("Invalid slide index:", targetIndex);
+          return;
+      }
+
       // 현재 점 활성화 해제 및 목표 점 활성화
-      const currentDot = dots[currentIndex];
-      const targetDot = dots[targetIndex];
-      currentDot.classList.remove('active');
-      targetDot.classList.add('active');
+      if (dots[currentIndex]) {
+        dots[currentIndex].classList.remove('active');
+      }
+      if (dots[targetIndex]) {
+        dots[targetIndex].classList.add('active');
+      }
 
       currentIndex = targetIndex;
+      updateSlidePosition(); // 슬라이더 위치 업데이트
     };
 
     // 4. 버튼 클릭 이벤트
@@ -382,6 +389,15 @@
         const targetIndex = dots.findIndex(dot => dot === targetDot);
         moveToSlide(targetIndex);
     });
+
+    // 화면 크기 변경 시 슬라이더 위치 재조정 (선택 사항이지만 반응형을 위해 좋음)
+    window.addEventListener('resize', () => {
+        slideWidth = track.clientWidth; // 너비 재계산
+        updateSlidePosition(); // 현재 슬라이드 위치에 맞게 재정렬
+    });
+
+    // 초기 로드 시 첫 번째 슬라이드로 설정
+    moveToSlide(0);
 
   </script>
 
