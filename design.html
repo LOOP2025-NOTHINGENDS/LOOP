@@ -79,20 +79,10 @@
     .dropdown-menu li { padding: 8px 16px; font-size: 13px; white-space: nowrap; }
     li:hover > .dropdown-menu { display: block; opacity: 1; margin-top: 0; }
 
-    /* --- ✨ 페이지 전체 콘텐츠 래퍼 --- */
-    .page-wrapper {
-        padding-top: 48px; /* 고정 헤더 높이만큼 여백 */
+    /* --- ✨ 메인 콘텐츠 시작 위치 --- */
+    .main-content {
+      padding-top: 48px;
     }
-    
-    /* --- ✨ 페이지 헤더 (메뉴바 아래로 이동) --- */
-    .page-header {
-      text-align: center;
-      padding: 60px 4vw;
-      background-color: #f8f8f8;
-      border-bottom: 1px solid #eee;
-    }
-    .page-header h1 { font-size: 40px; font-weight: 900; margin: 0 0 8px 0; }
-    .page-header p { font-size: 16px; color: #555; max-width: 600px; margin: 0 auto; }
     
     .page-container {
       max-width: 1200px;
@@ -135,15 +125,12 @@
     /* 반응형 스타일 */
     @media (max-width: 768px) {
       header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; background-color: rgba(255, 255, 255, 0.95); }
-      .page-wrapper { padding-top: 86px; } /* 모바일 헤더 높이만큼 여백 */
+      .main-content { padding-top: 86px; }
       .logo img { height: 24px; }
       nav ul { gap: 12px; }
       nav li { font-size: 12px; }
       .dropdown-menu { display: none !important; }
 
-      .page-header { padding: 40px 4vw; }
-      .page-header h1 { font-size: 32px; }
-      
       .page-container { padding: 60px 4vw; }
       .asset-grid { grid-template-columns: 1fr; }
       .poster-image-grid { grid-template-columns: 1fr; }
@@ -202,41 +189,34 @@
     </nav>
   </header>
 
-  <div class="page-wrapper">
-    
-    <header class="page-header">
-      <h1>Design Assets</h1>
-      <p>Explore the visual identity of LOOP, from the core logo and symbol to the official album artwork.</p>
-    </header>
-    
-    <main>
-      <div class="page-container">
-        <div class="asset-grid">
-          <div class="asset-card" style="--i: 1;">
-              <img src="looplogo.png" alt="LOOP 로고" class="logo-image">
-              <h3>LOGO</h3>
-              <p>LOOP의 로고는 '반복'이라는 키워드에 집중하여 디자인되었습니다. LOOP의 'OO'를 룰렛이 돌아가는 듯한 느낌으로 시각화했습니다.</p>
-          </div>
-          
-          <div class="asset-card" style="--i: 2;">
-              <img src="loopsymbol.png" alt="LOOP 심볼" class="symbol-image">
-              <h3>SYMBOL</h3>
-              <p>LOOP의 심볼은 뉴턴의 크레들에서 영감을 받아, 5개의 구슬이 부딪히며 반복되는 움직임과 속도를 시각화했습니다.</p>
-          </div>
+  <main class="main-content">
+    <div class="page-container">
+      
+      <div class="asset-grid">
+        <div class="asset-card" style="--i: 1;">
+            <img src="looplogo.png" alt="LOOP 로고" class="logo-image">
+            <h3>LOGO</h3>
+            <p>LOOP의 로고는 '반복'이라는 키워드에 집중하여 디자인되었습니다. LOOP의 'OO'를 룰렛이 돌아가는 듯한 느낌으로 시각화했습니다.</p>
+        </div>
+        
+        <div class="asset-card" style="--i: 2;">
+            <img src="loopsymbol.png" alt="LOOP 심볼" class="symbol-image">
+            <h3>SYMBOL</h3>
+            <p>LOOP의 심볼은 뉴턴의 크레들에서 영감을 받아, 5개의 구슬이 부딪히며 반복되는 움직임과 속도를 시각화했습니다.</p>
+        </div>
   
-          <div class="asset-card full-width" style="--i: 3;">
-              <h3>POSTERS</h3>
-              <p>LOOP의 포스터는 앨범의 핵심 주제인 '무너짐과 회복'을 상징합니다. AI로 생성된 초현실적인 이미지와 상징적인 요소들을 조합하여 그룹의 깊이 있는 세계관을 시각적으로 표현했습니다.</p>
-              <div class="poster-image-grid">
-                  <img src="loopposter.png" alt="LOOP 포스터">
-                  <img src="loopposter2.png" alt="LOOP 두 번째 포스터">
-              </div>
-          </div>
+        <div class="asset-card full-width" style="--i: 3;">
+            <h3>POSTERS</h3>
+            <p>LOOP의 포스터는 앨범의 핵심 주제인 '무너짐과 회복'을 상징합니다. AI로 생성된 초현실적인 이미지와 상징적인 요소들을 조합하여 그룹의 깊이 있는 세계관을 시각적으로 표현했습니다.</p>
+            <div class="poster-image-grid">
+                <img src="loopposter.png" alt="LOOP 포스터">
+                <img src="loopposter2.png" alt="LOOP 두 번째 포스터">
+            </div>
         </div>
       </div>
-    </main>
-
-  </div>
+      
+    </div>
+  </main>
 
   <footer class="site-footer">
     <div class="footer-container">
