@@ -65,7 +65,13 @@
     nav li:hover { color: #000; }
     .dropdown-menu { display: none; /* 드롭다운은 생략 */ }
 
-    /* --- ✨ 메인 레이아웃 (분할 화면) --- */
+    /* --- ✨ 활성화된 메뉴 스타일 --- */
+    nav li.nav-active a {
+      font-weight: 900; /* 폰트를 더 굵게 */
+      color: #000;     /* 색상을 더 진하게 */
+    }
+
+    /* --- 메인 레이아웃 (분할 화면) --- */
     .track-page-container {
       display: flex;
       padding-top: 48px;
@@ -95,7 +101,6 @@
       border-radius: 12px;
       margin-bottom: 32px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      /* --- 앨범 커버 이미지 경로 변경 --- */
       background-image: url('./loopalbumcover.jpg'); 
       background-size: cover;
       background-position: center;
@@ -125,7 +130,7 @@
       box-sizing: border-box;
     }
     
-    /* --- ✨ 트랙리스트 스타일 --- */
+    /* --- 트랙리스트 스타일 --- */
     .track-item {
       padding: 32px 0;
       border-bottom: 1px solid #e8e8e8;
@@ -191,7 +196,7 @@
       font-size: 11px;
       font-weight: bold;
       color: #fff;
-      background-color: #e60023; /* 눈에 띄는 색상으로 변경 */
+      background-color: #e60023;
       padding: 4px 12px;
       border-radius: 15px;
       text-transform: uppercase;
@@ -207,18 +212,9 @@
 
     /* --- 반응형 스타일 --- */
     @media (max-width: 992px) {
-      .track-page-container {
-        flex-direction: column;
-      }
-      .album-info-panel, .tracklist-panel {
-        width: 100%;
-        position: static;
-        height: auto;
-      }
-      .album-info-panel {
-        padding: 40px 5vw;
-        height: auto;
-      }
+      .track-page-container { flex-direction: column; }
+      .album-info-panel, .tracklist-panel { width: 100%; position: static; height: auto; }
+      .album-info-panel { padding: 40px 5vw; height: auto; }
       .album-cover { max-width: 300px; }
       .album-title { font-size: 40px; }
       .tracklist-panel { padding: 30px 5vw 50px; }
@@ -261,7 +257,7 @@
         <li><a href="goods.html">GOODS</a></li>
         <li><a href="design.html">DESIGN</a></li>
         <li><a href="mv.html">MV</a></li>
-        <li style="font-weight: bold; color: #000;">TRACK</li>
+        <li class="nav-active"><a href="track.html">TRACK</a></li>
         <li><a href="investor.html">INVESTORS</a></li>
       </ul>
     </nav>
@@ -335,7 +331,7 @@
             <div class="track-title-line">
               <h3 class="track-title">BLOSSOM <span class="feat">(feat.수연)</span></h3>
             </div>
-            <p class="track-description">나를 한명이라도 믿는 사람이 있지 않을까라는 생각을 하게 됐다. 나 자신에게 노력하고 싶었다. 내가 잘하는게 없으면 노력하면 되겠지라고 생각했다. 나보다 더 힘들게 사는 사람들도 있을텐데 내가 왜 이렇게까지 힘들어야할까 그냥 내가 너무 약해서 인건 아닐까 20살의 내가 시작을 잘못한거지 앞으로의 나는 예전의 모습을 버릴 수 있지 않을까? 나 자신을 위한 질문을 많이 했다. 쉽지는 않았다 오히려 내가 나를 믿지 않고 죽고 싶었을때보다 더 힘들었을지도 모른다. 더러워지고 녹슨걸 다시 새걸로 바꿔야되는거라 생각하면 되지 않을까라는 생각이다. 이미 녹슬어서 포기해버린건 오히려 쉽다 하지만 녹슬고 부러진걸 원상 복구 시키려면 더 많은 노력이 필요하다. 내 상황이 딱 이랬다. 너무 지치고 힘들었어서 다시 돌아오는데에는 시간과 정말 많은 노력이 필요했다. 미친듯이 노력했다 예전의 나를 버리려고. 그러다보니 주위에 사람이 하나 둘 다시 모이기 시작했고 나 자신도 사람을 밀어내지 않았다. 나는 내 자신을 한단계지만 성장했다고 생각했다.</p>
+            <p class="track-description">나를 한명이라도 믿는 사람이 있지 않을까라는 생각을 하게 됐다. 나 자신에게 노력하고 싶었다. 내가 잘하는게 없으면 노력하면 되겠지라고 생각했다. 나보다 더 힘들게 사는 사람들도 있을텐데 내가 왜 이렇게까지 힘들어야할까 그냥 내가 너무 약해서 인건 아닐까 20살의 내가 시작을 잘못한거지 앞으로의 나는 예전의 모습을 버릴 수 있지 않을까? 나 자신을 위한 질문을 많이 했다. 쉽지는 않았다 오히려 내가 나를 믿지 않고 죽고 싶었을때보다 더 힘들었을지도 모른다. 더러워지고 녹슨걸 다시 새걸로 바꿔야되는거라 생각하면 되지 않을까라는 생각이다. 이미 녹슬어서 포기해버린건 오히려 쉽다 하지만 녹슬고 부러진걸 원상 복구 시키려면 더 많은 노력이 필요하다. 내 상황가 딱 이랬다. 너무 지치고 힘들었어서 다시 돌아오는데에는 시간과 정말 많은 노력이 필요했다. 미친듯이 노력했다 예전의 나를 버리려고. 그러다보니 주위에 사람이 하나 둘 다시 모이기 시작했고 나 자신도 사람을 밀어내지 않았다. 나는 내 자신을 한단계지만 성장했다고 생각했다.</p>
           </div>
         </div>
       </div>
@@ -360,7 +356,7 @@
             <div class="track-title-line">
               <h3 class="track-title">TOO MUCH COFFEE <span class="feat">(feat. llake)</span></h3>
             </div>
-            <p class="track-description">이렇게 성장하기까지의 시간을 돌아봤을때 내 주변에 있던 사람들을 생각하면서 후회하기 보다는 그 사람들에게서 내가 어떤걸 배우고 깨달았는지 회상한다. 많은 우여곡절이 있었지만 언제나 끝이 있고 끝에는 행복, 혹은 또 다른 평화가 찾아 올거다. 물론, 평화가 마음의 평화일수도 있고 그저 여유일수도 있지만 어쩃든 잘 버텨온 나를 칭찬해주고 싶다. 너무 잘 이겨냈고 잘하고 있음에 감사하고 앞으로 더 열심히 살아야겠다는 다짐을 하고 싶은 생각을 들게 만드는 시간인거 같다. 또 누군가에게 상처를 줬거나 힘들게 했다면 그 또한 인정하고 싶어진다. 내가 누군가에게 좋든 안 좋은 영향을 끼쳤다면 사과하고 싶다. 이 또한, 내 자신이 성장 했다고 믿는다. 아직 많이 부족하다고 생각한다. 언젠간 내가 다시 나 자신을 버리면서 자신감을 잃어버리고 구속에서 벽만 보고 있을지는 몰라도 더 노력하고 싶고 더 잘하고 싶다. </p>
+            <p class="track-description">이렇게 성장하기까지의 시간을 돌아봤을때 내 주변에 있던 사람들을 생각하면서 후회하기 보다는 그 사람들에게서 내가 어떤걸 배우고 깨달았는지 회상한다. 많은 우여곡D절이 있었지만 언제나 끝이 있고 끝에는 행복, 혹은 또 다른 평화가 찾아 올거다. 물론, 평화가 마음의 평화일수도 있고 그저 여유일수도 있지만 어쩃든 잘 버텨온 나를 칭찬해주고 싶다. 너무 잘 이겨냈고 잘하고 있음에 감사하고 앞으로 더 열심히 살아야겠다는 다짐을 하고 싶은 생각을 들게 만드는 시간인거 같다. 또 누군가에게 상처를 줬거나 힘들게 했다면 그 또한 인정하고 싶어진다. 내가 누군가에게 좋든 안 좋은 영향을 끼쳤다면 사과하고 싶다. 이 또한, 내 자신이 성장 했다고 믿는다. 아직 많이 부족하다고 생각한다. 언젠간 내가 다시 나 자신을 버리면서 자신감을 잃어버리고 구속에서 벽만 보고 있을지는 몰라도 더 노력하고 싶고 더 잘하고 싶다. </p>
           </div>
         </div>
       </div>
