@@ -114,7 +114,9 @@
         overflow: hidden;
         border-radius: 12px;
         margin-top: 24px;
-        aspect-ratio: 16 / 9; /* 이미지 비율 유지 */
+        /* A1 비율 (1:1.414) 에 가깝게, 웹에서 보편적인 3:4 세로 비율로 설정 */
+        aspect-ratio: 3 / 4; /* A1 (1:1.414) 보다 약간 넓지만 세로형 포스터에 적합 */
+        background-color: #f0f0f0; /* 이미지가 contain 될 때 배경색 */
     }
     .slider-track {
         display: flex;
@@ -125,11 +127,14 @@
         min-width: 100%;
         height: 100%;
         box-sizing: border-box;
+        display: flex; /* 이미지 중앙 정렬을 위해 추가 */
+        justify-content: center; /* 이미지 중앙 정렬을 위해 추가 */
+        align-items: center; /* 이미지 중앙 정렬을 위해 추가 */
     }
     .slide img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain; /* 이미지가 잘리지 않고 컨테이너 안에 맞춰지도록 변경 */
         display: block;
     }
     .slider-btn {
@@ -148,6 +153,7 @@
         align-items: center;
         justify-content: center;
         transition: background-color 0.3s ease;
+        z-index: 10; /* 버튼이 슬라이더 위에 오도록 설정 */
     }
     .slider-btn:hover { background-color: rgba(0, 0, 0, 0.7); }
     .slider-btn.prev { left: 16px; }
@@ -159,6 +165,7 @@
         transform: translateX(-50%);
         display: flex;
         gap: 8px;
+        z-index: 10; /* 인디케이터가 슬라이더 위에 오도록 설정 */
     }
     .dot {
         width: 10px;
@@ -181,6 +188,10 @@
 
       .page-container { padding: 60px 4vw; }
       .asset-grid { grid-template-columns: 1fr; }
+      /* 모바일에서 슬라이더 버튼 크기 조절 */
+      .slider-btn { width: 36px; height: 36px; padding: 8px; }
+      .slider-btn.prev { left: 8px; }
+      .slider-btn.next { right: 8px; }
     }
 
     /* FOOTER STYLES */
@@ -324,7 +335,7 @@
     const dotsNav = document.querySelector('.slider-dots');
 
     // 슬라이드 너비는 유동적으로 계산되므로, 초기화 시 한 번만 계산합니다.
-    let slideWidth = track.clientWidth; // track의 현재 너비
+    // let slideWidth = track.clientWidth; // flexbox를 사용하므로 이 값은 직접 사용되지 않습니다.
 
     // 1. 하단 점(dot) 생성
     slides.forEach((slide, index) => {
@@ -392,7 +403,7 @@
 
     // 화면 크기 변경 시 슬라이더 위치 재조정 (선택 사항이지만 반응형을 위해 좋음)
     window.addEventListener('resize', () => {
-        slideWidth = track.clientWidth; // 너비 재계산
+        // slideWidth = track.clientWidth; // flexbox에서는 불필요
         updateSlidePosition(); // 현재 슬라이드 위치에 맞게 재정렬
     });
 
