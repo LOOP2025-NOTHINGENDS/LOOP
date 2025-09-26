@@ -108,73 +108,32 @@
     .asset-card h3 { font-family: 'MADE Outer Sans', sans-serif; font-size: 20px; margin: 0 0 8px 0; }
     .asset-card p { font-size: 16px; color: #555; line-height: 1.7; margin: 0; }
     
-    /* --- ✨ 이미지 슬라이더 스타일 --- */
+    /* --- ✨ 포스터 섹션 레이아웃 수정 --- */
+    .poster-section-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 텍스트와 슬라이더를 1:1 비율로 */
+        gap: 32px;
+        align-items: center;
+    }
+
+    /* 이미지 슬라이더 스타일 */
     .slider-container {
         position: relative;
         overflow: hidden;
         border-radius: 12px;
-        margin-top: 24px;
-        /* A1 비율 (1:1.414) 에 가깝게, 웹에서 보편적인 3:4 세로 비율로 설정 */
-        aspect-ratio: 3 / 4; /* A1 (1:1.414) 보다 약간 넓지만 세로형 포스터에 적합 */
-        background-color: #f0f0f0; /* 이미지가 contain 될 때 배경색 */
+        aspect-ratio: 3 / 4;
+        background-color: #f0f0f0;
+        width: 100%; /* 부모 그리드에 맞춰 꽉 채움 */
     }
-    .slider-track {
-        display: flex;
-        height: 100%;
-        transition: transform 0.5s ease-in-out;
-    }
-    .slide {
-        min-width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        display: flex; /* 이미지 중앙 정렬을 위해 추가 */
-        justify-content: center; /* 이미지 중앙 정렬을 위해 추가 */
-        align-items: center; /* 이미지 중앙 정렬을 위해 추가 */
-    }
-    .slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; /* 이미지가 잘리지 않고 컨테이너 안에 맞춰지도록 변경 */
-        display: block;
-    }
-    .slider-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.4);
-        color: white;
-        border: none;
-        padding: 12px;
-        border-radius: 50%;
-        cursor: pointer;
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.3s ease;
-        z-index: 10; /* 버튼이 슬라이더 위에 오도록 설정 */
-    }
+    .slider-track { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
+    .slide { min-width: 100%; height: 100%; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
+    .slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.4); color: white; border: none; padding: 10px; border-radius: 50%; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s ease; z-index: 10; }
     .slider-btn:hover { background-color: rgba(0, 0, 0, 0.7); }
-    .slider-btn.prev { left: 16px; }
-    .slider-btn.next { right: 16px; }
-    .slider-dots {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 8px;
-        z-index: 10; /* 인디케이터가 슬라이더 위에 오도록 설정 */
-    }
-    .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.5);
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+    .slider-btn.prev { left: 12px; }
+    .slider-btn.next { right: 12px; }
+    .slider-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background-color 0.3s ease; }
     .dot.active { background-color: white; }
 
     /* 반응형 스타일 */
@@ -188,10 +147,7 @@
 
       .page-container { padding: 60px 4vw; }
       .asset-grid { grid-template-columns: 1fr; }
-      /* 모바일에서 슬라이더 버튼 크기 조절 */
-      .slider-btn { width: 36px; height: 36px; padding: 8px; }
-      .slider-btn.prev { left: 8px; }
-      .slider-btn.next { right: 8px; }
+      .poster-section-layout { grid-template-columns: 1fr; } /* 모바일에선 수직으로 쌓음 */
     }
 
     /* FOOTER STYLES */
@@ -264,24 +220,27 @@
         </div>
   
         <div class="asset-card full-width" style="--i: 3;">
-            <h3>POSTERS</h3>
-            <p>LOOP의 포스터는 앨범의 핵심 주제인 '무너짐과 회복'을 상징합니다. AI로 생성된 초현실적인 이미지와 상징적인 요소들을 조합하여 그룹의 깊이 있는 세계관을 시각적으로 표현했습니다.</p>
-            
-            <div class="slider-container">
-                <div class="slider-track">
-                    <div class="slide"><img src="loopposter1.png" alt="LOOP 포스터 1"></div>
-                    <div class="slide"><img src="loopposter2.png" alt="LOOP 포스터 2"></div>
-                    <div class="slide"><img src="loopposter3.png" alt="LOOP 포스터 3"></div>
+            <div class="poster-section-layout">
+                <div class="poster-text">
+                    <h3>POSTERS</h3>
+                    <p>LOOP의 포스터는 앨범의 핵심 주제인 '무너짐과 회복'을 상징합니다. AI로 생성된 초현실적인 이미지와 상징적인 요소들을 조합하여 그룹의 깊이 있는 세계관을 시각적으로 표현했습니다.</p>
                 </div>
-                <button class="slider-btn prev">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                </button>
-                <button class="slider-btn next">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </button>
-                <div class="slider-dots"></div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slide"><img src="loopposter1.png" alt="LOOP 포스터 1"></div>
+                        <div class="slide"><img src="loopposter2.png" alt="LOOP 포스터 2"></div>
+                        <div class="slide"><img src="loopposter3.png" alt="LOOP 포스터 3"></div>
+                    </div>
+                    <button class="slider-btn prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="slider-btn next">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                    <div class="slider-dots"></div>
+                </div>
             </div>
-            </div>
+        </div>
       </div>
       
     </div>
@@ -334,10 +293,6 @@
     const prevButton = document.querySelector('.slider-btn.prev');
     const dotsNav = document.querySelector('.slider-dots');
 
-    // 슬라이드 너비는 유동적으로 계산되므로, 초기화 시 한 번만 계산합니다.
-    // let slideWidth = track.clientWidth; // flexbox를 사용하므로 이 값은 직접 사용되지 않습니다.
-
-    // 1. 하단 점(dot) 생성
     slides.forEach((slide, index) => {
       const dot = document.createElement('button');
       dot.classList.add('dot');
@@ -350,36 +305,28 @@
     const dots = Array.from(dotsNav.children);
     let currentIndex = 0;
 
-    // 슬라이드 위치 업데이트 함수 (트랙의 transform 속성만 변경)
     const updateSlidePosition = () => {
       track.style.transform = 'translateX(-' + currentIndex * 100 + '%)';
     };
 
-    // 3. 슬라이드 이동 함수
     const moveToSlide = (targetIndex) => {
-      // 인덱스 유효성 검사
       if (targetIndex < 0 || targetIndex >= slides.length) {
-          console.error("Invalid slide index:", targetIndex);
           return;
       }
-
-      // 현재 점 활성화 해제 및 목표 점 활성화
       if (dots[currentIndex]) {
         dots[currentIndex].classList.remove('active');
       }
       if (dots[targetIndex]) {
         dots[targetIndex].classList.add('active');
       }
-
       currentIndex = targetIndex;
-      updateSlidePosition(); // 슬라이더 위치 업데이트
+      updateSlidePosition();
     };
 
-    // 4. 버튼 클릭 이벤트
     nextButton.addEventListener('click', e => {
       let nextIndex = currentIndex + 1;
       if (nextIndex > slides.length - 1) {
-        nextIndex = 0; // 마지막 슬라이드에서 처음으로
+        nextIndex = 0;
       }
       moveToSlide(nextIndex);
     });
@@ -387,27 +334,22 @@
     prevButton.addEventListener('click', e => {
       let prevIndex = currentIndex - 1;
       if (prevIndex < 0) {
-        prevIndex = slides.length - 1; // 첫 슬라이드에서 마지막으로
+        prevIndex = slides.length - 1;
       }
       moveToSlide(prevIndex);
     });
     
-    // 5. 점(dot) 클릭 이벤트
     dotsNav.addEventListener('click', e => {
         const targetDot = e.target.closest('button.dot');
         if (!targetDot) return;
-
         const targetIndex = dots.findIndex(dot => dot === targetDot);
         moveToSlide(targetIndex);
     });
 
-    // 화면 크기 변경 시 슬라이더 위치 재조정 (선택 사항이지만 반응형을 위해 좋음)
     window.addEventListener('resize', () => {
-        // slideWidth = track.clientWidth; // flexbox에서는 불필요
-        updateSlidePosition(); // 현재 슬라이드 위치에 맞게 재정렬
+        updateSlidePosition();
     });
 
-    // 초기 로드 시 첫 번째 슬라이드로 설정
     moveToSlide(0);
 
   </script>
