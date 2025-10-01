@@ -304,6 +304,7 @@
 
     const dots = Array.from(dotsNav.children);
     let currentIndex = 0;
+    let autoSlideInterval;
 
     const updateSlidePosition = () => {
       track.style.transform = 'translateX(-' + currentIndex * 100 + '%)';
@@ -323,12 +324,38 @@
       updateSlidePosition();
     };
 
+    // ✨ 자동 슬라이딩 시작 함수 (3초 간격)
+    const startAutoSlide = () => {
+      clearInterval(autoSlideInterval); // 중복 실행 방지
+      
+      autoSlideInterval = setInterval(() => {
+        let nextIndex = currentIndex + 1;
+        if (nextIndex > slides.length - 1) {
+          nextIndex = 0; // 마지막이면 처음으로 돌아감 (Loop)
+        }
+        moveToSlide(nextIndex);
+      }, 3000); 
+    };
+
+    // ✨ 자동 슬라이딩 중지 함수
+    const stopAutoSlide = () => {
+      clearInterval(autoSlideInterval);
+    };
+    
+    // 수동 조작 시 자동 슬라이딩 멈추고 슬라이드 이동
+    const manualOperated = (targetIndex) => {
+      stopAutoSlide(); // 자동 슬라이딩 멈춤
+      moveToSlide(targetIndex); // 슬라이드 이동
+      // *참고: 필요하다면 여기서 일정 시간 후 startAutoSlide()를 다시 호출하여 자동 재생을 재개할 수 있습니다.
+    }
+
+
     nextButton.addEventListener('click', e => {
       let nextIndex = currentIndex + 1;
       if (nextIndex > slides.length - 1) {
         nextIndex = 0;
       }
-      moveToSlide(nextIndex);
+      manualOperated(nextIndex);
     });
 
     prevButton.addEventListener('click', e => {
@@ -336,21 +363,23 @@
       if (prevIndex < 0) {
         prevIndex = slides.length - 1;
       }
-      moveToSlide(prevIndex);
+      manualOperated(prevIndex);
     });
     
     dotsNav.addEventListener('click', e => {
         const targetDot = e.target.closest('button.dot');
         if (!targetDot) return;
         const targetIndex = dots.findIndex(dot => dot === targetDot);
-        moveToSlide(targetIndex);
+        manualOperated(targetIndex);
     });
 
     window.addEventListener('resize', () => {
         updateSlidePosition();
     });
 
+    // 페이지 로드 시 초기 슬라이드 설정 및 자동 슬라이딩 시작
     moveToSlide(0);
+    startAutoSlide();
 
   </script>
 
