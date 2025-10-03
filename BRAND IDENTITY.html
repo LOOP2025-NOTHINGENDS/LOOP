@@ -134,10 +134,9 @@
       animation: fadeUp 1s ease-out forwards;
     }
     .identity-section:nth-of-type(1) { animation-delay: 0.2s; }
-    /* animation-delay adjusted for new sections */
+    /* animation-delay adjusted for remaining sections */
     .identity-section:nth-of-type(2) { animation-delay: 0.4s; }
-    .identity-section:nth-of-type(3) { animation-delay: 0.6s; }
-    .identity-section:nth-of-type(4) { animation-delay: 0.8s; }
+
 
     .section-title {
       font-family: 'MADE Outer Sans', sans-serif;
@@ -167,7 +166,7 @@
       padding-bottom: 20px; /* 로고 설명과 다음 콘텐츠 간 간격 확보 */
     }
     
-    /* Brand Slogan & Core Value Styles Added */
+    /* Brand Slogan & Core Value Styles */
     .slogan-box {
       background-color: #000000;
       color: #ffffff;
@@ -191,17 +190,7 @@
       color: #d0d0d0;
     }
 
-    .color-palette { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
-    .color-swatch { border-radius: 8px; padding: 20px; text-align: left; }
-    .color-swatch .color-box { width: 100%; height: 120px; border-radius: 6px; margin-bottom: 12px; border: 1px solid rgba(0,0,0,0.05); }
-    .color-swatch .color-name { font-weight: bold; font-size: 16px; margin: 0 0 4px; }
-    .color-swatch .color-code { font-size: 14px; color: #555; }
-    .typography-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .font-display .font-name { font-size: 28px; font-weight: bold; margin: 0 0 16px; }
-    .font-display .font-sample-heading { font-size: 40px; margin: 0 0 12px; }
-    .font-display .font-sample-body { font-size: 16px; line-height: 1.7; }
-    .font-made { font-family: 'MADE Outer Sans', sans-serif; }
-    .font-suit { font-family: 'SUIT', sans-serif; }
+    /* REMOVED: .color-palette, .color-swatch, .typography-showcase, .font-display styles */
 
     @media (max-width: 768px) {
       nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -215,7 +204,6 @@
 
       .title { font-size: 32px; margin-top: 40px; }
       .content-container { gap: 60px; }
-      .typography-showcase { grid-template-columns: 1fr; }
       .dropdown-menu { display: none !important; }
       .logo-display { padding: 40px 20px; }
       .logo-description { font-size: 14px; }
@@ -372,48 +360,8 @@
           </p>
         </div>
       </section>
-
-      <section class="identity-section color-section" style="animation-delay: 0.5s;">
-        <h2 class="section-title">COLOR PALETTE</h2>
-        <div class="color-palette">
-          <div class="color-swatch">
-            <div class="color-box" style="background-color: #000000;"></div>
-            <p class="color-name">Primary Black</p>
-            <p class="color-code">#000000</p>
-          </div>
-          <div class="color-swatch">
-            <div class="color-box" style="background-color: #FFFFFF;"></div>
-            <p class="color-name">Primary White</p>
-            <p class="color-code">#FFFFFF</p>
-          </div>
-          <div class="color-swatch">
-            <div class="color-box" style="background-color: #A0A0A0;"></div>
-            <p class="color-name">Neutral Gray</p>
-            <p class="color-code">#A0A0A0</p>
-          </div>
-          <div class="color-swatch">
-            <div class="color-box" style="background-color: #4A90E2;"></div>
-            <p class="color-name">Accent Blue</p>
-            <p class="color-code">#4A90E2</p>
-          </div>
-        </div>
-      </section>
-      <section class="identity-section typography-section" style="animation-delay: 0.7s;">
-        <h2 class="section-title">TYPOGRAPHY</h2>
-        <div class="typography-showcase">
-          <div class="font-display">
-            <p class="font-name font-made">MADE Outer Sans</p>
-            <p class="font-sample-heading font-made">HEADINGS</p>
-            <p class="font-sample-body font-made">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789</p>
-          </div>
-          <div class="font-display">
-            <p class="font-name font-suit">SUIT</p>
-            <p class="font-sample-heading font-suit">Body Text</p>
-            <p class="font-sample-body font-suit">본문 텍스트는 SUIT 폰트를 사용하여<br>가독성을 높이고 정돈된 인상을 줍니다.<br>The quick brown fox jumps over the lazy dog.</p>
-          </div>
-        </div>
-      </section>
-    </div>
+      
+      </div>
   </main>
   
   <footer class="site-footer">
