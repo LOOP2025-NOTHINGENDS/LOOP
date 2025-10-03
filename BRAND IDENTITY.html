@@ -134,8 +134,10 @@
       animation: fadeUp 1s ease-out forwards;
     }
     .identity-section:nth-of-type(1) { animation-delay: 0.2s; }
+    /* animation-delay adjusted for new sections */
     .identity-section:nth-of-type(2) { animation-delay: 0.4s; }
     .identity-section:nth-of-type(3) { animation-delay: 0.6s; }
+    .identity-section:nth-of-type(4) { animation-delay: 0.8s; }
 
     .section-title {
       font-family: 'MADE Outer Sans', sans-serif;
@@ -162,7 +164,33 @@
       font-size: 16px;
       line-height: 1.6;
       color: #333;
+      padding-bottom: 20px; /* 로고 설명과 다음 콘텐츠 간 간격 확보 */
     }
+    
+    /* Brand Slogan & Core Value Styles Added */
+    .slogan-box {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 60px 40px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .slogan-box .slogan {
+      font-family: 'MADE Outer Sans', sans-serif;
+      font-size: 36px;
+      font-weight: 500;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+    .core-value-text {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.8;
+      font-weight: 300;
+      color: #d0d0d0;
+    }
+
     .color-palette { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
     .color-swatch { border-radius: 8px; padding: 20px; text-align: left; }
     .color-swatch .color-box { width: 100%; height: 120px; border-radius: 6px; margin-bottom: 12px; border: 1px solid rgba(0,0,0,0.05); }
@@ -191,6 +219,10 @@
       .dropdown-menu { display: none !important; }
       .logo-display { padding: 40px 20px; }
       .logo-description { font-size: 14px; }
+      
+      .slogan-box { padding: 40px 20px; }
+      .slogan-box .slogan { font-size: 24px; letter-spacing: 1px; }
+      .core-value-text { font-size: 15px; }
     }
 
     /* ======================= FOOTER STYLES (Added Section) ======================= */
@@ -326,12 +358,22 @@
         <div class="logo-display">
           <img src="./loop%20asset%20symbol.png" alt="LOOP Main Logo">
           <p class="logo-description">
-            LOOP의 심볼 로고는 뉴턴의 진자(Newton’s Cradle)의 운동 원리를 모티프로 하여, 속도와 연속성을 시각화한 디자인입니다.<br>
-            이를 통해 ‘루프(LOOP)’라는 단어가 지닌 순환성과 지속성을 직관적으로 표현했습니다.
+            LOOP의 심볼 로고는 **뉴턴의 진자(Newton’s Cradle)**의 운동 원리를 모티프로 하여, 속도와 연속성을 시각화한 디자인입니다. 이를 통해 ‘루프(LOOP)’라는 단어가 지닌 **순환성**과 **지속성**을 직관적으로 표현했습니다.
           </p>
         </div>
       </section>
-      <section class="identity-section color-section">
+
+      <section class="identity-section brand-value-section" style="animation-delay: 0.3s;">
+        <h2 class="section-title">BRAND SLOGAN & CORE VALUE</h2>
+        <div class="slogan-box">
+          <p class="slogan">NOTHING ENDS, IT'S JUST LOOPING</p>
+          <p class="core-value-text">
+            “LOOP는 청자가 느끼는 감정의 파동과, 아티스트가 겪는 무너짐과 회복을 담아, 누구도 포기하지 않는 마음이 언젠가 빛을 만나게 됨을 노래하는 음악적 순환입니다.”
+          </p>
+        </div>
+      </section>
+
+      <section class="identity-section color-section" style="animation-delay: 0.5s;">
         <h2 class="section-title">COLOR PALETTE</h2>
         <div class="color-palette">
           <div class="color-swatch">
@@ -356,7 +398,7 @@
           </div>
         </div>
       </section>
-      <section class="identity-section typography-section">
+      <section class="identity-section typography-section" style="animation-delay: 0.7s;">
         <h2 class="section-title">TYPOGRAPHY</h2>
         <div class="typography-showcase">
           <div class="font-display">
