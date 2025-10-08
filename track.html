@@ -63,12 +63,62 @@
     }
     nav a { text-decoration: none; color: inherit; }
     nav li:hover { color: #000; }
-    .dropdown-menu { display: none; }
-
     nav li.nav-active a {
       font-weight: 900;
       color: #000;
     }
+
+    /* ======================================================= */
+    /* ★ 드롭다운 메뉴 스타일 추가/수정 ★ */
+    /* ======================================================= */
+    .dropdown-menu {
+      display: none; /* 기본적으로 숨김 */
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      min-width: 160px;
+      opacity: 0;
+      transition: opacity 0.3s ease, margin-top 0.3s ease;
+      z-index: 1100;
+      margin-top: 10px;
+    }
+
+    .dropdown-menu li {
+      padding: 8px 16px;
+      font-size: 13px;
+      white-space: nowrap;
+      font-family: 'SUIT', sans-serif;
+      font-weight: 500;
+      text-align: center;
+      color: #333;
+      /* 부모 li의 gap을 따르지 않도록 margin: 0 설정 */
+      margin: 0; 
+    }
+    
+    .dropdown-menu li:hover {
+        background-color: #f5f5f5;
+        color: #000;
+    }
+    
+    .dropdown-menu a {
+        color: #333;
+        font-weight: 500;
+    }
+
+    /* ★ 핵심: li에 마우스를 올렸을 때 드롭다운 표시 */
+    li:hover > .dropdown-menu {
+      display: block;
+      opacity: 1;
+      margin-top: 0;
+    }
+    /* ======================================================= */
+
 
     /* --- 메인 레이아웃 (분할 화면) --- */
     .track-page-container {
@@ -230,6 +280,7 @@
       .logo img { height: 24px; }
       nav ul { gap: 12px; }
       nav li { font-size: 12px; }
+      /* 모바일에서는 드롭다운을 숨김 (기존 코드와 동일) */
       .dropdown-menu { display: none !important; }
 
       .album-title { font-size: 32px; }
@@ -239,7 +290,7 @@
       .track-description { font-size: 14px; }
     }
 
-    /* ======================= FOOTER STYLES (추가된 부분) ======================= */
+    /* ======================= FOOTER STYLES ======================= */
     .site-footer {
       background-color: #1a1a1a;
       color: #a0a0a0;
@@ -347,7 +398,12 @@
     </div>
     <nav>
       <ul>
-        <li><a href="about.html">ABOUT</a></li>
+        <li>
+          <a href="about.html">ABOUT</a>
+          <ul class="dropdown-menu">
+            <li><a href="BRAND IDENTITY.html">BRAND IDENTITY</a></li>
+          </ul>
+        </li>
         <li><a href="artist.html">ARTIST</a></li> 
         <li><a href="goods.html">GOODS</a></li>
         <li><a href="design.html">DESIGN</a></li>
