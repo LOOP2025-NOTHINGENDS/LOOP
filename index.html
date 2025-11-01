@@ -173,6 +173,7 @@
         overflow-x: scroll; 
         scroll-snap-type: x mandatory; 
         grid-auto-rows: 150px;
+        /* 중앙 정렬 패딩 유지 */
         scroll-padding-left: calc(50% - clamp(180px, 18vw, 300px) / 2);
         scroll-padding-right: calc(50% - clamp(180px, 18vw, 300px) / 2);
 
@@ -251,19 +252,22 @@
         opacity: 0.8;
     }
     
-    /* ⭐⭐ 새로 추가/수정된 부분 ⭐⭐ */
     .slider-button.prev {
-        left: 0; /* 왼쪽 버튼 */
+        left: 0; 
     }
 
     .slider-button.next {
-        right: 0; /* 오른쪽 버튼 */
+        right: 0; 
     }
-    /* ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ */
 
     .slider-button:hover {
         background: rgba(255, 255, 255, 0.2);
         opacity: 1;
+    }
+
+    .slider-button:disabled {
+        opacity: 0.3; /* 끝에 도달했을 때 버튼 비활성화 시 스타일 */
+        cursor: default;
     }
 
     /* ======================= STEEL CUT GALLERY STYLES ======================= */
@@ -493,16 +497,6 @@
       <div class="slider-container">
         <div class="slider-track" id="platform-slider">
           
-          <a href="https://music.apple.com/us/artist/artist-name/000000" target="_blank" class="platform-item" data-name="Apple">
-            <div class="platform-image"></div>
-          </a>
-          <a href="https://music.bugs.co.kr/artist/000000" target="_blank" class="platform-item" data-name="Bugs">
-            <div class="platform-image"></div>
-          </a>
-          <a href="https://music.amazon.com/artists/B00.../artist-name" target="_blank" class="platform-item" data-name="Amazon">
-            <div class="platform-image"></div>
-          </a>
-
           <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item" data-name="Melon">
             <div class="platform-image"></div>
           </a>
@@ -528,15 +522,6 @@
             <div class="platform-image"></div>
           </a>
           <a href="https://music.amazon.com/artists/B00.../artist-name" target="_blank" class="platform-item" data-name="Amazon">
-            <div class="platform-image"></div>
-          </a>
-          <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item" data-name="Melon">
-            <div class="platform-image"></div>
-          </a>
-          <a href="https://open.spotify.com/artist/000000" target="_blank" class="platform-item" data-name="Spotify">
-            <div class="platform-image"></div>
-          </a>
-          <a href="https://www.genie.co.kr/artist/home?acid=000000" target="_blank" class="platform-item" data-name="Genie">
             <div class="platform-image"></div>
           </a>
           
@@ -579,102 +564,85 @@
   </main>
 
   <script>
-    const totalItems = 9; 
-    const clonedItemsCount = 3; 
+    // 복제된 항목 제거로 인해 변수 및 함수 단순화
     let itemWidthWithGap; 
+    let currentIndex = 0; // 현재 중앙에 있는 항목의 인덱스 (0부터 시작)
 
     function updateActiveItem() {
       const slider = document.getElementById('platform-slider');
       const items = slider.querySelectorAll('.platform-item');
       
-      const containerCenter = slider.scrollLeft + slider.offsetWidth / 2;
-
-      items.forEach(item => {
-        const itemRect = item.getBoundingClientRect();
-        const itemCenter = slider.scrollLeft + itemRect.left + itemRect.width / 2 - slider.getBoundingClientRect().left;
-        
-        const distance = Math.abs(containerCenter - itemCenter);
-        
-        if (distance < itemRect.width * 0.7) { 
+      // 스크롤 위치에 관계없이, items[currentIndex]에 active 클래스를 부여
+      items.forEach((item, index) => {
+        if (index === currentIndex) {
           item.classList.add('active');
         } else {
           item.classList.remove('active');
         }
       });
+      
+      // 버튼 활성화/비활성화 상태 업데이트
+      const prevButton = document.querySelector('.slider-button.prev');
+      const nextButton = document.querySelector('.slider-button.next');
+      
+      // currentIndex가 첫 번째 항목(0)이면 이전 버튼 비활성화
+      prevButton.disabled = currentIndex === 0;
+      // currentIndex가 마지막 항목(items.length - 1)이면 다음 버튼 비활성화
+      nextButton.disabled = currentIndex === items.length - 1;
     }
-
-    // ⭐⭐ 무한 루프 처리를 위한 위치 조정 함수 (양방향 이동의 핵심) - 수정됨 ⭐⭐
-    function checkInfinityScroll() {
-        const slider = document.getElementById('platform-slider');
-        const items = slider.querySelectorAll('.platform-item');
-        
-        const realStartItemIndex = clonedItemsCount; // 3
-        const realEndItemIndex = totalItems + clonedItemsCount - 1; // 11
-        const itemWidth = items[0].offsetWidth;
-        const sliderHalfWidth = slider.offsetWidth / 2;
-
-        const currentScrollLeft = slider.scrollLeft;
-        
-        // 실제 콘텐츠 끝의 첫 번째 복제본 (인덱스 12)의 왼쪽 좌표
-        const firstEndCloneOffset = items[realStartItemIndex + totalItems].offsetLeft; 
-
-        // 1. 좌측으로 넘어가서 복제된 앞 부분(0, 1, 2)에 도달했을 때
-        if (currentScrollLeft < items[realStartItemIndex].offsetLeft) {
-            
-            // 점프 목표: 마지막 실제 항목(인덱스 11)이 중앙에 오도록 점프
-            const jumpPosition = items[realEndItemIndex].offsetLeft - sliderHalfWidth + itemWidth / 2;
-            slider.scrollLeft = jumpPosition;
-        } 
-        // 2. 우측으로 넘어가서 복제된 뒷 부분(12, 13, 14)에 도달했을 때
-        else if (currentScrollLeft >= firstEndCloneOffset) { 
-            
-            // 점프 목표: 첫 번째 실제 항목(인덱스 3)이 중앙에 오도록 점프
-            const jumpPosition = items[realStartItemIndex].offsetLeft - sliderHalfWidth + itemWidth / 2;
-            slider.scrollLeft = jumpPosition;
-        }
-    }
-
-
-    // 초기 로드 시 및 스크롤 시 'active' 업데이트
-    document.addEventListener('DOMContentLoaded', () => {
-        const slider = document.getElementById('platform-slider');
-        const items = slider.querySelectorAll('.platform-item');
-        const firstItem = items[0];
-
-        if (slider && firstItem) {
-            const gap = parseFloat(getComputedStyle(slider).gap);
-            const itemStyle = window.getComputedStyle(firstItem);
-            const itemWidth = parseFloat(itemStyle.width);
-            itemWidthWithGap = itemWidth + gap;
-
-            // 초기 로드 시 실제 콘텐츠의 시작점(4번째 항목)으로 스크롤 이동하여 중앙에 위치
-            const startItemIndex = clonedItemsCount; 
-            const initialScrollLeft = items[startItemIndex].offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
-            slider.scrollLeft = initialScrollLeft;
-
-            setTimeout(() => {
-                updateActiveItem();
-                // scroll 이벤트에 무한 루프 체크 로직 연결
-                slider.addEventListener('scroll', () => {
-                    updateActiveItem();
-                    checkInfinityScroll();
-                });
-            }, 100); 
-        }
-    });
 
     // 버튼 클릭 시 스크롤 기능
     function scrollSlider(direction) {
       const slider = document.getElementById('platform-slider');
+      const items = slider.querySelectorAll('.platform-item');
+
+      // 경계 체크
+      const newIndex = currentIndex + direction;
+      if (newIndex < 0 || newIndex >= items.length) {
+        return; // 슬라이더 경계를 벗어나면 동작 중지
+      }
       
-      slider.scrollBy({
-        left: direction * itemWidthWithGap,
+      currentIndex = newIndex; // 새 인덱스 저장
+      
+      // 해당 항목이 중앙에 오도록 스크롤 위치 계산
+      const targetItem = items[currentIndex];
+      const itemWidth = targetItem.offsetWidth;
+      const sliderWidth = slider.offsetWidth;
+      
+      // 목표 스크롤 위치: 현재 항목의 왼쪽 위치 - (슬라이더 너비 / 2) + (항목 너비 / 2)
+      const targetScrollLeft = targetItem.offsetLeft - (sliderWidth / 2) + (itemWidth / 2);
+      
+      slider.scrollTo({
+        left: targetScrollLeft,
         behavior: 'smooth'
       });
       
-      // 스크롤 완료 후 바로 checkInfinityScroll()을 호출하는 대신, 
-      // scroll 이벤트 핸들러에 위임하여 스크롤 중/완료 시 처리되도록 합니다.
+      // Active 상태 업데이트
+      setTimeout(updateActiveItem, 300); // 스크롤 애니메이션이 시작된 후 적용
     }
+
+
+    // 초기 로드 시 설정
+    document.addEventListener('DOMContentLoaded', () => {
+        const slider = document.getElementById('platform-slider');
+        const items = slider.querySelectorAll('.platform-item');
+        
+        if (items.length > 0) {
+            const firstItem = items[0];
+            const gap = parseFloat(getComputedStyle(slider).gap);
+            const itemWidth = firstItem.offsetWidth;
+            itemWidthWithGap = itemWidth + gap; // 스크롤 양 계산
+
+            // 초기 로드 시 첫 번째 항목(인덱스 0)이 중앙에 오도록 스크롤
+            const initialScrollLeft = firstItem.offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
+            slider.scrollLeft = initialScrollLeft;
+            
+            // 스크롤 이벤트에 active 로직을 연결할 필요가 없으므로 제거 (버튼 클릭 시만 동작)
+            
+            // 초기 active 상태 및 버튼 상태 설정
+            setTimeout(updateActiveItem, 100); 
+        }
+    });
   </script>
 
   <footer class="site-footer">
@@ -714,7 +682,7 @@
       <div class="footer-bottom">
         <div class="footer-social">
           <a href="https://www.instagram.com/dbrwlals.kr/" target="_blank" rel="noopener noreferrer" title="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441c0-.795-.645-1.44-1.441-1.44z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441c0-.795-.645-1.44-1.441-1-1.44z"/></svg>
           </a>
         </div>
         <p class="footer-copyright">
