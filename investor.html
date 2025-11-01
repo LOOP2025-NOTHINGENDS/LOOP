@@ -221,11 +221,13 @@
         list-style: none;
         padding: 0;
         margin: 0 auto;
-        max-width: 800px;
+        max-width: 100%; /* 너비를 최대로 늘리고 */
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap; /* ⭐⭐⭐ 줄 바꿈 방지 ⭐⭐⭐ */
         justify-content: center;
-        gap: 10px 25px; /* 이름 사이 간격 */
+        gap: 0 15px; /* ⭐ 항목 간 간격 조정 ⭐ */
+        overflow-x: auto; /* ⭐ 내용이 넘칠 경우 수평 스크롤 허용 ⭐ */
+        padding-bottom: 5px; /* 스크롤바 공간 확보 */
     }
     
     .thanks-item {
@@ -237,6 +239,8 @@
         background-color: #fff;
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         transition: background-color 0.2s ease;
+        white-space: nowrap; /* 텍스트 자체의 줄 바꿈 방지 */
+        flex-shrink: 0; /* 항목이 찌그러지는 것 방지 */
     }
 
     .thanks-item:hover {
