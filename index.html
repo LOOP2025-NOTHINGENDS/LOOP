@@ -7,11 +7,13 @@
   <style>
     @font-face {
       font-family: 'SUIT';
+      /* 폰트 파일 경로가 정확한지 확인해 주세요. */
       src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
     }
 
     @font-face {
       font-family: 'MADE Outer Sans';
+      /* 폰트 파일 경로가 정확한지 확인해 주세요. */
       src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
       font-weight: 500;
     }
@@ -84,7 +86,7 @@
     .main-content {
         padding-top: 48px;
         font-size: 0;
-        background-color: #000; /* 나머지 섹션 배경도 검은색으로 유지 */
+        background-color: #000;
     }
     .main-content section {
       margin: 0;
@@ -103,38 +105,160 @@
       position: relative;
     }
     
-    .hero-section {
+    /* ======================= NEW STREAM LINKS SECTION STYLES ======================= */
+    
+    .stream-links-section {
         background-color: black;
-        height: calc(100vh - 48px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .countdown-container {
-        color: white;
+        padding: 100px 0 150px;
         text-align: center;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-        width: 100%;
     }
 
-    .countdown-title {
-        font-family: 'SUIT', sans-serif;
-        font-size: 2vw;
-        font-weight: 600;
-        letter-spacing: 2px;
-        margin-bottom: 24px;
-        line-height: 1.5; /* 글자 크기가 커서 추가 */
+    .stream-title-container {
+        max-width: 90%;
+        margin: 0 auto 60px;
     }
 
-    #countdown-timer {
+    .stream-main-title {
         font-family: 'MADE Outer Sans', sans-serif;
-        font-size: 7vw;
+        font-size: clamp(30px, 4vw, 55px);
         font-weight: 500;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.05em;
+        margin-bottom: 20px;
         line-height: 1.2;
     }
+
+    .stream-subtitle {
+        font-family: 'SUIT', sans-serif;
+        font-size: clamp(14px, 1.5vw, 20px);
+        font-weight: 400;
+        color: #ccc;
+        line-height: 1.5;
+    }
+
+    /* 슬라이더 스타일 */
+    .slider-container {
+        position: relative;
+        max-width: 95vw;
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 20px 0;
+    }
+
+    .slider-track {
+        display: flex;
+        gap: 3vw;
+        /* 스크롤바가 보이도록 overflow-x를 auto로 설정하고, 버튼으로 이동하도록 js로 제어 */
+        overflow-x: scroll; 
+        scroll-snap-type: x mandatory; /* 스냅 효과 추가 */
+        padding: 0 5vw;
+        /* 스크롤바 숨기기 (크롬/사파리/엣지) */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+    .slider-track::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+    }
+
+    .platform-item {
+        flex: 0 0 auto;
+        width: clamp(180px, 18vw, 300px);
+        text-align: left;
+        text-decoration: none;
+        color: inherit;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        scroll-snap-align: start; /* 스냅 포인트 */
+    }
+
+    .platform-item:hover {
+        opacity: 0.9;
+        transform: translateY(-5px);
+    }
+
+    .platform-image {
+        width: 100%;
+        aspect-ratio: 1 / 1.5;
+        background-size: cover;
+        background-position: center;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        position: relative;
+        overflow: hidden;
+        /* 앨범 아트 느낌을 위한 그라데이션 오버레이 */
+        background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%); 
+    }
+    /* 임시 이미지 스타일 (실제 이미지를 넣으시면 아래 코드는 제거하세요) */
+    .platform-image.melon { background-image: url('./placeholder_melon.png'), linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%), #00CD3C; }
+    .platform-image.genie { background-image: url('./placeholder_genie.png'), linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%), #43B3FF; }
+    .platform-image.bugs { background-image: url('./placeholder_bugs.png'), linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%), #2E2D3A; }
+    .platform-image.spotify { background-image: url('./placeholder_spotify.png'), linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%), #1DB954; }
+    .platform-image.apple { background-image: url('./placeholder_apple.png'), linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%), #FA2C53; }
     
+    .platform-item:nth-child(1) .platform-image { background-color: #d62d2d; }
+    .platform-item:nth-child(2) .platform-image { background-color: #e28e1c; }
+    .platform-item:nth-child(3) .platform-image { background-color: #8c8f8a; }
+    .platform-item:nth-child(4) .platform-image { background-color: #1a5c68; }
+    .platform-item:nth-child(5) .platform-image { background-color: #9d3184; }
+
+
+    .platform-text {
+        font-family: 'MADE Outer Sans', sans-serif;
+        font-size: clamp(14px, 1.2vw, 20px);
+        font-weight: 500;
+        color: white;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    }
+
+
+    .platform-caption {
+        font-family: 'SUIT', sans-serif;
+        font-size: clamp(12px, 1vw, 16px);
+        font-weight: 500;
+        line-height: 1.4;
+        color: #a0a0a0;
+    }
+
+    /* 슬라이더 버튼 스타일 */
+    .slider-button {
+        position: absolute;
+        top: 60%; /* 제목과 슬라이더 중간 쯤 위치 */
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: none;
+        padding: 15px 10px;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 24px;
+        transition: background 0.3s ease;
+        border-radius: 4px;
+        user-select: none;
+        height: clamp(100px, 30vh, 180px); /* 앨범 커버 높이에 맞추기 */
+        display: flex;
+        align-items: center;
+        opacity: 0.8;
+    }
+
+    .slider-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        opacity: 1;
+    }
+
+    .slider-button.prev {
+        left: 0;
+    }
+
+    .slider-button.next {
+        right: 0;
+    }
+
     @media (max-width: 768px) {
       nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
       nav li { font-size: 12px; }
@@ -143,15 +267,20 @@
       .dropdown-menu { display: none !important; }
       .main-content { padding-top: 100px; }
       .overlapping-section { margin-top: -15vh; }
-
-      .hero-section {
-          height: calc(100vh - 100px);
+      
+      .stream-links-section {
+          padding: 60px 0 80px;
       }
-      .countdown-title { font-size: 4vw; margin-bottom: 16px; }
-      #countdown-timer { font-size: 12vw; }
+      .stream-main-title { font-size: 6vw; margin-bottom: 12px; }
+      .stream-subtitle { font-size: 3vw; }
+
+      .slider-button {
+          padding: 8px 4px;
+          font-size: 18px;
+      }
     }
 
-    /* ======================= FOOTER STYLES (추가된 부분) ======================= */
+    /* ======================= FOOTER STYLES ======================= */
     .site-footer {
       background-color: #1a1a1a;
       color: #a0a0a0;
@@ -276,11 +405,58 @@
 
   <main class="main-content">
     
-    <section class="hero-section">
-      <div class="countdown-container">
-        <h2 class="countdown-title">UNTIL THE DROP</h2>
-        <div id="countdown-timer"></div>
+    <section class="stream-links-section">
+      <div class="stream-title-container">
+        <h2 class="stream-main-title">NOTHING ENDS, IT'S JUST LOOPING</h2>
+        <p class="stream-subtitle">
+          아티스트 <span style="font-family: 'SUIT', sans-serif; font-weight: 700;">JIMIN</span>의 앨범 <span style="font-family: 'SUIT', sans-serif; font-weight: 700;">LOOP</span>가 모든 음원 사이트에 발매 되었습니다.
+        </p>
       </div>
+
+      <div class="slider-container">
+        <div class="slider-track" id="platform-slider">
+          
+          <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item">
+            <div class="platform-image" style="background-color: #d62d2d;">
+              <span class="platform-text">Selected projects from the last month</span>
+            </div>
+            <p class="platform-caption">Getting that lil look in the post</p>
+          </a>
+          
+          <a href="https://www.genie.co.kr/artist/home?acid=000000" target="_blank" class="platform-item">
+            <div class="platform-image" style="background-color: #e28e1c;">
+              <span class="platform-text">Otherworldly places located on Earth</span>
+            </div>
+            <p class="platform-caption">Selected projects from the last month</p>
+          </a>
+          
+          <a href="https://music.bugs.co.kr/artist/000000" target="_blank" class="platform-item">
+            <div class="platform-image" style="background-color: #8c8f8a;">
+              <span class="platform-text">Visualizing distorted sound mixes</span>
+            </div>
+            <p class="platform-caption">Otherworldly places located on Earth</p>
+          </a>
+
+          <a href="https://open.spotify.com/artist/000000" target="_blank" class="platform-item">
+            <div class="platform-image" style="background-color: #1a5c68;">
+              <span class="platform-text">Pale and ethereal pastel vibes</span>
+            </div>
+            <p class="platform-caption">Visualizing distorted sound mixes</p>
+          </a>
+          
+          <a href="https://music.apple.com/us/artist/artist-name/000000" target="_blank" class="platform-item">
+            <div class="platform-image" style="background-color: #9d3184;">
+              <span class="platform-text">Selected and popular posts on the social right now</span>
+            </div>
+            <p class="platform-caption">Pale and ethereal pastel vibes</p>
+          </a>
+          
+        </div>
+
+        <button class="slider-button prev" onclick="scrollSlider(-1)">❮</button>
+        <button class="slider-button next" onclick="scrollSlider(1)">❯</button>
+      </div>
+
     </section>
     
     <section>
@@ -292,29 +468,36 @@
   </main>
 
   <script>
-    const countDownDate = new Date("Nov 3, 2025 00:00:00").getTime();
-
-    const x = setInterval(function() {
-      const now = new Date().getTime();
-      const distance = countDownDate - now;
+    // ⭐⭐ 슬라이더 스크롤 기능 스크립트 ⭐⭐
+    function scrollSlider(direction) {
+      const slider = document.getElementById('platform-slider');
       
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      // 항목 하나의 너비와 간격을 계산 (첫 번째 항목을 기준으로 함)
+      const firstItem = slider.querySelector('.platform-item');
+      if (!firstItem) return;
       
-      document.getElementById("countdown-timer").innerHTML = 
-        days + "d " + 
-        (hours < 10 ? "0" + hours : hours) + "h " + 
-        (minutes < 10 ? "0" + minutes : minutes) + "m " + 
-        (seconds < 10 ? "0" + seconds : seconds) + "s ";
-      
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("countdown-timer").innerHTML = "COMING SOON!";
-        document.querySelector(".countdown-title").style.display = 'none';
+      const itemWidth = firstItem.offsetWidth;
+      const computedStyle = window.getComputedStyle(slider);
+      const gapMatch = computedStyle.gap.match(/([\d\.]+)(px|vw|%)/);
+      let gap = 0;
+      if (gapMatch) {
+          const value = parseFloat(gapMatch[1]);
+          const unit = gapMatch[2];
+          if (unit === 'vw') {
+              gap = (value / 100) * window.innerWidth;
+          } else { // 'px' 등 다른 단위
+              gap = value;
+          }
       }
-    }, 1000);
+
+      // 스크롤 양 = 항목 너비 + 간격
+      const scrollAmount = itemWidth + gap;
+      
+      slider.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+    }
   </script>
 
   <footer class="site-footer">
@@ -351,7 +534,7 @@
       <div class="footer-bottom">
         <div class="footer-social">
           <a href="https://www.instagram.com/dbrwlals.kr/" target="_blank" rel="noopener noreferrer" title="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441c0-.795-.645-1.44-1.441-1.44z"/></svg>
           </a>
         </div>
         <p class="footer-copyright">
