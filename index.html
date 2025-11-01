@@ -98,10 +98,13 @@
       padding: 0;
       border: 0;
     }
-    .overlapping-section {
+    /* 이 오버랩 스타일은 이제 세 번째 섹션이 이미지일 때만 의미가 있으므로,
+       세 번째 섹션을 비워두는 경우 제거하거나 조정할 수 있습니다.
+       현재는 깔끔한 분리를 위해 제거합니다. */
+    /* .overlapping-section {
       margin-top: -20vh; 
       position: relative;
-    }
+    } */
     
     /* ======================= NEW LOGO SECTION STYLE ======================= */
     .middle-logo-section {
@@ -120,7 +123,16 @@
         opacity: 0.8; 
         width: clamp(150px, 20vw, 300px);
     }
-    /* ======================= NEW STREAM LINKS SECTION STYLES ======================= */
+
+    /* ======================= EMPTY SECTION STYLE (Website 3 대체) ======================= */
+    .empty-section {
+        background-color: black;
+        height: 10vh; /* 적절한 높이로 조정하여 푸터와 분리 */
+        padding: 0;
+        margin: 0;
+    }
+
+    /* ======================= STREAM LINKS SECTION STYLES ======================= */
     
     .stream-links-section {
         background-color: black;
@@ -136,14 +148,12 @@
         align-items: center;
     }
 
-    /* 슬라이더 섹션 로고 스타일 */
     .stream-section-logo {
         max-width: 400px;
         height: auto;
         margin-bottom: 30px;
     }
 
-    /* 슬라이더 스타일 */
     .slider-container {
         position: relative;
         max-width: 100vw;
@@ -262,7 +272,6 @@
       .logo img { height: 24px; }
       .dropdown-menu { display: none !important; }
       .main-content { padding-top: 100px; }
-      .overlapping-section { margin-top: -15vh; }
       
       .stream-links-section {
           padding: 60px 0 80px;
@@ -274,6 +283,7 @@
           font-size: 18px;
       }
       .middle-logo-section { height: 30vh; }
+      .empty-section { height: 5vh; }
     }
 
     /* ======================= FOOTER STYLES ======================= */
@@ -422,46 +432,36 @@
           <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item" data-name="Melon">
             <div class="platform-image"></div>
           </a>
-          
           <a href="https://open.spotify.com/artist/000000" target="_blank" class="platform-item" data-name="Spotify">
             <div class="platform-image"></div>
           </a>
-
           <a href="https://www.genie.co.kr/artist/home?acid=000000" target="_blank" class="platform-item" data-name="Genie">
             <div class="platform-image"></div>
           </a>
-          
           <a href="https://www.music-flo.com/detail/artist/000000" target="_blank" class="platform-item" data-name="FLO">
             <div class="platform-image"></div>
           </a>
-
           <a href="https://music.youtube.com/channel/UC.../featured" target="_blank" class="platform-item" data-name="Youtube">
             <div class="platform-image"></div>
           </a>
-
           <a href="https://vibe.naver.com/artist/000000" target="_blank" class="platform-item" data-name="VIBE">
             <div class="platform-image"></div>
           </a>
-
           <a href="https://music.apple.com/us/artist/artist-name/000000" target="_blank" class="platform-item" data-name="Apple">
             <div class="platform-image"></div>
           </a>
-          
           <a href="https://music.bugs.co.kr/artist/000000" target="_blank" class="platform-item" data-name="Bugs">
             <div class="platform-image"></div>
           </a>
-
           <a href="https://music.amazon.com/artists/B00.../artist-name" target="_blank" class="platform-item" data-name="Amazon">
             <div class="platform-image"></div>
           </a>
           <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item" data-name="Melon">
             <div class="platform-image"></div>
           </a>
-          
           <a href="https://open.spotify.com/artist/000000" target="_blank" class="platform-item" data-name="Spotify">
             <div class="platform-image"></div>
           </a>
-
           <a href="https://www.genie.co.kr/artist/home?acid=000000" target="_blank" class="platform-item" data-name="Genie">
             <div class="platform-image"></div>
           </a>
@@ -478,9 +478,8 @@
       <img src="./loop logo.png" alt="Loop Logo in Center" />
     </section>
     
-    <section class="overlapping-section">
-      <img src="./LOOP_WEBSITE3.jpeg" alt="Section 3" />
-    </section>
+    <section class="empty-section">
+      </section>
   </main>
 
   <script>
@@ -513,22 +512,18 @@
         const slider = document.getElementById('platform-slider');
         const items = slider.querySelectorAll('.platform-item');
         
-        // 실제 콘텐츠 시작점과 끝점 (인덱스를 이용해 계산)
-        // 실제 콘텐츠는 items[3]부터 items[11]까지입니다. (0~2는 앞 복제본, 12~14는 뒤 복제본)
-        
+        // 실제 콘텐츠 시작점과 끝점 (인덱스: 3~11)
         const realContentStart = items[3].offsetLeft; 
         const realContentEnd = items[11].offsetLeft + itemWidthWithGap - parseFloat(getComputedStyle(slider).gap);
         
         const currentScrollLeft = slider.scrollLeft;
         
-        // 스크롤이 복제된 앞 부분에 도달하면 실제 콘텐츠의 끝으로 이동
+        // 스크롤이 복제된 앞 부분에 도달하면 실제 콘텐츠의 끝으로 점프
         if (currentScrollLeft < realContentStart) {
-            // 부드러운 전환을 위해 스냅 위치로 바로 이동
             slider.scrollLeft = realContentEnd - itemWidthWithGap;
         } 
-        // 스크롤이 복제된 뒷 부분에 도달하면 실제 콘텐츠의 시작으로 이동
+        // 스크롤이 복제된 뒷 부분에 도달하면 실제 콘텐츠의 시작으로 점프
         else if (currentScrollLeft > realContentEnd) { 
-            // 부드러운 전환을 위해 스냅 위치로 바로 이동
             slider.scrollLeft = realContentStart;
         }
     }
@@ -542,13 +537,12 @@
 
         if (slider && firstItem) {
             const gap = parseFloat(getComputedStyle(slider).gap);
-            // itemWidthWithGap 계산 (스크롤 양 결정)
             const itemStyle = window.getComputedStyle(firstItem);
             const itemWidth = parseFloat(itemStyle.width);
             itemWidthWithGap = itemWidth + gap;
 
             // 초기 로드 시 실제 콘텐츠의 시작점(4번째 항목)으로 스크롤 이동하여 중앙에 위치
-            const startItemIndex = 3; // 0, 1, 2 (복제), 3 (첫 번째 실제 항목)
+            const startItemIndex = 3;
             const initialScrollLeft = items[startItemIndex].offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
             slider.scrollLeft = initialScrollLeft;
 
@@ -556,7 +550,7 @@
                 updateActiveItem();
                 slider.addEventListener('scroll', () => {
                     updateActiveItem();
-                    checkInfinityScroll(); // 스크롤 시 무한 루프 체크
+                    checkInfinityScroll();
                 });
             }, 100); 
         }
