@@ -593,34 +593,33 @@
       });
     }
 
-    // ⭐⭐ 무한 루프 처리를 위한 위치 조정 함수 (양방향 이동의 핵심) ⭐⭐
+    // ⭐⭐ 무한 루프 처리를 위한 위치 조정 함수 (양방향 이동의 핵심) - 수정됨 ⭐⭐
     function checkInfinityScroll() {
         const slider = document.getElementById('platform-slider');
         const items = slider.querySelectorAll('.platform-item');
         
         const realStartItemIndex = clonedItemsCount; // 3
         const realEndItemIndex = totalItems + clonedItemsCount - 1; // 11
-
-        const currentScrollLeft = slider.scrollLeft;
         const itemWidth = items[0].offsetWidth;
         const sliderHalfWidth = slider.offsetWidth / 2;
 
-        // 실제 콘텐츠 시작점과 끝점의 Offset
-        const realContentStartOffset = items[realStartItemIndex].offsetLeft; 
-        const realContentEndOffset = items[realEndItemIndex].offsetLeft; 
+        const currentScrollLeft = slider.scrollLeft;
+        
+        // 실제 콘텐츠 끝의 첫 번째 복제본 (인덱스 12)의 왼쪽 좌표
+        const firstEndCloneOffset = items[realStartItemIndex + totalItems].offsetLeft; 
 
         // 1. 좌측으로 넘어가서 복제된 앞 부분(0, 1, 2)에 도달했을 때
-        if (currentScrollLeft < realContentStartOffset) {
+        if (currentScrollLeft < items[realStartItemIndex].offsetLeft) {
             
-            // 점프 목표: 마지막 실제 항목(11번째)이 중앙에 오도록 계산
-            const jumpPosition = realContentEndOffset - sliderHalfWidth + itemWidth / 2;
+            // 점프 목표: 마지막 실제 항목(인덱스 11)이 중앙에 오도록 점프
+            const jumpPosition = items[realEndItemIndex].offsetLeft - sliderHalfWidth + itemWidth / 2;
             slider.scrollLeft = jumpPosition;
         } 
         // 2. 우측으로 넘어가서 복제된 뒷 부분(12, 13, 14)에 도달했을 때
-        else if (currentScrollLeft > realContentEndOffset) { 
+        else if (currentScrollLeft >= firstEndCloneOffset) { 
             
-            // 점프 목표: 첫 번째 실제 항목(3번째)이 중앙에 오도록 계산
-            const jumpPosition = realContentStartOffset - sliderHalfWidth + itemWidth / 2;
+            // 점프 목표: 첫 번째 실제 항목(인덱스 3)이 중앙에 오도록 점프
+            const jumpPosition = items[realStartItemIndex].offsetLeft - sliderHalfWidth + itemWidth / 2;
             slider.scrollLeft = jumpPosition;
         }
     }
@@ -645,6 +644,7 @@
 
             setTimeout(() => {
                 updateActiveItem();
+                // scroll 이벤트에 무한 루프 체크 로직 연결
                 slider.addEventListener('scroll', () => {
                     updateActiveItem();
                     checkInfinityScroll();
@@ -661,11 +661,9 @@
         left: direction * itemWidthWithGap,
         behavior: 'smooth'
       });
-
-      setTimeout(() => {
-          updateActiveItem();
-          checkInfinityScroll();
-      }, 500); 
+      
+      // 스크롤 완료 후 바로 checkInfinityScroll()을 호출하는 대신, 
+      // scroll 이벤트 핸들러에 위임하여 스크롤 중/완료 시 처리되도록 합니다.
     }
   </script>
 
