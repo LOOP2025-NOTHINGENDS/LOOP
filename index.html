@@ -266,7 +266,7 @@
     }
 
     .slider-button:disabled {
-        opacity: 0.3; /* 끝에 도달했을 때 버튼 비활성화 시 스타일 */
+        opacity: 0.3; 
         cursor: default;
     }
 
@@ -571,7 +571,6 @@
       const slider = document.getElementById('platform-slider');
       const items = slider.querySelectorAll('.platform-item');
       
-      // 스크롤 위치에 관계없이, items[currentIndex]에 active 클래스를 부여
       items.forEach((item, index) => {
         if (index === currentIndex) {
           item.classList.add('active');
@@ -580,13 +579,10 @@
         }
       });
       
-      // 버튼 활성화/비활성화 상태 업데이트
       const prevButton = document.querySelector('.slider-button.prev');
       const nextButton = document.querySelector('.slider-button.next');
       
-      // currentIndex가 첫 번째 항목(0)이면 이전 버튼 비활성화
       prevButton.disabled = currentIndex === 0;
-      // currentIndex가 마지막 항목(items.length - 1)이면 다음 버튼 비활성화
       nextButton.disabled = currentIndex === items.length - 1;
     }
 
@@ -606,6 +602,7 @@
       const itemWidth = targetItem.offsetWidth;
       const sliderWidth = slider.offsetWidth;
       
+      // 목표 스크롤 위치: 현재 항목의 왼쪽 위치 - (슬라이더 너비 / 2) + (항목 너비 / 2)
       const targetScrollLeft = targetItem.offsetLeft - (sliderWidth / 2) + (itemWidth / 2);
       
       slider.scrollTo({
@@ -629,11 +626,12 @@
             const itemWidth = firstItem.offsetWidth;
             itemWidthWithGap = itemWidth + gap; // 스크롤 양 계산
 
-            // 초기 로드 시 첫 번째 항목(인덱스 0)이 중앙에 오도록 스크롤
-            const initialScrollLeft = firstItem.offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
-            slider.scrollLeft = initialScrollLeft;
+            // ⭐⭐⭐ 수정된 부분: 중앙 항목(인덱스 4)에서 시작 ⭐⭐⭐
+            const centerItemIndex = Math.floor(items.length / 2); // 9개 중 4 (5번째 항목)
+            currentIndex = centerItemIndex; // 시작 인덱스를 4로 설정
             
-            // 스크롤 이벤트에 active 로직을 연결할 필요가 없으므로 제거 (버튼 클릭 시만 동작)
+            const initialScrollLeft = items[currentIndex].offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
+            slider.scrollLeft = initialScrollLeft;
             
             // 초기 active 상태 및 버튼 상태 설정
             setTimeout(updateActiveItem, 100); 
