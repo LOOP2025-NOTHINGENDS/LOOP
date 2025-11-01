@@ -83,15 +83,15 @@
 
     .main-content {
         padding-top: 48px;
-        font-size: 0; /* 섹션 간의 불필요한 공백 제거 */
+        font-size: 0;
         background-color: #000;
     }
     .main-content section {
       margin: 0;
       padding: 0;
-      line-height: 0; /* 섹션 내 img 요소 아래 공백 제거 */
+      line-height: 0; 
     }
-    .main-content section > img { /* 섹션 직계 자식 이미지에만 적용 */
+    .main-content section > img {
       width: 100%;
       display: block;
       margin: 0;
@@ -108,7 +108,7 @@
         align-items: center;
         padding: 0;
         margin: 0;
-        line-height: initial; /* 텍스트 포함 가능성이 있으므로 초기화 */
+        line-height: initial;
     }
 
     .middle-logo-section img {
@@ -124,16 +124,16 @@
         height: 10vh; 
         padding: 0;
         margin: 0;
-        line-height: initial; /* 텍스트 포함 가능성이 있으므로 초기화 */
+        line-height: initial;
     }
 
-    /* ======================= STREAM LINKS SECTION STYLES (텍스트 크기 확대 및 공간 확보) ======================= */
+    /* ======================= STREAM LINKS SECTION STYLES (타이틀 크기 및 공간 조정) ======================= */
     
     .stream-links-section {
         background-color: black;
-        padding: 150px 0 150px; /* ⭐ 헤더와의 공간 확보 (100px -> 150px) ⭐ */
+        padding: 150px 0 150px; /* ⭐ 헤더와의 공간 유지/확보 ⭐ */
         text-align: center;
-        line-height: initial; /* 텍스트 요소가 있으므로 초기화 */
+        line-height: initial;
     }
 
     .stream-title-container {
@@ -141,10 +141,10 @@
         margin: 0 auto 60px;
     }
 
-    /* ⭐⭐ "NOTHING ENDS, IT'S JUST LOOPING" 텍스트 크기 확대 ⭐⭐ */
+    /* ⭐⭐ "NOTHING ENDS, IT'S JUST LOOPING" 텍스트 크기 조정 ⭐⭐ */
     .stream-main-title {
         font-family: 'MADE Outer Sans', sans-serif;
-        font-size: clamp(40px, 6vw, 80px); /* ⭐폰트 크기 확대 ⭐ */
+        font-size: clamp(35px, 5vw, 65px); /* ⭐ 크기 조정 ⭐ */
         font-weight: 500;
         letter-spacing: 0.05em;
         margin-bottom: 20px;
@@ -173,6 +173,7 @@
         gap: 3vw;
         overflow-x: scroll; 
         scroll-snap-type: x mandatory; 
+        /* PC/태블릿 기본값 */
         scroll-padding-left: calc(50% - clamp(180px, 18vw, 300px) / 2);
         scroll-padding-right: calc(50% - clamp(180px, 18vw, 300px) / 2);
 
@@ -185,7 +186,8 @@
 
     .platform-item {
         flex: 0 0 auto;
-        width: clamp(180px, 18vw, 300px);
+        /* PC/태블릿 기본값 */
+        width: clamp(180px, 18vw, 300px); 
         text-align: center;
         text-decoration: none;
         color: inherit;
@@ -264,34 +266,41 @@
         right: 0;
     }
 
+    /* ======================= 모바일 반응형 조정 (768px 이하) ======================= */
     @media (max-width: 768px) {
-      .slider-track {
-        scroll-padding-left: calc(50% - clamp(180px, 40vw, 250px) / 2);
-        scroll-padding-right: calc(50% - clamp(180px, 40vw, 250px) / 2);
-      }
-      .platform-item {
-        width: clamp(180px, 40vw, 250px);
-      }
-
-      nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
-      nav li { font-size: 12px; }
+      /* 헤더와 메인 콘텐츠 패딩 조정 */
       header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; }
-      .logo img { height: 24px; }
-      .dropdown-menu { display: none !important; }
       .main-content { padding-top: 100px; }
       
       .stream-links-section {
-          padding: 100px 0 80px; /* ⭐ 모바일에서도 헤더와 공간 확보 ⭐ */
+          padding: 100px 0 80px;
       }
-      .stream-main-title { font-size: clamp(30px, 6vw, 50px); margin-bottom: 12px; } 
-      .stream-subtitle { font-size: clamp(12px, 3vw, 16px); } 
+      
+      /* ⭐⭐ 모바일 타이틀 크기 조정 ⭐⭐ */
+      .stream-main-title { 
+          font-size: clamp(25px, 6vw, 40px); 
+          margin-bottom: 12px; 
+      } 
+      .stream-subtitle { 
+          font-size: clamp(12px, 3vw, 16px); 
+      } 
+
+      /* 슬라이더 항목 크기 및 중앙 정렬 조정 */
+      .platform-item {
+        width: clamp(150px, 40vw, 250px); /* 모바일에서 더 커지도록 조정 */
+      }
+      .slider-track {
+        scroll-padding-left: calc(50% - clamp(150px, 40vw, 250px) / 2);
+        scroll-padding-right: calc(50% - clamp(150px, 40vw, 250px) / 2);
+      }
+      
+      .middle-logo-section { height: 30vh; }
+      .empty-section { height: 5vh; }
 
       .slider-button {
           padding: 8px 4px;
           font-size: 18px;
       }
-      .middle-logo-section { height: 30vh; }
-      .empty-section { height: 5vh; }
     }
 
     /* ======================= FOOTER STYLES ======================= */
@@ -495,9 +504,10 @@
 
   <script>
     const totalItems = 9; // 실제 슬라이더 항목의 총 개수 (복제 제외)
+    const clonedItemsCount = 3; // 앞/뒤로 복제된 항목 수
     let itemWidthWithGap; // 항목 너비 + 간격 (초기화 시 계산)
 
-    // 중앙 확대/축소 로직을 위한 함수
+    // 중앙 확대/축소 로직
     function updateActiveItem() {
       const slider = document.getElementById('platform-slider');
       const items = slider.querySelectorAll('.platform-item');
@@ -506,10 +516,12 @@
 
       items.forEach(item => {
         const itemRect = item.getBoundingClientRect();
+        // 항목의 중앙 위치 (슬라이더 컨테이너 기준)
         const itemCenter = slider.scrollLeft + itemRect.left + itemRect.width / 2 - slider.getBoundingClientRect().left;
         
         const distance = Math.abs(containerCenter - itemCenter);
         
+        // 중앙에 충분히 가까우면 활성화
         if (distance < itemRect.width * 0.7) { 
           item.classList.add('active');
         } else {
@@ -518,26 +530,31 @@
       });
     }
 
-    // 무한 루프 처리를 위한 위치 조정 함수
+    // ⭐⭐ 무한 루프 처리를 위한 위치 조정 함수 (양방향 이동의 핵심) ⭐⭐
     function checkInfinityScroll() {
         const slider = document.getElementById('platform-slider');
         const items = slider.querySelectorAll('.platform-item');
         
-        // 실제 콘텐츠 시작점과 끝점 (인덱스: 3~11)
-        // 슬라이더 트랙의 스크롤 위치를 기준으로 계산
-        const realContentStartOffset = items[3].offsetLeft; 
-        const realContentEndOffset = items[11].offsetLeft; 
-        
-        const currentScrollLeft = slider.scrollLeft;
-        const scrollThreshold = itemWidthWithGap * 0.5; // 절반 정도 넘어가면 점프
+        // 실제 콘텐츠의 시작 항목과 끝 항목 (인덱스)
+        const realStartItemIndex = clonedItemsCount; 
+        const realEndItemIndex = totalItems + clonedItemsCount - 1; 
 
-        // 스크롤이 복제된 앞 부분에 도달하면 실제 콘텐츠의 끝으로 점프
-        if (currentScrollLeft < realContentStartOffset - scrollThreshold) {
-            slider.scrollLeft = realContentEndOffset + slider.offsetWidth - items[11].offsetWidth - itemWidthWithGap * 2; 
+        // 스크롤이 끝에 도달했을 때 점프할 목표 위치
+        const jumpToStartScroll = items[realStartItemIndex].offsetLeft - (slider.offsetWidth / 2) + (items[realStartItemIndex].offsetWidth / 2);
+        const jumpToEndScroll = items[realEndItemIndex - clonedItemsCount].offsetLeft; // 끝에서 3번째 항목 시작 위치
+
+        const currentScrollLeft = slider.scrollLeft;
+
+        // 스크롤이 복제된 앞 부분 (인덱스 0~2)을 벗어나면 (좌측 이동 시)
+        if (currentScrollLeft < items[realStartItemIndex].offsetLeft) {
+            // 실제 콘텐츠의 끝으로 점프
+            slider.scrollLeft = items[realEndItemIndex].offsetLeft - (slider.offsetWidth / 2) + (items[realEndItemIndex].offsetWidth / 2) - itemWidthWithGap;
+
         } 
-        // 스크롤이 복제된 뒷 부분에 도달하면 실제 콘텐츠의 시작으로 점프
-        else if (currentScrollLeft > realContentEndOffset + scrollThreshold) { 
-            slider.scrollLeft = realContentStartOffset;
+        // 스크롤이 복제된 뒷 부분 (인덱스 12~14)에 도달하면 (우측 이동 시)
+        else if (currentScrollLeft > items[realEndItemIndex].offsetLeft) { 
+            // 실제 콘텐츠의 시작으로 점프
+            slider.scrollLeft = jumpToStartScroll + itemWidthWithGap;
         }
     }
 
@@ -555,7 +572,7 @@
             itemWidthWithGap = itemWidth + gap;
 
             // 초기 로드 시 실제 콘텐츠의 시작점(4번째 항목)으로 스크롤 이동하여 중앙에 위치
-            const startItemIndex = 3; // 첫 번째 실제 콘텐츠 항목의 인덱스
+            const startItemIndex = clonedItemsCount; 
             const initialScrollLeft = items[startItemIndex].offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
             slider.scrollLeft = initialScrollLeft;
 
@@ -563,7 +580,7 @@
                 updateActiveItem();
                 slider.addEventListener('scroll', () => {
                     updateActiveItem();
-                    checkInfinityScroll();
+                    // checkInfinityScroll(); // 부드러운 스크롤 시 checkInfinityScroll은 버튼 클릭 후 setTimeout에서만 실행하는 것이 더 안정적입니다.
                 });
             }, 100); 
         }
@@ -573,19 +590,15 @@
     function scrollSlider(direction) {
       const slider = document.getElementById('platform-slider');
       
-      // 스크롤하기 전에 현재 위치와 아이템 폭을 기반으로 목표 스크롤 위치 계산
-      const currentScrollLeft = slider.scrollLeft;
-      let targetScrollLeft = currentScrollLeft + direction * itemWidthWithGap;
-
+      // 스크롤 시작
       slider.scrollBy({
         left: direction * itemWidthWithGap,
         behavior: 'smooth'
       });
 
-      // 스크롤이 끝난 후 무한 루프를 체크하기 위해 약간의 지연
+      // 스크롤 애니메이션 완료 예상 시간 (500ms) 후 무한 루프 체크 및 Active 업데이트
       setTimeout(() => {
           updateActiveItem();
-          // 스크롤 애니메이션 완료 후 무한 루프 체크 (즉시 점프)
           checkInfinityScroll();
       }, 500); 
     }
@@ -628,7 +641,7 @@
       <div class="footer-bottom">
         <div class="footer-social">
           <a href="https://www.instagram.com/dbrwlals.kr/" target="_blank" rel="noopener noreferrer" title="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441c0-.795-.645-1.44-1.441-1.44z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441c0-.795-.645-1.44-1.441-1.44z"/></svg>
           </a>
         </div>
         <p class="footer-copyright">
