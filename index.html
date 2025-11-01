@@ -497,6 +497,16 @@
       <div class="slider-container">
         <div class="slider-track" id="platform-slider">
           
+          <a href="https://vibe.naver.com/artist/000000" target="_blank" class="platform-item" data-name="VIBE">
+            <div class="platform-image"></div>
+          </a>
+          <a href="https://music.apple.com/us/artist/artist-name/000000" target="_blank" class="platform-item" data-name="Apple">
+            <div class="platform-image"></div>
+          </a>
+          <a href="https://music.bugs.co.kr/artist/000000" target="_blank" class="platform-item" data-name="Bugs">
+            <div class="platform-image"></div>
+          </a>
+
           <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item" data-name="Melon">
             <div class="platform-image"></div>
           </a>
@@ -522,6 +532,16 @@
             <div class="platform-image"></div>
           </a>
           <a href="https://music.amazon.com/artists/B00.../artist-name" target="_blank" class="platform-item" data-name="Amazon">
+            <div class="platform-image"></div>
+          </a>
+
+          <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item" data-name="Melon">
+            <div class="platform-image"></div>
+          </a>
+          <a href="https://open.spotify.com/artist/000000" target="_blank" class="platform-item" data-name="Spotify">
+            <div class="platform-image"></div>
+          </a>
+          <a href="https://www.genie.co.kr/artist/home?acid=000000" target="_blank" class="platform-item" data-name="Genie">
             <div class="platform-image"></div>
           </a>
           
@@ -564,79 +584,116 @@
   </main>
 
   <script>
-    let itemWidthWithGap; 
-    let currentIndex = 0; // 현재 중앙에 있는 항목의 인덱스 (0부터 시작)
+    let slider;
+    let items;
+    let itemWidth;
+    let gap;
+    let totalItems; 
+    const realItemsCount = 9; // 실제 슬라이드될 원본 항목 수
+    const clonedItemsEachSide = 3; // 각 사이드에 복제된 항목 수 (예: 3개)
+
+    let currentIndex = clonedItemsEachSide; // 실제 항목의 첫 번째 인덱스에서 시작
 
     function updateActiveItem() {
-      const slider = document.getElementById('platform-slider');
-      const items = slider.querySelectorAll('.platform-item');
+      // 현재 스크롤 위치를 기반으로 중앙에 있는 '실제' 항목을 찾습니다.
+      const scrollCenter = slider.scrollLeft + slider.offsetWidth / 2;
       
+      let closestItemIndex = -1;
+      let minDistance = Infinity;
+
+      for (let i = 0; i < totalItems; i++) {
+        const item = items[i];
+        // 항목의 중앙 위치
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(scrollCenter - itemCenter);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestItemIndex = i;
+        }
+      }
+
+      // active 클래스 업데이트
       items.forEach((item, index) => {
-        if (index === currentIndex) {
+        if (index === closestItemIndex) {
           item.classList.add('active');
         } else {
           item.classList.remove('active');
         }
       });
       
-      const prevButton = document.querySelector('.slider-button.prev');
-      const nextButton = document.querySelector('.slider-button.next');
-      
-      prevButton.disabled = currentIndex === 0;
-      nextButton.disabled = currentIndex === items.length - 1;
+      // 현재 중앙에 있는 항목을 currentIndex로 업데이트하여 다음 스크롤에 사용
+      currentIndex = closestItemIndex;
     }
 
-    // 버튼 클릭 시 스크롤 기능
     function scrollSlider(direction) {
-      const slider = document.getElementById('platform-slider');
-      const items = slider.querySelectorAll('.platform-item');
+      const targetIndex = currentIndex + direction;
 
-      const newIndex = currentIndex + direction;
-      if (newIndex < 0 || newIndex >= items.length) {
-        return; 
+      // 무한 스크롤 로직 추가
+      if (direction === -1) { // 왼쪽으로 이동
+        if (currentIndex <= clonedItemsEachSide) { // 복제된 시작 구간에 도달했거나 넘어섰다면
+          // 순간 이동 (원본의 끝 부분으로)
+          slider.scrollLeft += (realItemsCount * (itemWidth + gap)); // 원본 길이만큼 뒤로 순간 이동
+          currentIndex += realItemsCount; // currentIndex도 동일하게 조정
+          // setTimeout을 사용하여 순간 이동 후 다음 스크롤 애니메이션이 적용되도록 합니다.
+          setTimeout(() => {
+            const newTargetScrollLeft = items[currentIndex - 1].offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
+            slider.scrollTo({
+              left: newTargetScrollLeft,
+              behavior: 'smooth'
+            });
+            setTimeout(updateActiveItem, 300);
+          }, 0); // 즉시 실행
+          return;
+        }
+      } else { // 오른쪽으로 이동
+        if (currentIndex >= totalItems - clonedItemsEachSide -1 ) { // 복제된 끝 구간에 도달했거나 넘어섰다면
+          // 순간 이동 (원본의 시작 부분으로)
+          slider.scrollLeft -= (realItemsCount * (itemWidth + gap)); // 원본 길이만큼 앞으로 순간 이동
+          currentIndex -= realItemsCount; // currentIndex도 동일하게 조정
+          setTimeout(() => {
+            const newTargetScrollLeft = items[currentIndex + 1].offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
+            slider.scrollTo({
+              left: newTargetScrollLeft,
+              behavior: 'smooth'
+            });
+            setTimeout(updateActiveItem, 300);
+          }, 0); // 즉시 실행
+          return;
+        }
       }
-      
-      currentIndex = newIndex; 
-      
+
+      // 일반적인 스크롤 (무한 루프 경계가 아닐 때)
+      currentIndex = targetIndex; 
       const targetItem = items[currentIndex];
-      const itemWidth = targetItem.offsetWidth;
-      const sliderWidth = slider.offsetWidth;
-      
-      // 목표 스크롤 위치: 현재 항목의 왼쪽 위치 - (슬라이더 너비 / 2) + (항목 너비 / 2)
-      const targetScrollLeft = targetItem.offsetLeft - (sliderWidth / 2) + (itemWidth / 2);
+      const targetScrollLeft = targetItem.offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
       
       slider.scrollTo({
         left: targetScrollLeft,
         behavior: 'smooth'
       });
       
-      // 스크롤 애니메이션이 완료될 때까지 기다렸다가 updateActiveItem 호출
       setTimeout(updateActiveItem, 300); 
     }
 
-
-    // 초기 로드 시 설정
     document.addEventListener('DOMContentLoaded', () => {
-        const slider = document.getElementById('platform-slider');
-        const items = slider.querySelectorAll('.platform-item');
-        
-        if (items.length > 0) {
-            const firstItem = items[0];
-            const gap = parseFloat(getComputedStyle(slider).gap);
-            const itemWidth = firstItem.offsetWidth;
-            itemWidthWithGap = itemWidth + gap; // 스크롤 양 계산
+        slider = document.getElementById('platform-slider');
+        items = slider.querySelectorAll('.platform-item');
+        totalItems = items.length; // 이제 전체 항목 수는 9 + 3 + 3 = 15개
 
-            // ⭐⭐⭐ 수정된 부분: 중앙 항목(인덱스 4)에서 시작 ⭐⭐⭐
-            const centerItemIndex = Math.floor(items.length / 2); // 9개 중 4 (5번째 항목)
-            currentIndex = centerItemIndex; // 시작 인덱스를 4로 설정
+        if (totalItems > 0) {
+            itemWidth = items[0].offsetWidth;
+            gap = parseFloat(getComputedStyle(slider).gap);
             
+            // 초기 스크롤 위치를 '실제' 항목의 첫 번째 항목(원본 1번, 인덱스 `clonedItemsEachSide`)으로 설정
+            currentIndex = clonedItemsEachSide; 
             const initialScrollLeft = items[currentIndex].offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
             slider.scrollLeft = initialScrollLeft;
             
-            // 초기 active 상태 및 버튼 상태 설정
             setTimeout(updateActiveItem, 100); 
         }
     });
+
   </script>
 
   <footer class="site-footer">
