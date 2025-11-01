@@ -318,37 +318,41 @@
 
     /* ======================= 모바일 반응형 조정 (768px 이하) ======================= */
     @media (max-width: 768px) {
-      /* ⭐⭐⭐ 헤더 스타일 수정 ⭐⭐⭐ */
+      /* ⭐⭐ 헤더 중앙 정렬 수정 ⭐⭐ */
       header { 
-          flex-direction: row; /* 다시 가로 배열로 유지 */
+          flex-direction: row; 
           height: auto; 
           min-height: 48px; 
           padding: 6px 5vw; 
           gap: 0; 
           flex-wrap: wrap; 
-          align-items: flex-start; /* 상단 정렬 */
+          align-items: center;
       }
-      .main-content { padding-top: 50px; } 
+      .main-content { padding-top: 100px; }
 
-      .logo { margin-right: 10px; order: 1; }
+      .logo { margin-right: auto; order: 1; }
       .logo img { height: 24px; }
       
       nav { 
-          flex-basis: 100%; /* 네비게이션을 새 줄에 배치 */
-          justify-content: flex-start; 
+          flex-basis: 100%; 
+          justify-content: center; /* ⭐ nav 컨테이너 중앙 정렬 ⭐ */
           margin-top: 5px; 
-          order: 2; /* 네비게이션을 아래로 이동 */
+          order: 2; 
       }
       nav ul { 
-          gap: 1.5vw; /* 링크 간격을 매우 좁게 조정 */ 
-          justify-content: flex-start;
-          width: 100%;
+          gap: 1.5vw; 
+          justify-content: center; 
+          width: auto; 
+          max-width: 100%;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          padding-bottom: 5px;
       }
       nav li { 
-          font-size: 10px; /* 폰트 크기를 더 작게 조정 */ 
+          font-size: 10px; 
           padding-bottom: 0; 
           margin-bottom: 0;
-          white-space: nowrap; /* 링크가 절대 줄 바꿈 되지 않도록 설정 */
+          white-space: nowrap; 
       }
       .dropdown-menu { display: none !important; }
       /* ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ */
@@ -717,8 +721,9 @@
             itemWidth = items[0].offsetWidth;
             gap = parseFloat(getComputedStyle(slider).gap);
             
-            // 초기 스크롤 위치를 '실제' 항목의 첫 번째 항목(원본 1번, 인덱스 `clonedItemsEachSide`)으로 설정
-            currentIndex = clonedItemsEachSide; 
+            // ⭐⭐⭐ 중앙 항목(인덱스 7)에서 시작 ⭐⭐⭐
+            currentIndex = clonedItemsEachSide + Math.floor(realItemsCount / 2); // 3 + 4 = 7
+            
             const initialScrollLeft = items[currentIndex].offsetLeft - (slider.offsetWidth / 2) + (itemWidth / 2);
             slider.scrollLeft = initialScrollLeft;
             
