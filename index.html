@@ -7,13 +7,11 @@
   <style>
     @font-face {
       font-family: 'SUIT';
-      /* 폰트 파일 경로가 정확한지 확인해 주세요. */
       src: url('./fonts/suit/SUIT-ttf/SUIT-Regular.ttf') format('truetype');
     }
 
     @font-face {
       font-family: 'MADE Outer Sans';
-      /* 폰트 파일 경로가 정확한지 확인해 주세요. */
       src: url('./fonts/outer_sans/made_outer_sans/MADE Outer Sans Medium PERSONAL USE.otf') format('opentype');
       font-weight: 500;
     }
@@ -138,7 +136,7 @@
     /* 슬라이더 스타일 */
     .slider-container {
         position: relative;
-        max-width: 100vw; /* 뷰포트 전체 너비 사용 */
+        max-width: 100vw;
         margin: 0 auto;
         padding: 20px 0;
     }
@@ -148,8 +146,6 @@
         gap: 3vw;
         overflow-x: scroll; 
         scroll-snap-type: x mandatory; 
-        padding: 0; /* 좌우 패딩을 항목 중앙 정렬을 위한 scroll-padding으로 대체 */
-        /* 중앙 정렬을 위한 패딩 계산: (컨테이너 너비 - 항목 너비) / 2 */
         scroll-padding-left: calc(50% - clamp(180px, 18vw, 300px) / 2);
         scroll-padding-right: calc(50% - clamp(180px, 18vw, 300px) / 2);
 
@@ -162,20 +158,17 @@
 
     .platform-item {
         flex: 0 0 auto;
-        /* 정사각형 사이즈 반영 */
         width: clamp(180px, 18vw, 300px);
         text-align: center;
         text-decoration: none;
         color: inherit;
-        transition: transform 0.3s ease-in-out, opacity 0.3s ease; /* transform 트랜지션 추가 */
-        scroll-snap-align: center; /* 중앙에 스냅 */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+        scroll-snap-align: center;
         
-        /* 중앙 확대 효과의 기본 크기 설정 */
         transform: scale(0.85); 
         opacity: 0.6;
     }
 
-    /* 중앙에 가까운 항목에 적용될 클래스 */
     .platform-item.active {
         transform: scale(1);
         opacity: 1;
@@ -184,65 +177,45 @@
 
     .platform-image {
         width: 100%;
-        /* 정사각형 1:1 비율 */
         aspect-ratio: 1 / 1; 
         background-size: cover;
         background-position: center;
         border-radius: 12px;
-        margin-bottom: 12px;
+        /* margin-bottom: 12px; // 캡션 제거로 인한 여백 조정 */
         display: flex;
-        align-items: flex-end;
-        justify-content: center; /* 텍스트 중앙 정렬 */
-        padding: 15px;
+        align-items: center; /* 이미지 중앙에 로고가 있다면 중앙 정렬 */
+        justify-content: center; 
+        padding: 0; /* 텍스트 제거로 인한 패딩 제거 */
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
         position: relative;
         overflow: hidden;
-        /* 그라데이션 오버레이 유지 */
-        background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%); 
+        /* 그라데이션 오버레이 (로고 이미지에 따라 필요 없으면 제거 가능) */
+        background-image: linear-gradient(to top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 60%); 
+        background-blend-mode: multiply; /* 그라데이션이 배경 이미지에 섞이도록 */
     }
     
     /* 실제 이미지 파일명과 경로를 사용하여 배경 설정 */
-    .platform-item:nth-child(1) .platform-image { background-image: url('./melon music.png'); }
-    .platform-item:nth-child(2) .platform-image { background-image: url('./spotify.png'); }
-    .platform-item:nth-child(3) .platform-image { background-image: url('./genie.png'); }
-    .platform-item:nth-child(4) .platform-image { background-image: url('./flo.png'); }
-    .platform-item:nth-child(5) .platform-image { background-image: url('./youtube music.png'); }
-    .platform-item:nth-child(6) .platform-image { background-image: url('./naver vibe.png'); }
-    .platform-item:nth-child(7) .platform-image { background-image: url('./apple music.png'); }
-    .platform-item:nth-child(8) .platform-image { background-image: url('./bugs.png'); }
-    .platform-item:nth-child(9) .platform-image { background-image: url('./amazon music.png'); }
+    /* 파일명에 띄어쓰기가 있다면 웹 서버에 따라 문제가 될 수 있으니 주의하세요. */
+    /* 예: 'melon music.png' -> 'melon_music.png'로 변경 권장 */
+    .platform-item[data-name="Melon"] .platform-image { background-image: url('./melon music.png'); }
+    .platform-item[data-name="Spotify"] .platform-image { background-image: url('./spotify.png'); }
+    .platform-item[data-name="Genie"] .platform-image { background-image: url('./genie.png'); }
+    .platform-item[data-name="FLO"] .platform-image { background-image: url('./flo.png'); }
+    .platform-item[data-name="Youtube"] .platform-image { background-image: url('./youtube music.png'); }
+    .platform-item[data-name="VIBE"] .platform-image { background-image: url('./naver vibe.png'); }
+    .platform-item[data-name="Apple"] .platform-image { background-image: url('./apple music.png'); }
+    .platform-item[data-name="Bugs"] .platform-image { background-image: url('./bugs.png'); }
+    .platform-item[data-name="Amazon"] .platform-image { background-image: url('./amazon music.png'); }
 
 
-    .platform-text {
-        font-family: 'MADE Outer Sans', sans-serif;
-        font-size: clamp(14px, 1.2vw, 20px);
-        font-weight: 500;
-        color: white;
-        /* 캡션 위에 텍스트는 이미지의 제목으로 사용했습니다 */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-        text-align: center;
-        width: 100%;
-        padding: 0 10px;
-    }
-
-
-    .platform-caption {
-        font-family: 'SUIT', sans-serif;
-        font-size: clamp(12px, 1vw, 16px);
-        font-weight: 500;
-        line-height: 1.4;
-        color: #a0a0a0;
-        margin-top: 0;
-    }
+    /* 제거된 텍스트 관련 스타일 삭제 */
+    /* .platform-text {} */
+    /* .platform-caption {} */
 
     /* 슬라이더 버튼 스타일 */
     .slider-button {
         position: absolute;
-        top: 50%; /* 1:1 비율에 맞춰 50%로 조정 */
+        top: 50%;
         transform: translateY(-50%);
         background: rgba(255, 255, 255, 0.1);
         color: white;
@@ -254,7 +227,7 @@
         transition: background 0.3s ease;
         border-radius: 4px;
         user-select: none;
-        height: 60px; /* 고정 높이 */
+        height: 60px;
         display: flex;
         align-items: center;
         opacity: 0.8;
@@ -274,7 +247,6 @@
     }
 
     @media (max-width: 768px) {
-      /* 모바일 환경에서는 중앙 정렬 패딩을 다시 계산 */
       .slider-track {
         scroll-padding-left: calc(50% - clamp(180px, 40vw, 250px) / 2);
         scroll-padding-right: calc(50% - clamp(180px, 40vw, 250px) / 2);
@@ -283,7 +255,6 @@
         width: clamp(180px, 40vw, 250px);
       }
 
-      /* 나머지 모바일 스타일 유지 */
       nav ul { gap: 12px; justify-content: center; flex-wrap: wrap; }
       nav li { font-size: 12px; }
       header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; }
@@ -440,67 +411,61 @@
       <div class="slider-container">
         <div class="slider-track" id="platform-slider">
           
+          <a href="https://music.apple.com/us/artist/artist-name/000000" target="_blank" class="platform-item" data-name="Apple">
+            <div class="platform-image"></div>
+          </a>
+          <a href="https://music.bugs.co.kr/artist/000000" target="_blank" class="platform-item" data-name="Bugs">
+            <div class="platform-image"></div>
+          </a>
+          <a href="https://music.amazon.com/artists/B00.../artist-name" target="_blank" class="platform-item" data-name="Amazon">
+            <div class="platform-image"></div>
+          </a>
+
           <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item" data-name="Melon">
-            <div class="platform-image">
-              <span class="platform-text">Melon Music</span>
-            </div>
-            <p class="platform-caption">Getting that lil look in the post</p>
+            <div class="platform-image"></div>
           </a>
           
           <a href="https://open.spotify.com/artist/000000" target="_blank" class="platform-item" data-name="Spotify">
-            <div class="platform-image">
-              <span class="platform-text">Spotify</span>
-            </div>
-            <p class="platform-caption">Selected projects from the last month</p>
+            <div class="platform-image"></div>
           </a>
 
           <a href="https://www.genie.co.kr/artist/home?acid=000000" target="_blank" class="platform-item" data-name="Genie">
-            <div class="platform-image">
-              <span class="platform-text">Genie</span>
-            </div>
-            <p class="platform-caption">Otherworldly places located on Earth</p>
+            <div class="platform-image"></div>
           </a>
           
           <a href="https://www.music-flo.com/detail/artist/000000" target="_blank" class="platform-item" data-name="FLO">
-            <div class="platform-image">
-              <span class="platform-text">FLO</span>
-            </div>
-            <p class="platform-caption">Visualizing distorted sound mixes</p>
+            <div class="platform-image"></div>
           </a>
 
           <a href="https://music.youtube.com/channel/UC.../featured" target="_blank" class="platform-item" data-name="Youtube">
-            <div class="platform-image">
-              <span class="platform-text">Youtube Music</span>
-            </div>
-            <p class="platform-caption">Pale and ethereal pastel vibes</p>
+            <div class="platform-image"></div>
           </a>
 
           <a href="https://vibe.naver.com/artist/000000" target="_blank" class="platform-item" data-name="VIBE">
-            <div class="platform-image">
-              <span class="platform-text">Naver VIBE</span>
-            </div>
-            <p class="platform-caption">Selected and popular posts on the social right now</p>
+            <div class="platform-image"></div>
           </a>
 
           <a href="https://music.apple.com/us/artist/artist-name/000000" target="_blank" class="platform-item" data-name="Apple">
-            <div class="platform-image">
-              <span class="platform-text">Apple Music</span>
-            </div>
-            <p class="platform-caption">Getting that lil look in the post</p>
+            <div class="platform-image"></div>
           </a>
           
           <a href="https://music.bugs.co.kr/artist/000000" target="_blank" class="platform-item" data-name="Bugs">
-            <div class="platform-image">
-              <span class="platform-text">Bugs</span>
-            </div>
-            <p class="platform-caption">Selected projects from the last month</p>
+            <div class="platform-image"></div>
           </a>
 
           <a href="https://music.amazon.com/artists/B00.../artist-name" target="_blank" class="platform-item" data-name="Amazon">
-            <div class="platform-image">
-              <span class="platform-text">Amazon Music</span>
-            </div>
-            <p class="platform-caption">Otherworldly places located on Earth</p>
+            <div class="platform-image"></div>
+          </a>
+          <a href="https://www.melon.com/artist/timeline.htm?artistId=000000" target="_blank" class="platform-item" data-name="Melon">
+            <div class="platform-image"></div>
+          </a>
+          
+          <a href="https://open.spotify.com/artist/000000" target="_blank" class="platform-item" data-name="Spotify">
+            <div class="platform-image"></div>
+          </a>
+
+          <a href="https://www.genie.co.kr/artist/home?acid=000000" target="_blank" class="platform-item" data-name="Genie">
+            <div class="platform-image"></div>
           </a>
           
         </div>
@@ -520,6 +485,9 @@
   </main>
 
   <script>
+    const totalItems = 9; // 실제 슬라이더 항목의 총 개수 (복제 제외)
+    let itemWidthWithGap; // 항목 너비 + 간격 (초기화 시 계산)
+
     // 중앙 확대/축소 로직을 위한 함수
     function updateActiveItem() {
       const slider = document.getElementById('platform-slider');
@@ -529,14 +497,10 @@
 
       items.forEach(item => {
         const itemRect = item.getBoundingClientRect();
-        // 항목의 중앙 위치 (슬라이더 기준)
         const itemCenter = slider.scrollLeft + itemRect.left + itemRect.width / 2 - slider.getBoundingClientRect().left;
         
-        // 항목 중앙과 컨테이너 중앙 간의 거리 차이 (절대값)
         const distance = Math.abs(containerCenter - itemCenter);
         
-        // 항목 너비의 절반보다 거리가 가까우면 'active' 클래스 적용
-        // 항목 너비의 70% 정도를 기준으로 설정하여 중앙 항목을 명확히 함
         if (distance < itemRect.width * 0.7) { 
           item.classList.add('active');
         } else {
@@ -545,46 +509,68 @@
       });
     }
 
+    // 무한 루프 처리를 위한 위치 조정 함수
+    function checkInfinityScroll() {
+        const slider = document.getElementById('platform-slider');
+        const items = slider.querySelectorAll('.platform-item');
+        
+        // 실제 콘텐츠 시작점과 끝점
+        const realContentStart = items[totalItems].offsetLeft;
+        const realContentEnd = items[totalItems * 2 - 1].offsetLeft + itemWidthWithGap - parseFloat(getComputedStyle(slider).gap);
+        
+        // 현재 스크롤 위치
+        const currentScrollLeft = slider.scrollLeft;
+        
+        // 스크롤이 복제된 앞 부분에 도달하면 실제 콘텐츠의 끝으로 이동
+        if (currentScrollLeft < realContentStart) {
+            slider.scrollLeft = realContentEnd - (realContentStart - currentScrollLeft); // 현재 위치만큼 끝에서 다시 시작
+        } 
+        // 스크롤이 복제된 뒷 부분에 도달하면 실제 콘텐츠의 시작으로 이동
+        else if (currentScrollLeft >= realContentEnd + itemWidthWithGap) { // 아이템 하나 더 지나간 경우
+            slider.scrollLeft = realContentStart + (currentScrollLeft - realContentEnd - itemWidthWithGap); // 현재 위치만큼 시작에서 다시 시작
+        }
+    }
+
+
     // 초기 로드 시 및 스크롤 시 'active' 업데이트
     document.addEventListener('DOMContentLoaded', () => {
         const slider = document.getElementById('platform-slider');
-        if (slider) {
-            // 초기 로드 시 중앙 항목 활성화
-            setTimeout(updateActiveItem, 100); 
-            // 스크롤 이벤트에 리스너 추가 (쓰로틀링 필요하지만 간결함을 위해 생략)
-            slider.addEventListener('scroll', updateActiveItem);
+        const firstItem = slider.querySelector('.platform-item');
+
+        if (slider && firstItem) {
+            const gap = parseFloat(getComputedStyle(slider).gap);
+            itemWidthWithGap = firstItem.offsetWidth + gap;
+
+            // 초기 로드 시 실제 콘텐츠의 시작점으로 스크롤 이동
+            // 첫 번째 실제 항목이 중앙에 오도록 조정
+            const initialScrollLeft = firstItem.offsetWidth * (totalItems) + (gap * (totalItems - 1)) - (slider.offsetWidth / 2) + (firstItem.offsetWidth / 2);
+            slider.scrollLeft = initialScrollLeft;
+
+            setTimeout(() => {
+                updateActiveItem();
+                slider.addEventListener('scroll', () => {
+                    updateActiveItem();
+                    checkInfinityScroll(); // 스크롤 시 무한 루프 체크
+                });
+            }, 100); 
         }
     });
 
     // 버튼 클릭 시 스크롤 기능
     function scrollSlider(direction) {
       const slider = document.getElementById('platform-slider');
-      const firstItem = slider.querySelector('.platform-item');
-      if (!firstItem) return;
-      
-      const itemWidth = firstItem.offsetWidth;
-      const computedStyle = window.getComputedStyle(slider);
-      const gapMatch = computedStyle.gap.match(/([\d\.]+)(px|vw|%)/);
-      let gap = 0;
-      if (gapMatch) {
-          const value = parseFloat(gapMatch[1]);
-          const unit = gapMatch[2];
-          if (unit === 'vw') {
-              gap = (value / 100) * window.innerWidth;
-          } else {
-              gap = value;
-          }
-      }
-
-      const scrollAmount = itemWidth + gap;
       
       slider.scrollBy({
-        left: direction * scrollAmount,
+        left: direction * itemWidthWithGap,
         behavior: 'smooth'
       });
 
       // 스크롤이 끝난 후 중앙 항목 업데이트를 강제로 실행
-      setTimeout(updateActiveItem, 500); 
+      // 애니메이션이 완료될 시간을 고려하여 딜레이
+      setTimeout(() => {
+          updateActiveItem();
+          checkInfinityScroll(); // 스크롤 후에도 무한 루프 체크
+      }, 500); 
     }
   </script>
 
