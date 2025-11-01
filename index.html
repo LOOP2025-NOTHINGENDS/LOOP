@@ -318,8 +318,40 @@
 
     /* ======================= 모바일 반응형 조정 (768px 이하) ======================= */
     @media (max-width: 768px) {
-      header { flex-direction: column; height: auto; padding: 10px 5vw; gap: 10px; }
-      .main-content { padding-top: 100px; }
+      /* ⭐⭐⭐ 헤더 스타일 수정 ⭐⭐⭐ */
+      header { 
+          flex-direction: row; /* 다시 가로 배열로 유지 */
+          height: auto; 
+          min-height: 48px; 
+          padding: 6px 5vw; 
+          gap: 0; 
+          flex-wrap: wrap; 
+          align-items: flex-start; /* 상단 정렬 */
+      }
+      .main-content { padding-top: 50px; } 
+
+      .logo { margin-right: 10px; order: 1; }
+      .logo img { height: 24px; }
+      
+      nav { 
+          flex-basis: 100%; /* 네비게이션을 새 줄에 배치 */
+          justify-content: flex-start; 
+          margin-top: 5px; 
+          order: 2; /* 네비게이션을 아래로 이동 */
+      }
+      nav ul { 
+          gap: 1.5vw; /* 링크 간격을 매우 좁게 조정 */ 
+          justify-content: flex-start;
+          width: 100%;
+      }
+      nav li { 
+          font-size: 10px; /* 폰트 크기를 더 작게 조정 */ 
+          padding-bottom: 0; 
+          margin-bottom: 0;
+          white-space: nowrap; /* 링크가 절대 줄 바꿈 되지 않도록 설정 */
+      }
+      .dropdown-menu { display: none !important; }
+      /* ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ */
       
       .stream-links-section {
           padding: 100px 0 80px; 
@@ -679,7 +711,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         slider = document.getElementById('platform-slider');
         items = slider.querySelectorAll('.platform-item');
-        totalItems = items.length; // 이제 전체 항목 수는 9 + 3 + 3 = 15개
+        totalItems = items.length; 
 
         if (totalItems > 0) {
             itemWidth = items[0].offsetWidth;
